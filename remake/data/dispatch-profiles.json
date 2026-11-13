@@ -1,0 +1,362 @@
+{
+  "sea-cliff": {
+    "difficulty": 0,
+    "weights": {
+      "fire": 10,
+      "criminal": 0,
+      "rescue": 0,
+      "riot": 0,
+      "traffic": 30,
+      "medevac": 30,
+      "transport": 30
+    }
+  },
+  "city-1": {
+    "difficulty": 0,
+    "weights": {
+      "fire": 10,
+      "criminal": 0,
+      "rescue": 0,
+      "riot": 0,
+      "traffic": 30,
+      "medevac": 30,
+      "transport": 30
+    }
+  },
+  "city-2": {
+    "difficulty": 0,
+    "weights": {
+      "fire": 10,
+      "criminal": 0,
+      "rescue": 0,
+      "riot": 0,
+      "traffic": 30,
+      "medevac": 30,
+      "transport": 30
+    }
+  },
+  "city-3": {
+    "difficulty": 0,
+    "weights": {
+      "fire": 10,
+      "criminal": 10,
+      "rescue": 5,
+      "riot": 0,
+      "traffic": 30,
+      "medevac": 20,
+      "transport": 25
+    }
+  },
+  "city-4": {
+    "difficulty": 0,
+    "weights": {
+      "fire": 10,
+      "criminal": 10,
+      "rescue": 5,
+      "riot": 0,
+      "traffic": 30,
+      "medevac": 20,
+      "transport": 25
+    }
+  },
+  "city-5": {
+    "difficulty": 0,
+    "weights": {
+      "fire": 10,
+      "criminal": 10,
+      "rescue": 5,
+      "riot": 0,
+      "traffic": 30,
+      "medevac": 20,
+      "transport": 25
+    }
+  },
+  "city-6": {
+    "difficulty": 0,
+    "weights": {
+      "fire": 15,
+      "criminal": 20,
+      "rescue": 10,
+      "riot": 0,
+      "traffic": 20,
+      "medevac": 20,
+      "transport": 15
+    }
+  },
+  "city-7": {
+    "difficulty": 0,
+    "weights": {
+      "fire": 15,
+      "criminal": 20,
+      "rescue": 10,
+      "riot": 0,
+      "traffic": 20,
+      "medevac": 20,
+      "transport": 15
+    }
+  },
+  "city-8": {
+    "difficulty": 0,
+    "weights": {
+      "fire": 15,
+      "criminal": 20,
+      "rescue": 10,
+      "riot": 0,
+      "traffic": 20,
+      "medevac": 20,
+      "transport": 15
+    }
+  },
+  "city-9": {
+    "difficulty": 1,
+    "weights": {
+      "fire": 20,
+      "criminal": 20,
+      "rescue": 10,
+      "riot": 0,
+      "traffic": 15,
+      "medevac": 20,
+      "transport": 15
+    }
+  },
+  "city-10": {
+    "difficulty": 0,
+    "weights": {
+      "fire": 20,
+      "criminal": 20,
+      "rescue": 10,
+      "riot": 0,
+      "traffic": 15,
+      "medevac": 20,
+      "transport": 15
+    }
+  },
+  "city-11": {
+    "difficulty": 1,
+    "weights": {
+      "fire": 20,
+      "criminal": 20,
+      "rescue": 10,
+      "riot": 0,
+      "traffic": 15,
+      "medevac": 20,
+      "transport": 15
+    }
+  },
+  "city-12": {
+    "difficulty": 1,
+    "weights": {
+      "fire": 20,
+      "criminal": 20,
+      "rescue": 15,
+      "riot": 0,
+      "traffic": 15,
+      "medevac": 15,
+      "transport": 15
+    }
+  },
+  "city-13": {
+    "difficulty": 1,
+    "weights": {
+      "fire": 20,
+      "criminal": 20,
+      "rescue": 15,
+      "riot": 0,
+      "traffic": 15,
+      "medevac": 15,
+      "transport": 15
+    }
+  },
+  "city-14": {
+    "difficulty": 1,
+    "weights": {
+      "fire": 20,
+      "criminal": 20,
+      "rescue": 15,
+      "riot": 0,
+      "traffic": 15,
+      "medevac": 15,
+      "transport": 15
+    }
+  },
+  "city-15": {
+    "difficulty": 1,
+    "weights": {
+      "fire": 25,
+      "criminal": 20,
+      "rescue": 20,
+      "riot": 0,
+      "traffic": 10,
+      "medevac": 15,
+      "transport": 10
+    }
+  },
+  "city-16": {
+    "difficulty": 1,
+    "weights": {
+      "fire": 25,
+      "criminal": 20,
+      "rescue": 20,
+      "riot": 0,
+      "traffic": 10,
+      "medevac": 15,
+      "transport": 10
+    }
+  },
+  "city-17": {
+    "difficulty": 1,
+    "weights": {
+      "fire": 25,
+      "criminal": 20,
+      "rescue": 20,
+      "riot": 0,
+      "traffic": 10,
+      "medevac": 15,
+      "transport": 10
+    }
+  },
+  "city-18": {
+    "difficulty": 2,
+    "weights": {
+      "fire": 25,
+      "criminal": 20,
+      "rescue": 20,
+      "riot": 0,
+      "traffic": 10,
+      "medevac": 15,
+      "transport": 10
+    }
+  },
+  "city-19": {
+    "difficulty": 2,
+    "weights": {
+      "fire": 25,
+      "criminal": 20,
+      "rescue": 20,
+      "riot": 0,
+      "traffic": 10,
+      "medevac": 15,
+      "transport": 10
+    }
+  },
+  "city-20": {
+    "difficulty": 2,
+    "weights": {
+      "fire": 25,
+      "criminal": 20,
+      "rescue": 20,
+      "riot": 0,
+      "traffic": 10,
+      "medevac": 15,
+      "transport": 10
+    }
+  },
+  "city-21": {
+    "difficulty": 2,
+    "weights": {
+      "fire": 20,
+      "criminal": 25,
+      "rescue": 20,
+      "riot": 5,
+      "traffic": 10,
+      "medevac": 10,
+      "transport": 10
+    }
+  },
+  "city-22": {
+    "difficulty": 2,
+    "weights": {
+      "fire": 20,
+      "criminal": 25,
+      "rescue": 20,
+      "riot": 5,
+      "traffic": 10,
+      "medevac": 10,
+      "transport": 10
+    }
+  },
+  "city-23": {
+    "difficulty": 2,
+    "weights": {
+      "fire": 25,
+      "criminal": 25,
+      "rescue": 25,
+      "riot": 5,
+      "traffic": 5,
+      "medevac": 10,
+      "transport": 5
+    }
+  },
+  "city-24": {
+    "difficulty": 2,
+    "weights": {
+      "fire": 25,
+      "criminal": 25,
+      "rescue": 25,
+      "riot": 5,
+      "traffic": 5,
+      "medevac": 10,
+      "transport": 5
+    }
+  },
+  "city-25": {
+    "difficulty": 3,
+    "weights": {
+      "fire": 25,
+      "criminal": 25,
+      "rescue": 20,
+      "riot": 10,
+      "traffic": 5,
+      "medevac": 10,
+      "transport": 5
+    }
+  },
+  "city-26": {
+    "difficulty": 3,
+    "weights": {
+      "fire": 25,
+      "criminal": 25,
+      "rescue": 20,
+      "riot": 10,
+      "traffic": 5,
+      "medevac": 10,
+      "transport": 5
+    }
+  },
+  "city-27": {
+    "difficulty": 3,
+    "weights": {
+      "fire": 20,
+      "criminal": 25,
+      "rescue": 20,
+      "riot": 20,
+      "traffic": 5,
+      "medevac": 5,
+      "transport": 5
+    }
+  },
+  "city-28": {
+    "difficulty": 3,
+    "weights": {
+      "fire": 20,
+      "criminal": 25,
+      "rescue": 20,
+      "riot": 20,
+      "traffic": 5,
+      "medevac": 5,
+      "transport": 5
+    }
+  },
+  "city-29": {
+    "difficulty": 3,
+    "weights": {
+      "fire": 20,
+      "criminal": 20,
+      "rescue": 15,
+      "riot": 20,
+      "traffic": 10,
+      "medevac": 10,
+      "transport": 5
+    }
+  }
+}

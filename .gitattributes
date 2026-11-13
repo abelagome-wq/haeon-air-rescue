@@ -1,0 +1,8 @@
+* -text
+*.blend binary
+*.glb binary
+*.bin binary
+*.png binary
+*.webp binary
+*.wav binary
+*.mp3 binary

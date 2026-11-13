@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+<title>ALT</title>
+<defs>
+  <linearGradient id="rim" x2=".7" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#a7a6a0"/><stop offset=".22" stop-color="#59595a"/><stop offset=".48" stop-color="#232426"/><stop offset=".8" stop-color="#0c0d0e"/><stop offset="1" stop-color="#6c6a66"/></linearGradient>
+  <radialGradient id="face" cx=".42" cy=".33" r=".86"><stop stop-color="#3e3c39"/><stop offset=".77" stop-color="#191a1b"/><stop offset="1" stop-color="#121315"/></radialGradient>
+</defs>
+<circle cx="90" cy="90" r="88" fill="url(#rim)" stroke="#141415" stroke-width="3"/>
+<circle cx="90" cy="90" r="79" fill="url(#face)" stroke="#111213" stroke-width="4"/>
+<g fill="none" stroke="#ebe7d6"><path d="M90 17L90 29" stroke-width="2.5"/>
+<path d="M99.15 17.58L98.52 22.54" stroke-width="1.3"/>
+<path d="M108.15 19.29L106.91 24.14" stroke-width="1.3"/>
+<path d="M116.87 22.13L115.03 26.78" stroke-width="1.3"/>
+<path d="M125.17 26.03L122.76 30.41" stroke-width="1.3"/>
+<path d="M132.91 30.94L125.85 40.65" stroke-width="2.5"/>
+<path d="M139.97 36.79L136.55 40.43" stroke-width="1.3"/>
+<path d="M146.25 43.47L142.39 46.66" stroke-width="1.3"/>
+<path d="M151.64 50.88L147.41 53.56" stroke-width="1.3"/>
+<path d="M156.05 58.92L151.53 61.05" stroke-width="1.3"/>
+<path d="M159.43 67.44L148.01 71.15" stroke-width="2.5"/>
+<path d="M161.71 76.32L156.8 77.26" stroke-width="1.3"/>
+<path d="M162.86 85.42L157.87 85.73" stroke-width="1.3"/>
+<path d="M162.86 94.58L157.87 94.27" stroke-width="1.3"/>
+<path d="M161.71 103.68L156.8 102.74" stroke-width="1.3"/>
+<path d="M159.43 112.56L148.01 108.85" stroke-width="2.5"/>
+<path d="M156.05 121.08L151.53 118.95" stroke-width="1.3"/>
+<path d="M151.64 129.12L147.41 126.44" stroke-width="1.3"/>
+<path d="M146.25 136.53L142.39 133.34" stroke-width="1.3"/>
+<path d="M139.97 143.21L136.55 139.57" stroke-width="1.3"/>
+<path d="M132.91 149.06L125.85 139.35" stroke-width="2.5"/>
+<path d="M125.17 153.97L122.76 149.59" stroke-width="1.3"/>
+<path d="M116.87 157.87L115.03 153.22" stroke-width="1.3"/>
+<path d="M108.15 160.71L106.91 155.86" stroke-width="1.3"/>
+<path d="M99.15 162.42L98.52 157.46" stroke-width="1.3"/>
+<path d="M90 163L90 151" stroke-width="2.5"/>
+<path d="M80.85 162.42L81.48 157.46" stroke-width="1.3"/>
+<path d="M71.85 160.71L73.09 155.86" stroke-width="1.3"/>
+<path d="M63.13 157.87L64.97 153.22" stroke-width="1.3"/>
+<path d="M54.83 153.97L57.24 149.59" stroke-width="1.3"/>
+<path d="M47.09 149.06L54.15 139.35" stroke-width="2.5"/>
+<path d="M40.03 143.21L43.45 139.57" stroke-width="1.3"/>
+<path d="M33.75 136.53L37.61 133.34" stroke-width="1.3"/>
+<path d="M28.36 129.12L32.59 126.44" stroke-width="1.3"/>
+<path d="M23.95 121.08L28.47 118.95" stroke-width="1.3"/>
+<path d="M20.57 112.56L31.99 108.85" stroke-width="2.5"/>
+<path d="M18.29 103.68L23.2 102.74" stroke-width="1.3"/>
+<path d="M17.14 94.58L22.13 94.27" stroke-width="1.3"/>
+<path d="M17.14 85.42L22.13 85.73" stroke-width="1.3"/>
+<path d="M18.29 76.32L23.2 77.26" stroke-width="1.3"/>
+<path d="M20.57 67.44L31.99 71.15" stroke-width="2.5"/>
+<path d="M23.95 58.92L28.47 61.05" stroke-width="1.3"/>
+<path d="M28.36 50.88L32.59 53.56" stroke-width="1.3"/>
+<path d="M33.75 43.47L37.61 46.66" stroke-width="1.3"/>
+<path d="M40.03 36.79L43.45 40.43" stroke-width="1.3"/>
+<path d="M47.09 30.94L54.15 40.65" stroke-width="2.5"/>
+<path d="M54.83 26.03L57.24 30.41" stroke-width="1.3"/>
+<path d="M63.13 22.13L64.97 26.78" stroke-width="1.3"/>
+<path d="M71.85 19.29L73.09 24.14" stroke-width="1.3"/>
+<path d="M80.85 17.58L81.48 22.54" stroke-width="1.3"/></g>
+<g fill="#f5f1df" font-family="Arial,sans-serif" font-weight="bold" font-size="15" text-anchor="middle"><text x="90" y="44">0</text>
+<text x="119.39" y="53.55">1</text>
+<text x="137.55" y="78.55">2</text>
+<text x="137.55" y="109.45">3</text>
+<text x="119.39" y="134.45">4</text>
+<text x="90" y="144">5</text>
+<text x="60.61" y="134.45">6</text>
+<text x="42.45" y="109.45">7</text>
+<text x="42.45" y="78.55">8</text>
+<text x="60.61" y="53.55">9</text></g>
+<text x="90" y="73" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#cbc9bd">ALT</text>
+<text x="90" y="111" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#c6c3b7">m × 100</text>
+<circle cx="90" cy="90" r="6" fill="#65645d" stroke="#171818" stroke-width="2"/>
+</svg>

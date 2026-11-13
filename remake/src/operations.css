@@ -1,0 +1,283 @@
+:root {
+  --ink:#132a3a; --deep:#0d202d; --mist:#d9e9ee; --ice:#92d9ec; --signal:#ff795d;
+  --paper:#f2f5f5; --rule:#7792a54a; --orange:var(--signal); --mint:var(--ice);
+  --mono:"IBM Plex Mono",Consolas,monospace;
+  --classic-metal:#162e3d; --classic-button:#203d4c; --classic-light:var(--mist);
+  --classic-yellow:var(--ice); --classic-screw:none; --classic-stripe:none;
+  --classic-edge:none; --classic-display:#0d202d;
+}
+body {font-family:"Instrument Sans","Malgun Gothic",system-ui,sans-serif}
+#hangar {background:#eff3f3;color:var(--ink)}
+#hangar .home-inner {width:min(1120px,92vw);padding:20px 0}
+#hangar .brand {border:0;box-shadow:none;color:var(--ink);padding:3px 0 15px;gap:10px}
+#hangar .brand>b {color:var(--ink);font:900 24px/1 Arial,sans-serif;letter-spacing:.05em}
+#hangar .brand>i {background:#95aab3;height:15px}
+#hangar .brand .radio {color:#476674}
+#hangar .brand .mark {width:31px;height:31px;background:url("../art/icons/icon-192.png") center/cover;border-radius:5px}
+#hangar .intro {position:relative;isolation:isolate;display:flex;flex-flow:column;justify-content:flex-end;
+  min-height:clamp(175px,22vw,280px);margin:0 0 16px;padding:clamp(20px,3.3vw,42px);
+  background:#253c49 url("../art/haeon-apron.webp") center 52%/cover;overflow:hidden}
+#hangar .intro::before {content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,#0a1e30df,#102a3c74 40%,transparent 73%)}
+#hangar .intro .kicker {font-size:11px;letter-spacing:.19em;color:#abdae6}
+#hangar .intro h1 {color:#fff;font-size:clamp(33px,4.5vw,62px);letter-spacing:-.065em;line-height:1.16;margin:8px 0}
+#hangar .intro p {color:#e0eaeb;margin:0}
+#hangar .hangar-grid {grid-template-columns:.96fr 1.04fr;gap:16px}
+#hangar .aircard {border:0;border-radius:0;min-height:310px;background:#203747;box-shadow:none}
+#hangar .aircard::before,#hangar .aircard::after {display:none}
+#hangar .aircard .strap {padding:15px 19px;color:#fff}
+#hangar .airfoot {padding:34px 19px 16px;background:linear-gradient(transparent,#102233e6);color:white}
+#hangar .airfoot small,#hangar .airfoot>span {color:#c3e5ed}
+#hangar #dispatch {border:1px solid #c5d5da;border-top:3px solid var(--ink);box-shadow:none;
+  color:var(--ink);background:#fff;border-radius:0;padding:clamp(14px,2.1vw,25px)}
+#hangar #dispatch h2 {font-size:24px;margin:0 0 12px;letter-spacing:-.04em}
+.plan-fields {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 13px}
+.plan-field {min-width:0}
+#hangar #dispatch label {margin:0 0 4px;color:#4f6775}
+#hangar #dispatch label strong {color:#415d6e;margin:0;font-size:12px}
+#hangar #dispatch select {width:100%;height:38px;color:var(--ink);background:#f6f9fa;border:1px solid #c4d4dc;border-radius:3px;padding:4px 8px}
+#hangar #start,#overlay #resume {color:#112634;background:var(--signal);border:0;box-shadow:none;border-radius:3px}
+#hangar #start span {color:#132a3a}
+#hangar #start:disabled {background:#d3dde0}
+#hangar #menuInfo,#hangar #career {color:#516b77}
+#hangar .career-strip {margin-top:13px;padding:12px 16px;background:#e0e9ec;border:0;border-left:3px solid #77a4b2;box-shadow:none;border-radius:0;color:var(--ink)}
+#hangar .career-strip small,#hangar #ownedKit {color:#3b5969}
+#hangar #cashBalance {background:none;color:var(--ink);padding:0}
+#hangar :is(#openShop,#inspect,#installApp,#openSoundEditor,.tilt-options button) {background:white;color:var(--ink);border:1px solid #abbfc9;box-shadow:none;border-radius:3px}
+#hangar footer {border-color:#c4d5da;color:#506977}
+#hangar .mobile-install {color:#314e60}
+#hangar :is(button,select):focus-visible,#hud button:focus-visible,dialog button:focus-visible {outline:3px solid #e85b43;outline-offset:1px}
+body.flying {background:#091923}
+body #hud :is(.topbar,.dispatch-msg,#fieldKit,.instruments,.status-bank,.radar-buttons,.walk-actions:not(:empty),#navlabel,#quick),
+body #hud .lowerleft .radarbox {background:#112a39ef;border:1px solid #69859780;border-radius:3px;box-shadow:none;color:#e2f1f6;text-shadow:none}
+body #hud .dispatch-msg {border-left:3px solid var(--ice)}
+body:not(.mobile-layout) #hud::before {background:linear-gradient(90deg,#132c3b,#0e2432);border-top:1px solid #527482;box-shadow:none}
+body #hud :is(.topbar,.field-row,#toolRack,.walk-actions,.radar-buttons,.touch-aim-controls) button,body #hud #radioToggle,
+body #hud #touchPanelToggle {background:#233e4d;color:#eaf6f8;border:1px solid #7193a180;box-shadow:none;border-radius:3px}
+body #hud :is(.dispatch-meta,#course,#quick,#cabinStatus,#unitStatus,#navlabel,#engineState,#dispatchTimer) {color:#bddbe5}
+body #hud :is(#wallet,#cashReading,#feedback,#radioMessage) {color:#a7e2f2;text-shadow:none}
+body #hud #feedback:not(:empty) {background:#102737ed;border:1px solid #547887}
+body #hud #toolRack>button::before,.equipment-card::before {display:none}
+body #hud #toolRack>button[aria-pressed=true] {background:#264e5e;outline:1px solid #99d9e8;color:#fff}
+body #hud #toolRack>button {padding:5px 7px;min-width:0}
+body #hud #fieldTool,body #hud #station {background:#e0edf0;color:var(--ink);border:1px solid #80a4b0}
+.incident-heading {display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#incidentPriority {font-size:11px;font-weight:800;color:var(--priority-color);border-left:2px solid currentColor;padding-left:5px}
+#bucketControls:not([hidden]) {display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin:4px 0;order:-1}
+#bucketControls button {color:#ecf6f9;background:#274857;border:1px solid #70909f;border-radius:3px;padding:4px 7px;cursor:pointer;touch-action:none}
+#bucketControls button[aria-pressed=true] {background:#326a7b;border-color:#9ee7f2}
+#bucketControls #bucketValve {color:#172d39;background:#ff937b}
+#bucketControls #bucketValve[aria-pressed=true] {background:#ff634a}
+#bucketControls label {display:inline-flex;gap:4px;align-items:center;font:11px var(--mono);color:#c5e8f4}
+#waterGauge {width:35px;height:12px;accent-color:#57c6e5}
+#dropSight {position:absolute;z-index:2;pointer-events:none;transform:translate(-50%,-50%);width:24px;height:24px;border:2px solid #b6f9ff;border-radius:50%;box-shadow:0 0 0 1px #183d4a,0 0 5px #0d334c}
+#dropSight::before,#dropSight::after {content:"";position:absolute;background:#d6ffff;left:50%;top:50%;transform:translate(-50%,-50%);box-shadow:0 0 2px #103e4a}
+#dropSight::before {width:10px;height:2px}#dropSight::after {height:10px;width:2px}
+#network,#inspection,#serviceDialog,#overlay .dialog,#hangarDesk {background:#152e3d;color:#e4eff3;border:1px solid #718995;border-radius:4px;box-shadow:0 12px 40px #0919245e}
+#network .map-tools button,#network #assignPriority,#network #callList button,#network .inspecthead button {color:#e7f1f5;background:#233f50;border:1px solid #627f8e;border-radius:3px}
+#network #assignPriority:not(:disabled) {color:#112a39;background:var(--signal);padding:7px 12px}
+#network #callList button {border-left:3px solid var(--priority-color)}
+#network #callList button[aria-pressed=true] {background:#365b68}
+#network #mapTitle {color:#f0f7fa}
+#shop {background:#f3f6f7;border:1px solid #9cb6c3;box-shadow:0 12px 40px #0d253450;border-radius:5px;color:var(--ink)}
+#shop .shop-inner {background:#f3f6f7;padding-top:16px}
+#shop .catalog-plate,#shop .equipment-card {background:#dbe6ea;border:1px solid #9eb7c0}
+#shop .shop-tabs button[aria-pressed=true],#shop .aircraft-index button[aria-pressed=true] {background:#284c61;color:white}
+#shop .aircraft-index button:nth-child(n) {color:#213c4d;background:#d4e4e9;border-color:#9db1b9}
+#shop .aircraft-index button[aria-pressed=true]:nth-child(n) {background:#26495d;color:white}
+#serviceDialog .service-items label {background:#1e3d4d;border-color:#526f7e}
+#serviceDialog .service-items b {color:#a4deed}
+body.mobile-layout #hud .touch-flight-buttons button {color:#e6f4f8;background:#163142e6;border-color:#84a6b5}
+body.mobile-layout #hud .touch-flight-buttons :is(#touchLiftUp,#touchLiftDown) {background:#245466e8;border-color:#9bd1df}
+body.mobile-layout #hud #touchUse {background:#ff937ced;color:#192e3a}
+body.mobile-layout #hud #touchStick {border-color:#97c8d8;background-color:#18384980}
+body.mobile-layout #hud #touchKnob {background:#b4d9e280;border-color:#e1f3f7}
+body.mobile-layout #hud #bucketControls:not([hidden]) {display:flex;order:-2;flex-wrap:nowrap;margin:0}
+body.mobile-layout #hud #bucketControls button {min-height:44px;min-width:44px;padding:3px;font-size:11px;word-break:keep-all;flex:1}
+body.mobile-layout #hud #bucketControls label {flex-flow:column;gap:0}
+body.mobile-layout #hud #fieldKitPanel:has(#bucketControls:not([hidden])) {overflow-y:auto}
+body.mobile-layout.touch-panels-collapsed #hud #fieldKitPanel>#bucketControls:not([hidden]) {display:flex}
+@media(max-width:720px){
+  #hangar .home-inner {width:94vw}
+  #hangar .intro {min-height:155px;background-position:56% 50%}
+  #hangar .hangar-grid {grid-template-columns:1fr}
+  #hangar .aircard {position:relative;top:0;height:170px;min-height:170px}
+  #hangar #dispatch select {height:44px;font-size:16px}
+}
+@media(max-height:520px) and (orientation:landscape){
+  #hangar .intro {min-height:100px;padding:13px 20px}
+  #hangar .intro h1 {font-size:32px}
+  #hangar .intro .kicker {display:none}
+  #hangar .hangar-grid {grid-template-columns:.8fr 1.2fr}
+}
+
+#hangar #previewAircraft {position:absolute;z-index:2;top:46px;right:14px;min-height:44px;padding:8px 12px;border:1px solid #a7c3cd;border-radius:3px;background:#132d40ed;color:#fff;cursor:pointer}
+
+#hangar .career-strip {flex-wrap:wrap}
+#hangar .career-actions {gap:8px;flex:0 1 auto;min-width:0}
+#hangar #resetCareer,#overlay #restartFlight,#resetDialog button {min-height:44px;padding:8px 14px;border-radius:3px;touch-action:manipulation}
+#hangar #resetCareer {color:var(--ink);background:transparent;border:1px solid #99aeba}
+#hangar #resetCareer span {display:block;margin-top:4px;color:#405d6c;font:11px var(--mono)}
+#overlay #restartFlight {width:100%;margin-top:9px;color:#e4eff3;background:#203c4b;border:1px solid #718995}
+body:not(.mobile-layout) #overlay .dialog {max-height:calc(100dvh - 28px);overflow-y:auto}
+#resetDialog {width:min(28rem,calc(100% - 24px));max-height:calc(100dvh - 24px);overflow:auto;
+  padding:clamp(18px,4vw,28px);background:#f3f6f7;color:var(--ink);border:1px solid #9cb6c3;
+  border-radius:5px;box-shadow:0 12px 40px #0919245e;word-break:keep-all;overflow-wrap:anywhere}
+#resetDialog::backdrop {background:#091924bd}
+#resetDialog h2 {font-size:clamp(21px,4.8vw,26px);line-height:1.3;letter-spacing:-.04em}
+#resetDialog p {margin-top:12px;line-height:1.6}
+#resetNotice:empty {display:none}
+#resetNotice {color:#853821}
+#resetDialog .reset-actions {display:flex;justify-content:flex-end;flex-wrap:wrap;gap:10px;margin-top:22px}
+#resetDialog button {min-width:5rem;font-weight:700}
+#resetCancel {background:#fff;color:var(--ink);border:1px solid #869eaa}
+#resetConfirm {background:#213f50;color:#fff;border:1px solid #213f50}
+
+/* Touch flight keeps the aircraft and horizon clear. The full instruments,
+   radio and tools share a single scroll surface when opened. */
+#flightDetails {display:contents}
+#touchBrief,#touchTelemetry {display:none}
+body.mobile-layout #hud {display:block;padding:0}
+body.mobile-layout {--stick-size:clamp(82px,14vmin,104px);--flight-button:clamp(44px,8vmin,52px);--touch-gap:4px}
+body.mobile-layout #hud .topbar {
+  top:calc(var(--safe-top) + 4px);right:var(--mobile-right);left:auto;width:max-content;
+  height:44px;gap:var(--touch-gap);padding:0;background:none;border:0;box-shadow:none;z-index:3;
+}
+body.mobile-layout #hud .topbar :is(.unit,#location,#course,#wallet,#performance) {display:none}
+body.mobile-layout #hud .topbar button,body.mobile-layout #hud #touchPanelToggle {
+  position:static;display:block;width:44px;height:44px;min-width:44px;margin:0;padding:2px;
+  border-radius:8px;background:#102936ae;border:1px solid #a1c5d363;font-size:12px;line-height:1.2;
+}
+body.mobile-layout.touch-controls #hud #cockpitView {display:none}
+body.mobile-layout #hud #pauseBtn {font-size:16px}
+body.mobile-layout #hud #touchPanelToggle[aria-expanded="true"] {background:#25566a;border-color:#a3dce8}
+body.mobile-layout #hud #touchBrief,body.mobile-layout #hud #touchTelemetry {
+  position:absolute;left:var(--mobile-left);width:max-content;max-width:calc(100% - var(--mobile-left) - var(--mobile-right) - 192px);
+  border-radius:4px;color:#f2fcff;text-shadow:0 1px 3px #071720;background:#0b222c9c;
+  pointer-events:none;font-variant-numeric:tabular-nums;
+}
+body.mobile-layout.touch-controls #hud #touchBrief {max-width:calc(100% - var(--mobile-left) - var(--mobile-right) - 146px)}
+body.mobile-layout #hud #touchBrief {
+  top:calc(var(--safe-top) + 5px);display:grid;align-content:center;min-height:36px;
+  padding:3px 8px;border-left:2px solid var(--touch-priority,#9ddce6);line-height:1.35;
+}
+body.mobile-layout #hud #touchMission {overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px}
+body.mobile-layout #hud #touchCourse {font-size:11px;color:#d2e9f0;white-space:nowrap}
+body.mobile-layout #hud #touchCourse:empty {display:none}
+body.mobile-layout:not(.on-foot) #hud #touchTelemetry {
+  display:block;bottom:calc(var(--touch-bottom) + var(--stick-size) + 5px);
+  max-width:none;padding:3px 6px;font:600 11px/1.35 var(--mono);
+}
+body.mobile-layout #hud #flightDetails {
+  display:block;position:absolute;z-index:2;top:calc(var(--safe-top) + 52px);right:var(--mobile-right);
+  width:min(290px,calc(100% - var(--mobile-left) - var(--mobile-right)));
+  max-height:calc(100% - var(--safe-top) - var(--touch-bottom) - 2 * var(--flight-button) - 63px);
+  overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;pointer-events:auto;
+  background:#102936f5;border:1px solid #72929e;border-radius:7px;
+}
+body.mobile-layout.touch-panels-collapsed #hud #flightDetails {display:none}
+body.mobile-layout #hud #flightDetails :is(.dispatch-msg,#fieldKit,.lowerleft,.instruments) {
+  position:static;inset:auto;width:100%;max-width:none;min-width:0;max-height:none;height:auto;
+  transform:none;margin:0;border:0;border-radius:0;border-bottom:1px solid #7695a147;box-shadow:none;
+}
+body.mobile-layout #hud #flightDetails .dispatch-msg {overflow:visible;padding:7px 9px;background:none}
+body.mobile-layout #hud #flightDetails .dispatch-msg h2 {font-size:15px}
+body.mobile-layout #hud #flightDetails #fieldKit {padding:5px 8px;background:none}
+body.mobile-layout #hud #flightDetails #fieldKitPanel {height:auto;max-height:none;min-height:0;overflow:visible}
+body.mobile-layout #hud #flightDetails .lowerleft {
+  display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;gap:4px;padding:6px 8px;
+}
+body.mobile-layout #hud #flightDetails .radarbox {grid-area:1/1;width:100%;height:78px;border:0}
+body.mobile-layout #hud #flightDetails .radar-buttons {
+  position:static;grid-area:1/2/3/3;align-self:start;grid-template-columns:repeat(2,44px);gap:2px;padding:0;border:0;
+}
+body.mobile-layout #hud #flightDetails #navlabel {position:static;grid-area:2/1;width:100%;height:auto;padding:2px}
+body.mobile-layout #hud #flightDetails #seatRoster:not(:empty) {
+  position:static;grid-column:1/-1;max-height:none;max-width:none;
+}
+body.mobile-layout.on-foot #hud #flightDetails :is(.instruments,.lowerleft,#fieldKit) {display:none}
+body.mobile-layout #hud #flightDetails .instruments {padding:5px 0;justify-content:space-evenly}
+body.mobile-layout #hud #flightDetails .instruments>div {width:24%;min-width:0;padding:1px}
+body.mobile-layout #hud #feedback:not(:empty) {
+  top:calc(var(--safe-top) + 49px);bottom:auto;left:var(--mobile-left);right:auto;transform:none;z-index:1;
+  width:max-content;max-width:min(310px,44%);max-height:3.4em;padding:3px 6px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  white-space:normal;font-size:11px;line-height:1.35;text-align:left;pointer-events:none;
+}
+body.mobile-layout #hud .touch-stick-zone {height:var(--stick-size);bottom:var(--touch-bottom)}
+body.mobile-layout #hud .touch-hint {display:none}
+body.mobile-layout #hud #touchStick {background:#142c354d;box-shadow:none}
+body.mobile-layout #hud #touchKnob {width:36px;height:36px;margin:-18px 0 0 -18px;background:#c5e2ea63}
+body.mobile-layout #hud .touch-flight-buttons {bottom:var(--touch-bottom);gap:var(--touch-gap)}
+body.mobile-layout #hud .touch-flight-buttons button {border-radius:9px;box-shadow:none;background:#122e3e9e;border-color:#a1c5d385}
+body.mobile-layout #hud .touch-flight-buttons :is(#touchLiftUp,#touchLiftDown) {background:#1a495bab}
+body.mobile-layout #hud .touch-flight-buttons #touchUse {background:#e6937cd6;color:#102531}
+body.mobile-layout #hud .touch-flight-buttons button.is-held,body.mobile-layout #hud #touchStick.is-held {background:#447d89;border-color:#d1fffa}
+body.mobile-layout #hud .walk-actions:not(:empty) {
+  position:absolute;left:var(--mobile-left);right:auto;top:auto;bottom:calc(var(--touch-bottom) + var(--stick-size) + 26px);
+  width:max-content;max-width:calc(100% - var(--mobile-left) - var(--mobile-right));gap:4px;background:none;border:0;
+}
+body.mobile-layout #hud .walk-actions:not(:empty) button {
+  width:auto;min-width:44px;min-height:44px;padding:4px 7px;background:#102936bc;border-radius:6px;font-size:11px;
+}
+
+#hangar .departure-weather {display:grid;align-content:start;gap:2px;color:#274858;line-height:1.3}
+#hangar .departure-weather b {margin-bottom:2px;color:#415d6e;font-size:12px}
+#departureConditions {font-size:13px;font-weight:650}
+#departureVisibility {font-size:12px}
+#hud #flightWeather {display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;margin-top:4px;padding-top:4px;
+  border-top:1px solid #aacddb40;color:#ddf0f4;font-size:11px;line-height:1.4;font-variant-numeric:tabular-nums}
+#hud #flightVisibility {color:#bdd5df}
+body:not(.mobile-layout) #hud:has(#flightWeather:not([hidden])) #feedback:not(:empty) {
+  top:auto;bottom:calc(var(--rail-height) + 52px);
+}
+body.mobile-layout #hud #touchWind:not(:empty) {margin-left:6px;padding-left:6px;border-left:1px solid #a9c7d080;color:#d5edf5;white-space:nowrap}
+@media (max-width:480px) {
+  body.mobile-layout {--flight-pad-height:max(var(--stick-size),calc(2 * var(--flight-button) + var(--touch-gap)))}
+  body.mobile-layout:not(.on-foot) #hud #touchTelemetry {bottom:calc(var(--touch-bottom) + var(--flight-pad-height) + 5px)}
+  body.mobile-layout #hud .walk-actions:not(:empty) {bottom:calc(var(--touch-bottom) + var(--flight-pad-height) + 26px)}
+}
+#hangar .district-preview {grid-column:1/-1;display:flex;align-items:center;gap:12px;min-width:0;background:#e6edef;border:1px solid #bccbd1;padding:6px 10px;color:#213b49}
+#hangar #districtMap {width:60px;height:60px;flex:none;border:1px solid #6d8792}
+#hangar .district-preview div {display:grid;gap:4px}
+#hangar #districtSpan {font-variant-numeric:tabular-nums;color:#466373}
+#hangar #regenerateCity {margin-left:auto;padding:7px 10px;min-height:36px;border:1px solid #8b9fa8;border-radius:3px;background:#f8faf9;color:#234250;cursor:pointer}
+#hud #openPadActions {display:none}
+body.pad-connected #hud #openPadActions {display:inline-block}
+.pad-sheet {width:min(570px,94vw);max-height:90dvh;padding:0;border:1px solid #8da7af;border-radius:6px;background:#eff4f5;color:#183440}
+.pad-sheet::backdrop {background:#07131dbb}
+.pad-sheet-inner {padding:clamp(12px,2.5vw,22px)}
+.pad-sheet header {display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.pad-sheet h2 {margin:0;font-size:1.2rem}
+.pad-sheet button,.pad-sheet select {font:inherit;font-size:.86rem;color:inherit;background:#fff;border:1px solid #9aaeb6;border-radius:4px;padding:7px 9px}
+.pad-sheet button:disabled {opacity:.48}
+.pad-sheet .pad-tabs {display:flex;gap:4px;flex-wrap:wrap;border-bottom:1px solid #b6c7cc;padding-bottom:9px}
+.pad-sheet .pad-tabs button[aria-pressed=true] {color:#fff;background:#244b5a}
+.pad-pages fieldset {border:0;padding:0;margin:12px 0 0}
+.pad-pages legend,.pad-selector {font-size:.82rem;font-weight:700;color:#47606c}
+.pad-pages fieldset div {display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.pad-selector {display:flex;align-items:center;gap:8px;padding:8px 0 0}
+.pad-bindings {display:grid;grid-template-columns:max-content 1fr;gap:6px 15px;margin:8px 0}
+.pad-bindings dt {font-weight:700}.pad-bindings dd {margin:0}
+.pad-sheet-inner p {margin:12px 0 0;font-size:.85rem;color:#385767}
+.pad-sheet :is(button,select):focus-visible {outline:3px solid #16758b;outline-offset:1px}
+.pad-connected :is(button,input,select,textarea,a[href],[tabindex]):focus {
+  outline: 3px solid #ffcc73;
+  outline-offset: 2px;
+}
+.pad-picker {
+  box-sizing: border-box; width: min(460px,92vw); max-height: 82dvh;
+  padding: 18px 20px; overflow: auto; color: #f0f5f6; background: #142d3b;
+  border: 1px solid #61818d; border-radius: 6px;
+}
+.pad-picker::backdrop {background: #07131ab3}
+.pad-picker h2 {font-size: 18px; margin: 0 0 14px}
+.pad-option-list {display:grid; gap:4px; max-height:58dvh; padding:5px; overflow:auto}
+.pad-option-list button {text-align:left; min-height:34px}
+.pad-option-list [aria-selected=true] {border-color:#96c6c6}
+.pad-keys {display:grid; gap:4px; margin:12px 0}
+.pad-key-row {display:grid; grid-template-columns:repeat(10,minmax(0,1fr)); gap:3px}
+.pad-edits {display:flex; flex-wrap:wrap; gap:5px; margin:0 0 10px}
+.pad-keys button {padding:6px 1px; min-width:0}
+.pad-picker output {display:block; overflow-wrap:anywhere; margin:0 0 8px}
+.pad-picker select {max-width:100%}
+#modelInfo a {color:#a5e2f0;text-underline-offset:.18em;white-space:nowrap}

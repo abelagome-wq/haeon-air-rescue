@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+<title>AIRSPEED</title>
+<defs>
+  <linearGradient id="rim" x2=".7" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#a7a6a0"/><stop offset=".22" stop-color="#59595a"/><stop offset=".48" stop-color="#232426"/><stop offset=".8" stop-color="#0c0d0e"/><stop offset="1" stop-color="#6c6a66"/></linearGradient>
+  <radialGradient id="face" cx=".42" cy=".33" r=".86"><stop stop-color="#3e3c39"/><stop offset=".77" stop-color="#191a1b"/><stop offset="1" stop-color="#121315"/></radialGradient>
+</defs>
+<circle cx="90" cy="90" r="88" fill="url(#rim)" stroke="#141415" stroke-width="3"/>
+<circle cx="90" cy="90" r="79" fill="url(#face)" stroke="#111213" stroke-width="4"/>
+<g fill="none" stroke="#ebe7d6"><path d="M38.38 141.62L46.87 133.13" stroke-width="2.5"/>
+<path d="M34.49 137.41L38.29 134.16" stroke-width="1.3"/>
+<path d="M30.94 132.91L34.99 129.97" stroke-width="1.3"/>
+<path d="M27.76 128.14L32.02 125.53" stroke-width="1.3"/>
+<path d="M24.96 123.14L29.41 120.87" stroke-width="1.3"/>
+<path d="M22.56 117.94L27.18 116.02" stroke-width="1.3"/>
+<path d="M20.57 112.56L25.33 111.01" stroke-width="1.3"/>
+<path d="M19.02 107.04L23.88 105.87" stroke-width="1.3"/>
+<path d="M17.9 101.42L22.84 100.64" stroke-width="1.3"/>
+<path d="M17.23 95.73L22.21 95.34" stroke-width="1.3"/>
+<path d="M17 90L29 90" stroke-width="2.5"/>
+<path d="M17.23 84.27L22.21 84.66" stroke-width="1.3"/>
+<path d="M17.9 78.58L22.84 79.36" stroke-width="1.3"/>
+<path d="M19.02 72.96L23.88 74.13" stroke-width="1.3"/>
+<path d="M20.57 67.44L25.33 68.99" stroke-width="1.3"/>
+<path d="M22.56 62.06L27.18 63.98" stroke-width="1.3"/>
+<path d="M24.96 56.86L29.41 59.13" stroke-width="1.3"/>
+<path d="M27.76 51.86L32.02 54.47" stroke-width="1.3"/>
+<path d="M30.94 47.09L34.99 50.03" stroke-width="1.3"/>
+<path d="M34.49 42.59L38.29 45.84" stroke-width="1.3"/>
+<path d="M38.38 38.38L46.87 46.87" stroke-width="2.5"/>
+<path d="M42.59 34.49L45.84 38.29" stroke-width="1.3"/>
+<path d="M47.09 30.94L50.03 34.99" stroke-width="1.3"/>
+<path d="M51.86 27.76L54.47 32.02" stroke-width="1.3"/>
+<path d="M56.86 24.96L59.13 29.41" stroke-width="1.3"/>
+<path d="M62.06 22.56L63.98 27.18" stroke-width="1.3"/>
+<path d="M67.44 20.57L68.99 25.33" stroke-width="1.3"/>
+<path d="M72.96 19.02L74.13 23.88" stroke-width="1.3"/>
+<path d="M78.58 17.9L79.36 22.84" stroke-width="1.3"/>
+<path d="M84.27 17.23L84.66 22.21" stroke-width="1.3"/>
+<path d="M90 17L90 29" stroke-width="2.5"/>
+<path d="M95.73 17.23L95.34 22.21" stroke-width="1.3"/>
+<path d="M101.42 17.9L100.64 22.84" stroke-width="1.3"/>
+<path d="M107.04 19.02L105.87 23.88" stroke-width="1.3"/>
+<path d="M112.56 20.57L111.01 25.33" stroke-width="1.3"/>
+<path d="M117.94 22.56L116.02 27.18" stroke-width="1.3"/>
+<path d="M123.14 24.96L120.87 29.41" stroke-width="1.3"/>
+<path d="M128.14 27.76L125.53 32.02" stroke-width="1.3"/>
+<path d="M132.91 30.94L129.97 34.99" stroke-width="1.3"/>
+<path d="M137.41 34.49L134.16 38.29" stroke-width="1.3"/>
+<path d="M141.62 38.38L133.13 46.87" stroke-width="2.5"/>
+<path d="M145.51 42.59L141.71 45.84" stroke-width="1.3"/>
+<path d="M149.06 47.09L145.01 50.03" stroke-width="1.3"/>
+<path d="M152.24 51.86L147.98 54.47" stroke-width="1.3"/>
+<path d="M155.04 56.86L150.59 59.13" stroke-width="1.3"/>
+<path d="M157.44 62.06L152.82 63.98" stroke-width="1.3"/>
+<path d="M159.43 67.44L154.67 68.99" stroke-width="1.3"/>
+<path d="M160.98 72.96L156.12 74.13" stroke-width="1.3"/>
+<path d="M162.1 78.58L157.16 79.36" stroke-width="1.3"/>
+<path d="M162.77 84.27L157.79 84.66" stroke-width="1.3"/>
+<path d="M163 90L151 90" stroke-width="2.5"/>
+<path d="M162.77 95.73L157.79 95.34" stroke-width="1.3"/>
+<path d="M162.1 101.42L157.16 100.64" stroke-width="1.3"/>
+<path d="M160.98 107.04L156.12 105.87" stroke-width="1.3"/>
+<path d="M159.43 112.56L154.67 111.01" stroke-width="1.3"/>
+<path d="M157.44 117.94L152.82 116.02" stroke-width="1.3"/>
+<path d="M155.04 123.14L150.59 120.87" stroke-width="1.3"/>
+<path d="M152.24 128.14L147.98 125.53" stroke-width="1.3"/>
+<path d="M149.06 132.91L145.01 129.97" stroke-width="1.3"/>
+<path d="M145.51 137.41L141.71 134.16" stroke-width="1.3"/>
+<path d="M141.62 141.62L133.13 133.13" stroke-width="2.5"/></g>
+<g fill="#f5f1df" font-family="Arial,sans-serif" font-weight="bold" font-size="15" text-anchor="middle"><text x="54.64" y="129.36">0</text>
+<text x="40" y="94">50</text>
+<text x="54.64" y="58.64">100</text>
+<text x="90" y="44">150</text>
+<text x="125.36" y="58.64">200</text>
+<text x="140" y="94">250</text>
+<text x="125.36" y="129.36">300</text></g>
+<text x="90" y="73" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#cbc9bd">AIRSPEED</text>
+<text x="90" y="111" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#c6c3b7">km/h</text>
+<circle cx="90" cy="90" r="6" fill="#65645d" stroke="#171818" stroke-width="2"/>
+</svg>

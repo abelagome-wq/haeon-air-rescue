@@ -1,0 +1,19 @@
+{
+  "name": "해온 항공구조대",
+  "short_name": "해온 구조대",
+  "description": "항공 관제와 함께 화재 진압, 인명 구조, 의료 후송을 수행합니다. 플레이하려면 인터넷 연결이 필요합니다.",
+  "lang": "ko",
+  "id": "../",
+  "start_url": "./index.html",
+  "scope": "../",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#142a3a",
+  "theme_color": "#142a3a",
+  "prefer_related_applications": false,
+  "icons": [
+    { "src": "./art/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./art/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./art/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

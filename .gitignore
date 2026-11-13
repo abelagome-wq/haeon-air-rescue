@@ -1,0 +1,14 @@
+# v25 local runtime data: only the project-created files already tracked here travel with Git.
+/models/
+/remake/art/
+/remake/data/
+/SIMCOPT/
+/.codex-attachments/
+*.zip
+*.exe
+*.blend1
+*.blend2
+__pycache__/
+*.pyc
+.env
+.env.*
