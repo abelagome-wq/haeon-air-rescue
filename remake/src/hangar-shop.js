@@ -88,7 +88,7 @@ export function createHangarShop(career, onSelect) {
     details.append(element('h3', '', item.name));
     const specs = element('dl', 'catalog-spec');
     for (const [label, value] of [
-      ['참고 기체', item.inspiration],
+      ['기체 번호', item.designation],
       ['가격', money(item.price)],
       ['보유 상태', profile.ownedAircraft.includes(item.id) ? '보유' : '미보유'],
       ['최고 속도', plane.speedKmh + ' km/h'],

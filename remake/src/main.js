@@ -250,7 +250,7 @@ async function validateSelection(){
   $('menuInfo').textContent=warning||(plan?'선택한 현장으로 출동합니다.':route?
     '경력 '+route.level+'단계 · 지역 점수 '+(p.cityScores?.[district]??0)+' / '+route.goal+'점':'도시 무전을 받으며 순찰합니다.');
 }
-function showPlane(){const i=HELICOPTERS.findIndex(h=>h.id===$('heliSelect').value),h=HELICOPTERS[i];if(!h)return;$('airTitle').textContent=h.name;$('airCode').textContent='HAEON '+String(301+i);$('airIndex').textContent=String(i+1).padStart(2,'0')+' / '+HELICOPTERS.length;$('airPhoto').src='art/'+h.id+'.webp';$('airPhoto').alt=h.name+' 기체 렌더';}
+function showPlane(){const i=HELICOPTERS.findIndex(h=>h.id===$('heliSelect').value),h=HELICOPTERS[i];if(!h)return;$('airTitle').textContent=h.name;$('airCode').textContent=h.designation;$('airIndex').textContent=String(i+1).padStart(2,'0')+' / '+HELICOPTERS.length;$('airPhoto').src='art/'+h.id+'.webp';$('airPhoto').alt=h.name+' 기체 렌더';}
 async function menu(){
   const [account]=await Promise.all([pilot.ready,soundLibrary.ready]);if(!account.ok)throw Error(account.message);
   $('citySelect').replaceChildren(...Object.entries(citySizes).map(([id,label])=>new Option(label,id)));

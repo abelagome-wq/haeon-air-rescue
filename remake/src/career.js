@@ -12,8 +12,8 @@ export const PROFILE_VERSION = 2;
 const freezeCatalog = rows => Object.freeze(rows.map(row => Object.freeze({
   ...row, ...(row.requires ? {requires:Object.freeze(row.requires)} : {}),
 })));
-export const AIRCRAFT_CATALOG = freezeCatalog(FLEET.map(({id, name, inspiration, price}) => ({
-  id, name, inspiration, price,
+export const AIRCRAFT_CATALOG = freezeCatalog(FLEET.map(({id, name, designation, price}) => ({
+  id, name, designation, price,
   ...(id === 'SCWZR300' ? {starter:true} : {}),
   ...(id === 'APACHE' ? {special:true, description:'원작의 특수 기체로, 격납고에서 구매할 수 있습니다.'} : {}),
 })));

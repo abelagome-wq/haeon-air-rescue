@@ -4,10 +4,22 @@ import {createTexturePolicy,closeTextureImages} from './texture-policy.js';
 import {createInspectorGestures} from './inspect-gestures.js';
 import {FLEET} from './fleet.js';
 import {hangarEnvironment} from './hangar-lighting.js';
-import {airframeReferences} from './airframe-references.js';
 const $=id=>document.getElementById(id);
 let rows,objectCatalog,session=null,turn=0,opening=0;
-const fleetCatalog=FLEET.map(h=>({id:h.id,title:h.name,group:'항공기',source:h.inspiration,path:h.path}));
+const fleetCatalog=FLEET.map(h=>({id:h.id,title:h.name,code:h.designation,group:'항공기',path:h.path}));
+const aircraftById=new Map(FLEET.map(h=>[h.id,h]));
+const rotorAircraft=new Map([
+  ['SCWZROTR','SCWZR300'],['JETRROTR','JETRANG'],['H500ROTR','HUGH500'],
+  ['MD52ROTR','MD520'],['BELLROTR','BELL212'],['AGUSROTR','AGUSTA'],
+  ['DAUPROTR','DAUPHIN'],['MDEXROTR','MDEXPLRR'],['APACROTR','APACHE'],
+]);
+function catalogObject(object){
+  const rotorId=rotorAircraft.get(object.id);
+  const aircraft=aircraftById.get(rotorId??object.id);
+  if(!aircraft)return {...object,code:object.id};
+  return {...object,code:aircraft.designation,title:aircraft.name+(rotorId?' 로터':''),source:''};
+}
+const labelFor=row=>row.code+' · '+row.title;
 function freeModel(model){
   if(!model)return;const gs=new Set(),ms=new Set(),ts=new Set(),sks=new Set();
   model.traverse(o=>{if(o.geometry)gs.add(o.geometry);if(o.skeleton)sks.add(o.skeleton);for(const m of [].concat(o.material||[])){ms.add(m);for(const v of Object.values(m))if(v?.isTexture)ts.add(v);}});
@@ -20,7 +32,7 @@ async function choose(){
   const ticket=++turn,s=session,row=rows?.find(r=>r.id===$('objectSelect').value);
   if(!s)return;s.gestures?.reset();s.mixer?.stopAllAction();if(s.current){s.scene.remove(s.current);freeModel(s.current);s.current=null;}s.mixer=null;$('animationLabel').hidden=true;
   if(!row){$('modelInfo').textContent='조건에 맞는 객체가 없습니다.';return;}
-  $('modelInfo').textContent=row.id+' · 모델을 여는 중…';
+  $('modelInfo').textContent=labelFor(row)+' · 모델을 여는 중…';
   try{
     const url=new URL('../../'+(row.path??'models/complete/'+row.glb),import.meta.url).href;
     const gltf=await s.loader.loadAsync(url);
@@ -35,18 +47,17 @@ async function choose(){
     const box=new T.Box3().setFromObject(s.current,true),center=box.getCenter(new T.Vector3()),extent=box.getSize(new T.Vector3());
     s.gestures?.reset();s.current.position.sub(center);s.radius=Math.max(.05,extent.length()*.52);s.zoom=aircraft?.86:1;s.yaw=.72;s.pitch=aircraft?.19:.32;
     s.clips=gltf.animations;if(s.clips.length){s.mixer=new T.AnimationMixer(s.current);$('animation').replaceChildren(...s.clips.map((c,i)=>new Option(c.name,i)));$('animationLabel').hidden=false;activateClip();}
-    $('modelInfo').textContent=row.id+'  /  '+row.title+'  ·  '+row.source+'  ·  '+(s.clips.length?s.clips.length+'개 동작':aircraft?'비행 기체':'정적 모델');
-    if(aircraft&&airframeReferences[row.id]){
-      const link=document.createElement('a');link.href=airframeReferences[row.id];link.target='_blank';link.rel='noopener noreferrer';
-      link.textContent='실기 사진 ↗';link.setAttribute('aria-label',row.source+' 실기 사진 새 창에서 보기');
-      $('modelInfo').append('　',link);
-    }
-  }catch(e){if(ticket===turn)$('modelInfo').textContent='모델 읽기 실패: '+e.message;}
+    const modelType=s.clips.length?s.clips.length+'개 동작':aircraft?'비행 기체':'정적 모델';
+    $('modelInfo').textContent=[labelFor(row),row.source,modelType].filter(Boolean).join(' · ');
+  }catch(e){
+    if(ticket===turn)$('modelInfo').textContent=labelFor(row)+' 모델을 불러올 수 없습니다.';
+    console.error(e);
+  }
 }
 function filter(preferred=''){
   const q=$('findModel').value.trim().toLowerCase(),g=$('groups').value,sel=$('objectSelect'),old=preferred||sel.value;
-  const result=rows.filter(r=>(!g||r.group===g)&&[r.id,r.title,r.group,r.source].join(' ').toLowerCase().includes(q));
-  sel.replaceChildren(...result.map(r=>new Option(r.id+' · '+r.title,r.id)));if(result.some(r=>r.id===old))sel.value=old;choose();
+  const result=rows.filter(r=>(!g||r.group===g)&&[r.code,r.title,r.group,r.source].join(' ').toLowerCase().includes(q));
+  sel.replaceChildren(...result.map(r=>new Option(labelFor(r),r.id)));if(result.some(r=>r.id===old))sel.value=old;choose();
 }
 export async function openInspection(initial='',aircraftId=''){
   const modal=$('inspection');if(modal.open)return;
@@ -54,7 +65,7 @@ export async function openInspection(initial='',aircraftId=''){
   $('inspectionHeading').textContent=aircraftId?'항공기 3D 점검':'객체 점검실';
   $('modelInfo').textContent='모델 목록을 불러오는 중입니다.';
   try{
-    const catalog=aircraftId?fleetCatalog:(objectCatalog??=await fetch('./data/objects.json').then(r=>r.json()));
+    const catalog=aircraftId?fleetCatalog:(objectCatalog??=await fetch('./data/objects.json').then(r=>r.json()).then(items=>items.map(catalogObject)));
     if(!modal.open||opening!==request)return;
     rows=catalog;
     const el=$('inspectorView'),r=new T.WebGLRenderer({antialias:true,powerPreference:'low-power'});
