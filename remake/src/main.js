@@ -44,15 +44,19 @@ let heldTool=null;
 const flightPadGestures=createFlightPadGestures();
 let padDownControlsCable=false;
 const cockpit=createCockpitDisplay(tool=>action(tool));
-setupSoundEditor();
-const radio=createOriginalRadio({library:soundLibrary, phraseURL:dispatchPhrase, station:store.get('station','mix'),isNight:()=>ctx?.night===true,
+const savedDialogue=store.get('dialogue-language','ko')==='en'?'en':'ko';
+const radio=createOriginalRadio({language:savedDialogue,library:soundLibrary, phraseURL:dispatchPhrase, station:store.get('station','mix'),isNight:()=>ctx?.night===true,
   onState:s=>{$('station').value=s.station;$('radioTrack').textContent=s.station==='off'?'음악 꺼짐':s.stationName+(s.title?' · '+s.title:'');},
-  onSpeech:({event,text})=>{
-    const channel={megaphone:'확성기',field:'현장',service:'지원'}[event.kind] || '사령실';
-    $('radioMessage').textContent='['+channel+'] '+text;radioUntil=elapsed+9;
+  onSpeech:({event,text,language})=>{
+    const en=language==='en', channel=en?({megaphone:'PA',field:'On scene',service:'Ground crew',station:'Radio'}[event.kind] || 'Dispatch'):
+      ({megaphone:'확성기',field:'현장',service:'지원',station:'방송'}[event.kind] || '관제');
+    const subtitle=$('radioMessage');subtitle.lang=en?'en':'ko';subtitle.textContent=text?'['+channel+'] '+text:'';radioUntil=elapsed+9;
   },
   onDuck:value=>sound.setDuck(value)});
 radio.setEnabled(soundOn);
+setupSoundEditor({language:savedDialogue,onLanguage:lang=>{
+  store.set('dialogue-language',lang);$('radioMessage').textContent='';radioUntil=0;radio.setLanguage(lang);
+}});
 function say(message){playerNotice=message;noticeUntil=elapsed+5;}
 const diag=qs.get('diag')==='1',fields=[$('citySelect'),$('heliSelect'),$('missionSelect'),$('quality'),$('controlsSelect'),$('scheme'),$('shift'),$('weatherSelect')];
 const mobileDevice=()=>navigator.maxTouchPoints>0&&matchMedia('(pointer: coarse) and (hover: none)').matches;

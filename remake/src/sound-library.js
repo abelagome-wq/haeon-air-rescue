@@ -1,5 +1,6 @@
 import radio from './original-radio-data.js';
 import spokenLines from './spoken-lines.js';
+import {dialogueLines} from './dialogue-lines.js';
 import {songsById} from './radio-program.js';
 
 const effects = {
@@ -16,9 +17,10 @@ const effects = {
 const genres = {jazz:'재즈',rock:'록',techno:'테크노',classic:'클래식'};
 const audioRoot = new URL('../art/audio/synth/', import.meta.url);
 const megaphoneGroups = ['교통 우회','정차','대피','해산','인사'];
-function recordingURL(id) {
-  const url = new URL(id+'.mp3',audioRoot);
-  if (Object.hasOwn(spokenLines,id)) url.searchParams.set('voice','3');
+function recordingURL(id, language='ko') {
+  const spoken = Object.hasOwn(spokenLines,id);
+  const url = new URL((spoken && language==='en'?'en/':'')+id+'.mp3',audioRoot);
+  if (spoken) url.searchParams.set('voice','4');
   return url.href;
 }
 
@@ -59,6 +61,13 @@ export const soundEntries = [
   ...Object.entries(effects).map(([id,label]) => ({id, group:'효과음', label, url:new URL(id+'.wav', audioRoot).href})),
 ];
 const entriesById = new Map(soundEntries.map(entry => [entry.id, entry]));
+const isSpeech = id => Object.hasOwn(spokenLines,id);
+const originalURL = (id,lang) => isSpeech(id) ? recordingURL(id,lang) : entriesById.get(id)?.url;
+const labelFor = (id,lang) => dialogueLines(lang)[id] || entriesById.get(id)?.label || '';
+// Existing Korean uploads keep their old IndexedDB keys. An English voice
+// replacement has its own key; music and effects stay shared.
+const keyFor = (id,lang) => isSpeech(id) && lang==='en' ? 'en:'+id : id;
+const idOf = key => key.startsWith('en:') ? key.slice(3) : key;
 const custom = new Map(), listeners = new Set();
 const collection = 'replacements';
 
@@ -87,21 +96,21 @@ async function access(mode, action) {
   } finally { db.close(); }
 }
 
-function apply(id, record) {
-  const previous = custom.get(id);
+function apply(key, record) {
+  const id = idOf(key), previous = custom.get(key);
   const preset=entriesById.get(record?.sourceId);
-  if(preset&&preset.id!==id)custom.set(id,{sourceId:preset.id,name:preset.label,url:preset.url});
-  else if(record?.file instanceof Blob)custom.set(id,{name:record.file.name,url:URL.createObjectURL(record.file),blob:true});
-  else custom.delete(id);
+  if(preset&&preset.id!==id)custom.set(key,{sourceId:preset.id});
+  else if(record?.file instanceof Blob)custom.set(key,{name:record.file.name,url:URL.createObjectURL(record.file),blob:true});
+  else custom.delete(key);
   try {
-    for (const notify of listeners) notify(id);
+    for (const notify of listeners) notify(id,isSpeech(id)?(key.startsWith('en:')?'en':'ko'):undefined);
   } finally {
     if (previous?.blob) URL.revokeObjectURL(previous.url);
   }
 }
 
 const ready = access('readonly', store => store.getAll()).then(rows => {
-  for (const row of rows) if (entriesById.has(row.id)) apply(row.id, row);
+  for (const row of rows) if (typeof row.id==='string' && entriesById.has(idOf(row.id))) apply(row.id,row);
 }).catch(() => {}); // Originals are playable even when the browser disallows storage.
 
 let pending = ready;
@@ -116,7 +125,7 @@ if (typeof window !== 'undefined' && typeof BroadcastChannel !== 'undefined') {
   try {
     channel = new BroadcastChannel('simcopter-sound-files');
     channel.onmessage = ({data:id}) => {
-      if (entriesById.has(id)) inOrder(async () => apply(id, await access('readonly', store => store.get(id))));
+      if (typeof id==='string' && entriesById.has(idOf(id))) inOrder(async () => apply(id, await access('readonly', store => store.get(id))));
     };
   } catch { /* Cross-tab notifications are optional. */ }
 }
@@ -132,29 +141,32 @@ async function validate(file) {
   } catch { throw Error('재생할 수 없는 오디오 파일입니다. WAV 또는 MP3 등 브라우저가 지원하는 파일을 선택하세요.'); }
 }
 
-function change(id, record) {
+function change(id, record, language) {
+  const key=keyFor(id,language);
   return inOrder(async () => {
     if (!entriesById.has(id)) throw Error('목록에 없는 소리입니다.');
     if(record&&Object.hasOwn(record,'sourceId')){
       if(!entriesById.has(record.sourceId)||record.sourceId===id)throw Error('교체에 사용할 다른 내장 소리를 선택하세요.');
     }else if(record) await validate(record.file);
     try {
-      await access('readwrite', store => record ? store.put(record) : store.delete(id));
+      await access('readwrite', store => record ? store.put({...record,id:key}) : store.delete(key));
     } catch (error) {
       throw Error(error.name === 'QuotaExceededError' ? '브라우저 저장 공간이 부족합니다. 다른 교체 파일을 기본 소리로 복원한 뒤 다시 시도하세요.' : '이 브라우저에 변경 사항을 저장할 수 없습니다. 사이트 저장 권한을 확인하세요.');
     }
-    apply(id, record);
-    channel?.postMessage(id);
+    apply(key, record);
+    channel?.postMessage(key);
   });
 }
 
 export const soundLibrary = {
   ready,
-  url(id) { return custom.get(id)?.url || entriesById.get(id)?.url; },
-  filename(id) { return custom.get(id)?.name || ''; },
-  preset(id) { return custom.get(id)?.sourceId || ''; },
-  replace(id,file) { return change(id,file===null?null:{id,file}); },
-  replaceWithPreset(id,sourceId) { return change(id,{id,sourceId}); },
-  reset(id) { return change(id,null); },
+  originalURL, label:labelFor,
+  url(id,lang='ko') { const r=custom.get(keyFor(id,lang));return r?.url || originalURL(r?.sourceId || id,lang); },
+  filename(id,lang='ko') { const r=custom.get(keyFor(id,lang));return r?.sourceId ? labelFor(r.sourceId,lang) : r?.name || ''; },
+  preset(id,lang='ko') { return custom.get(keyFor(id,lang))?.sourceId || ''; },
+  caption(id,lang='ko') { const r=custom.get(keyFor(id,lang));return r?.blob ? '' : dialogueLines(lang)[r?.sourceId || id] || ''; },
+  replace(id,file,lang='ko') { return change(id,file===null?null:{file},lang); },
+  replaceWithPreset(id,sourceId,lang='ko') { return change(id,{sourceId},lang); },
+  reset(id,lang='ko') { return change(id,null,lang); },
   subscribe(listener) { listeners.add(listener); return () => listeners.delete(listener); },
 };
