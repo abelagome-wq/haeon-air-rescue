@@ -22,7 +22,8 @@ for(const size of ['small','medium','large']){
     }
     inside(city.spawn);inside(planHomeBase(city).door);
     assert.deepEqual(sites.stations.map(p=>p.kind).sort(),['fire','hospital','police']);
-    for(const list of [sites.roads.values(),sites.water.values(),sites.hospitals,sites.harbor,sites.medical,sites.pickup,sites.fire,sites.riot,sites.rescueWater])
+    assert.ok(sites.cargo.length>=2,city.cityId+' lacks freight depots');
+    for(const list of [sites.roads.values(),sites.water.values(),sites.hospitals,sites.harbor,sites.medical,sites.pickup,sites.fire,sites.riot,sites.rescueWater,sites.cargo])
       for(const p of list)inside(p);
     for(const [kind,targets] of [['hospital',sites.medical],['fire',sites.fire],['police',sites.riot]]){
       assert.ok(targets.length>0,city.cityId+' '+kind);

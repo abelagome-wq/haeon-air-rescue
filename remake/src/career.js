@@ -114,7 +114,7 @@ export function createCareer(options={}){
   }
   function freshProfile(legacy=null,source='new'){
     const p={version:PROFILE_VERSION,revision:0,profileId:makeId(),cash:legacy?legacy.cash:STARTING_CASH,
-      ownedAircraft:['SCWZR300'],ownedEquipment:['bucket','megaphone'],selectedAircraft:'SCWZR300',
+      ownedAircraft:['SCWZR300'],ownedEquipment:['bucket','megaphone','hook'],selectedAircraft:'SCWZR300',
       score:legacy&&numeric(legacy.score)?legacy.score:0,
       completed:legacy&&count(legacy.completed)?legacy.completed:0,
       failed:legacy&&count(legacy.failed)?legacy.failed:0,
@@ -145,6 +145,10 @@ export function createCareer(options={}){
   }
   const ready=underLock(current=>{
     if(!current)commit(null,migrateInitialProfile());
+    else if(!current.ownedEquipment.includes('hook')){
+      // Issue the new standard fitting without replacing the pilot's selected water carrier.
+      commit(current,{...current,ownedEquipment:[...current.ownedEquipment,'hook']});
+    }
     else {state=current;boundProfileId=current.profileId;}
     status.code='ready';status.message='';return result(true,'ready','');
   }).then(value=>{
@@ -379,7 +383,7 @@ export function createCareer(options={}){
     beginSession:(id=makeId(),aircraftId=null,cityId=null)=>transaction(p=>openSession(p,id,aircraftId,cityId)),
     settleSession:(id,totals)=>transaction(p=>settleReceipt(p,id,totals)),
     closeSession:(id,totals)=>transaction(p=>settleReceipt(p,id,totals,true)),
-    canUse(tool,id){const kit=loadout(id),required={bucket:'bucket',cannon:'cannon',harness:'harness',gas:'gas',
+    canUse(tool,id){const kit=loadout(id),required={bucket:'bucket',hook:'hook',cannon:'cannon',harness:'harness',gas:'gas',
       traffic:'megaphone',stop:'megaphone',evacuate:'megaphone',disperse:'megaphone',greet:'megaphone',megaphone:'megaphone'}[tool];return required?kit[required]:true;},
     dispose(){disposed=true;events?.removeEventListener?.('storage',onStorage);subscribers.clear();},
   };

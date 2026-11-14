@@ -7,7 +7,7 @@ const $ = id => document.getElementById(id);
 export const money = value => '§' + Number(value).toLocaleString('ko-KR', {maximumFractionDigits: 2});
 export const requiredEquipment = tool => ({
   traffic: 'megaphone', stop: 'megaphone', evacuate: 'megaphone', disperse: 'megaphone', greet: 'megaphone',
-  bucket: 'bucket', cannon: 'cannon', harness: 'harness', gas: 'gas',
+  bucket: 'bucket', hook: 'hook', cannon: 'cannon', harness: 'harness', gas: 'gas',
 })[tool];
 
 const sections = ['aircraft', 'equipment', 'upgrades', 'inventory'];
@@ -26,7 +26,7 @@ function element(tag, className, text) {
   return node;
 }
 
-export function createHangarShop(career, onSelect) {
+export function createHangarShop(career, onSelect, canChangeExternal = () => true) {
   const dialog = $('shop');
   let section = 'aircraft';
   let shownAircraft = null;
@@ -113,6 +113,9 @@ export function createHangarShop(career, onSelect) {
 
   function addonButton(item, profile, fit) {
     const aircraftId = targetAircraft;
+    if (item.slot === 'water' && !canChangeExternal(aircraftId)) {
+      return actionButton(item, '화물 분리 후 교체', true);
+    }
     if (fit.mounted[item.slot] === item.id) {
       return actionButton(item, '분리', false, () => transact(
         () => career.unequipAddon(item.id, aircraftId), item.name + ' 분리 완료'));
@@ -131,7 +134,7 @@ export function createHangarShop(career, onSelect) {
   function addonRow(item, profile, fit) {
     const row = element('div', 'part-row');
     const description = element('div', 'part-description');
-    if (item.slot === 'water') description.append(element('b', '', item.name));
+    if (item.capacityLitres) description.append(element('b', '', item.name));
     const owned = profile.ownedEquipment.includes(item.id);
     const mounted = fit.mounted[item.slot] === item.id;
     const details = [];
@@ -149,12 +152,14 @@ export function createHangarShop(career, onSelect) {
   function equipmentPage(profile) {
     const fit = getAircraftFit(profile, targetAircraft);
     const page = element('section', 'equipment-page');
+    const hook = ADDON_CATALOG.find(item => item.id === 'hook');
     for (const [kind, name, detail] of [
       ['bucket', '물양동이', '기체 아래에 매달아 물을 담고 현장 위에서 투하합니다.'],
+      ['hook', hook.name, hook.description],
       ['tank', '물탱크', '동체에 고정해 물을 운반하고 현장 위에서 방류합니다.'],
     ]) {
       const card = element('article', 'equipment-card');
-      if (kind === 'bucket') card.dataset.equipment = 'bucket';
+      card.dataset.equipment = kind;
       card.append(element('h3', '', name), element('p', '', detail));
       for (const item of ADDON_CATALOG.filter(part => part.kind === kind)) card.append(addonRow(item, profile, fit));
       page.append(card);
@@ -259,7 +264,7 @@ export function createHangarShop(career, onSelect) {
     pageRoot.dataset.section = section;
     $('shopDescription').textContent = {
       aircraft: '색인에서 기체를 골라 제원과 가격을 확인하세요.',
-      equipment: '보유 부품은 기체마다 장착하거나 분리할 수 있습니다. 물양동이와 물탱크는 하나만 장착할 수 있습니다.',
+      equipment: '기체 하부에는 물양동이, 화물 고리, 물탱크 중 하나를 장착합니다. 장비를 바꿀 기체를 선택하세요.',
       upgrades: '선택한 기체에 1단계부터 차례로 적용합니다. 수치는 현재 성능과 개량 후 성능입니다.',
       inventory: '',
     }[section];
@@ -314,10 +319,10 @@ export function createHangarShop(career, onSelect) {
   });
   career.subscribe(() => { if (dialog.open && !busy) render(); });
   return {
-    open(name = 'aircraft') {
+    open(name = 'aircraft', aircraftId) {
       const profile = career.snapshot();
       if (!profile) return;
-      targetAircraft = profile.selectedAircraft;
+      targetAircraft = profile.ownedAircraft.includes(aircraftId) ? aircraftId : profile.selectedAircraft;
       shownAircraft ??= AIRCRAFT_CATALOG.find(item => !profile.ownedAircraft.includes(item.id))?.id || profile.selectedAircraft;
       showSection(sections.includes(name) ? name : 'aircraft');
       if (!dialog.open) dialog.showModal();

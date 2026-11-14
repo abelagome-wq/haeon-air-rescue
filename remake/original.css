@@ -520,6 +520,16 @@ body.mobile-layout #hud .walk-actions {display:flex; flex-wrap:wrap; gap:4px}
 }
 #hangar #start span {color:#f6ce70}
 #hangar #menuInfo {color:#d3cdbf}
+#fitMissionGear:not([hidden]) {
+  display:block;
+  width:100%;
+  margin-top:6px;
+  padding:8px 12px;
+  border:1px solid #ac9972;
+  color:#fff0c7;
+  background:#364149;
+  cursor:pointer;
+}
 #hangar .career-strip {
   background:var(--classic-screw) 4px 4px / 7px 7px no-repeat,var(--classic-metal);
   border:2px solid #262628;

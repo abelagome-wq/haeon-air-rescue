@@ -3,7 +3,7 @@
 const pages=[
   ['field','현장',[
     ['현장 작업',[['use-context','권장 작업'],['board','기체 탑승·하차'],['service','기체 검사'],['hangar','격납고 입장']]],
-    ['탑승자·장비',[['use-board','승객 탑승·인계'],['use-doctor','의사 탑승·하차'],['use-officer','경관 탑승·하차'],['use-harness','구조 밧줄'],['cable','양동이 줄 전환'],['use-bucket','물 투하 준비'],['use-cannon','물대포'],['use-gas','최루탄']]],
+    ['탑승자·장비',[['use-board','승객 탑승·인계'],['use-doctor','의사 탑승·하차'],['use-officer','경관 탑승·하차'],['use-harness','구조 밧줄'],['cable','장비 줄 전환'],['use-bucket','물 투하 준비'],['use-hook','화물 고리 선택'],['use-cannon','물대포'],['use-gas','최루탄']]],
   ]],
   ['support','지원·방송',[
     ['출동 요청',[['use-firetruck','소방차'],['use-ambulance','구급차'],['use-police','경찰차'],['use-follow','경찰 추적']]],

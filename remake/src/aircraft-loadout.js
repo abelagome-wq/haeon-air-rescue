@@ -14,6 +14,8 @@ export const ADDON_CATALOG = catalog([
   {id:'tank-small', name:'물탱크 소', slot:'water', kind:'tank', capacityLitres:300, price:700, description:'300 L · 기체 하부에 고정해 줄을 내리지 않고 투하합니다.'},
   {id:'tank-medium', name:'물탱크 중', slot:'water', kind:'tank', capacityLitres:520, price:1350, description:'520 L · 기체 하부에 장착하는 중형 고정식 물탱크입니다.'},
   {id:'tank-large', name:'물탱크 대', slot:'water', kind:'tank', capacityLitres:760, price:2100, description:'760 L · 고정식 대형 물탱크이며 만수 시 상승력이 줄어듭니다.'},
+  // The existing save slot "water" is the underbelly station shared by all three fittings.
+  {id:'hook', name:'화물 고리', slot:'water', kind:'hook', price:0, starter:true, description:'줄을 내려 컨테이너를 연결하고, 하역장에 내려놓은 뒤 분리합니다.'},
 ]);
 
 const upgradeTypes = {
@@ -31,7 +33,7 @@ export const UPGRADE_CATALOG = catalog(Object.entries(upgradeTypes).flatMap(([ca
 const addons = new Map(ADDON_CATALOG.map(item => [item.id,item]));
 const slots = {water:'bucket', megaphone:'megaphone', harness:'harness', cannon:'cannon', gas:'gas'};
 const record = value => !!value && typeof value==='object' && !Array.isArray(value);
-export const hasWaterCarrier = owned => owned.some(id => addons.get(id)?.slot === 'water');
+export const hasWaterCarrier = owned => owned.some(id => addons.get(id)?.capacityLitres > 0);
 
 // Only explicit overrides are persisted. Missing slots inherit any original
 // tools owned by the pilot. An explicit null means intentionally unmounted.
@@ -67,8 +69,9 @@ export function getAircraftFit(profile, id=profile?.selectedAircraft) {
       !profile.manualMounts?.includes(original) ? original : null;
     mounted[slot] = saved?.mounted && Object.hasOwn(saved.mounted,slot) ? saved.mounted[slot] : fallback;
   }
-  const water = addons.get(mounted.water) ?? null;
-  const tools = {bucket:!!water, megaphone:!!mounted.megaphone, harness:!!mounted.harness,
+  const external = addons.get(mounted.water);
+  const water = external?.capacityLitres > 0 ? external : null;
+  const tools = {bucket:!!water, hook:external?.kind === 'hook', megaphone:!!mounted.megaphone, harness:!!mounted.harness,
     cannon:!!mounted.cannon && !!water, gas:!!mounted.gas, spotlight:permitted};
   return {levels, mounted, water, tools, modifiers:getUpgradeModifiers(levels)};
 }

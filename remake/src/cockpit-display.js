@@ -4,7 +4,7 @@ import {mapWindow,drawMapRaster} from './map-window.js';
 const $=id=>document.getElementById(id);
 const scales=[208,416,832,2048];
 const seatNames={patient:'부상자',passenger:'승객',doctor:'의사',officer:'경관'};
-const equipmentTools={bucket:'bucket',megaphone:'traffic',harness:'harness',cannon:'cannon',gas:'gas'};
+const equipmentTools={hook:'hook',bucket:'bucket',megaphone:'traffic',harness:'harness',cannon:'cannon',gas:'gas'};
 
 export function createCockpitDisplay(use){
   const instruments=createAircraftInstruments(document.querySelector('.instruments'),$('airframeSystems'));
@@ -75,7 +75,7 @@ export function createCockpitDisplay(use){
     document.body.classList.toggle('on-foot',s.onFoot);
     instruments.update(s);
     $('boardBtn').textContent=s.onFoot?'기체 탑승':'기체 하차';
-    $('boardBtn').disabled=!s.onFoot&&(!s.grounded||s.speed>1);
+    $('boardBtn').disabled=!s.onFoot&&(!s.grounded||s.speed>1||!!m.hook?.attached);
     $('engineState').textContent=s.engine;$('fuel').textContent=Math.round(s.fuel);
     $('damage').value=s.damage;$('damageValue').textContent=Math.round(s.damage)+'%';
     const needle=(id,angle)=>$(id).parentElement.style.setProperty('--gauge-angle',angle+'deg');
@@ -86,8 +86,8 @@ export function createCockpitDisplay(use){
     if(lastRack!==rack){
       lastRack=rack;$('toolRack').replaceChildren(...equipment.map(id=>{
         const b=document.createElement('button');b.type='button';b.dataset.equipment=id;
-        b.textContent=({bucket:m.bucket?.name??'급수 장비',megaphone:'확성기',harness:'구조 밧줄',cannon:'방화수포',gas:'최루가스'})[id];
-          b.onclick=()=>{const suggested=m.suggestedTool;const tool=id==='megaphone'&&['traffic','stop','evacuate','disperse'].includes(suggested)?suggested:equipmentTools[id];$('fieldTool').value=tool;$('fieldTool').dispatchEvent(new Event('change'));if(id!=='bucket')use(tool);};
+        b.textContent=({hook:'화물 고리',bucket:m.bucket?.name??'급수 장비',megaphone:'확성기',harness:'구조 밧줄',cannon:'방화수포',gas:'최루가스'})[id];
+          b.onclick=()=>{const suggested=m.suggestedTool;const tool=id==='megaphone'&&['traffic','stop','evacuate','disperse'].includes(suggested)?suggested:equipmentTools[id];$('fieldTool').value=tool;$('fieldTool').dispatchEvent(new Event('change'));if(id!=='bucket'&&id!=='hook')use(tool);};
         return b;
       }));
     }
