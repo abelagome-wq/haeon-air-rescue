@@ -1,6 +1,7 @@
-"""Render the fan edition's Korean speech in advance with Supertonic 3.
+"""Render the game's Korean or English voice recordings with Supertonic 3.
 
 With FFmpeg, Python 3.12 and `pip install supertonic==1.3.1`, run this script.
+Use --lang ko or --lang en; add --dispatch to render continuous radio calls.
 It loads supertone-oss-archive/supertonic-3 revision aafc6e32416a594460b32413efc49d7fe4ce6d46.
 An already downloaded model can be supplied with --model-dir for an offline run.
 The site ships only generated audio, without the inference software or model.
@@ -82,23 +83,27 @@ def master(key, samples, sample_rate):
 def load_scripts(args):
     if args.dispatch:
         module = (ROOT / 'src/dispatch-phrases.js').as_uri()
-        code = f"import {{dispatchPhrases}} from {json.dumps(module)}; console.log(JSON.stringify(Object.fromEntries(dispatchPhrases)));"
+        name = 'dispatchPhrases' if args.lang == 'ko' else 'dispatchPhrasesEn'
+        code = f"import {{{name} as phrases}} from {json.dumps(module)}; console.log(JSON.stringify(Object.fromEntries(phrases)));"
         output = subprocess.check_output(['node', '--input-type=module', '-e', code])
         return json.loads(output.decode('utf-8'))
     if args.scripts:
         return json.loads(args.scripts.read_text(encoding='utf-8-sig'))
-    manifest = (ROOT / 'src/spoken-lines.js').read_text(encoding='utf-8')
+    filename = 'spoken-lines-en.js' if args.lang == 'en' else 'spoken-lines.js'
+    manifest = (ROOT / 'src' / filename).read_text(encoding='utf-8')
     return json.loads(manifest.split('export default ', 1)[1].strip().removesuffix(';'))
 
 
 def run():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument('--model-dir', type=Path)
+    parser.add_argument('--lang', choices=['ko', 'en'], default='ko')
+    parser.add_argument('--threads', type=int, default=3, help='CPU threads used for model inference')
     parser.add_argument('--ffmpeg', default='ffmpeg')
     parser.add_argument('--only', nargs='+', help='render individual sound IDs')
     inputs = parser.add_mutually_exclusive_group()
     inputs.add_argument('--dispatch', action='store_true', help='render complete dispatch transmissions')
-    inputs.add_argument('--scripts', type=Path, help='use a JSON file mapping clip IDs to Korean lines')
+    inputs.add_argument('--scripts', type=Path, help='use a JSON file mapping clip IDs to lines in the selected language')
     parser.add_argument('--output', type=Path, help='target directory')
     parser.add_argument('--bitrate', help='MP3 bitrate (default 64k, or 40k for dispatch messages)')
     args = parser.parse_args()
@@ -108,9 +113,12 @@ def run():
         model_dir = snapshot_download(repo_id='supertone-oss-archive/supertonic-3', revision=MODEL_REV,
                                       allow_patterns=['*.json', '*.onnx', 'LICENSE'])
     engine = TTS(model='supertonic-3', model_dir=str(model_dir), auto_download=False,
-                 intra_op_num_threads=3, inter_op_num_threads=1)
+                 intra_op_num_threads=args.threads, inter_op_num_threads=1)
     lines = load_scripts(args)
-    destination = args.output or ROOT / 'art/audio' / ('dispatch' if args.dispatch else 'synth')
+    destination = ROOT / 'art/audio' / ('dispatch' if args.dispatch else 'synth')
+    if args.lang == 'en':
+        destination /= 'en'
+    destination = args.output or destination
     destination.mkdir(parents=True, exist_ok=True)
     bitrate = args.bitrate or ('40k' if args.dispatch else '64k')
     voices = {}
@@ -122,7 +130,7 @@ def run():
             voices[voice] = engine.get_voice_style(voice)
         seed = int.from_bytes(hashlib.sha256(key.encode()).digest()[:4], 'little')
         np.random.seed(seed)
-        speech, _ = engine.synthesize(lines[key], voice_style=voices[voice], lang='ko',
+        speech, _ = engine.synthesize(lines[key], voice_style=voices[voice], lang=args.lang,
                                       speed=pace, total_steps=10, silence_duration=0.17)
         rate, pcm = master(key, speech, engine.sample_rate)
         temporary = destination / (key + '.part')

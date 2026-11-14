@@ -8,11 +8,15 @@ export function setVoiceMode(value) {
   try { globalThis.localStorage?.setItem(preference, mode); } catch {}
 }
 
-// If a device has no local Korean voice, the caller plays the bundled Korean TTS clip.
-export function speakOnDevice(text, environment = globalThis) {
+// Return null when the selected language has no local voice so the game plays its recording.
+export function speakOnDevice(text, environment = globalThis, language = 'ko') {
   const synth = environment.speechSynthesis, Utterance = environment.SpeechSynthesisUtterance;
   if (mode !== 'device' || !text || !synth || !Utterance) return null;
-  const voice = synth.getVoices().find(v => v.localService && /^ko(?:[-_]|$)/i.test(v.lang));
+  const requested = language === 'en' ? 'en' : 'ko';
+  let voices;
+  try { voices = synth.getVoices().filter(v => v.localService && v.lang.toLowerCase().split(/[-_]/)[0] === requested); }
+  catch { return null; }
+  const voice = voices.find(v => v.default) || voices[0];
   if (!voice) return null;
   const line = new Utterance(text);
   line.voice = voice;

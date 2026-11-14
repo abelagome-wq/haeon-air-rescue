@@ -1,6 +1,6 @@
 import catalog from './original-radio-data.js';
 
-import spokenLines from './spoken-lines.js';
+import {dialogueLines} from './dialogue-lines.js';
 import {speakOnDevice} from './device-speech.js';
 import {createRadioChannel,isRadioVoice} from './radio-channel.js';
 import {createStationProgram,songsById} from './radio-program.js';
@@ -24,8 +24,9 @@ const incidentResults = {
   delayedTraffic:'DIS114', crowdReport:'DIS115', unavailable:'DIS117', blockedTraffic:'DIS119', fireExpired:'DIS120',
 };
 
-// Captions use the same scripts as the game's Korean TTS recordings.
-export function originalTransmission(event = {}) {
+// Resolve the incident before choosing the language. Both recordings describe the same call.
+export function originalTransmission(event = {}, language = 'ko') {
+  const spokenLines = dialogueLines(language);
   const {kind,type,variant} = event;
   let ids = [];
   if (kind === 'dispatch' && Object.hasOwn(baseCalls,type)) {
@@ -47,16 +48,28 @@ export function originalTransmission(event = {}) {
     (kind === 'service' && /^(?:POL|MDVC|DIS)/.test(event.clip)))) {
     ids = [event.clip];
   }
-  const text = ids.map(id => spokenLines[id]).filter(Boolean).join(' ') || (ids.length ? event.message || '' : '');
+  const text = ids.map(id => spokenLines[id]).filter(Boolean).join(' ');
   return {ids,text};
 }
 
 export function createOriginalRadio({onState = () => {}, onSpeech = () => {}, onDuck = () => {},
-  station = 'mix', environment = globalThis, library, phraseURL, rng=Math.random, isNight=()=>false} = {}) {
+  station = 'mix', language = 'ko', environment = globalThis, library, phraseURL, rng=Math.random, isNight=()=>false} = {}) {
   const doc = environment.document;
-  const clipURL = id => library ? library.url(id) : new URL(id+'.mp3',mediaRoot).href;
-  const state = {station:'off',stationName:'OFF',track:'',title:'',playing:false,speaking:false,
+  const state = {language:language === 'en' ? 'en' : 'ko',station:'off',stationName:'OFF',track:'',title:'',playing:false,speaking:false,
     enabled:true,paused:false,error:'',clip:''};
+  function clipURL(id) {
+    if (library) return library.url(id,state.language);
+    const spoken = Object.hasOwn(dialogueLines(state.language),id);
+    const url = new URL((spoken && state.language === 'en' ? 'en/' : '')+id+'.mp3',mediaRoot);
+    if (spoken) url.searchParams.set('voice','4');
+    return url.href;
+  }
+  function captionFor(id) {
+    return library?.caption?.(id,state.language) ?? dialogueLines(state.language)[id] ?? '';
+  }
+  function caption(job, ids = job.ids, text = ids.map(captionFor).filter(Boolean).join(' ')) {
+    onSpeech({text,event:job.event,ids:[...ids],language:state.language});
+  }
   const queue = [], cache = new Map(), recent = new Map();
   let storage;
   try{storage=environment.sessionStorage;}catch{}
@@ -120,7 +133,7 @@ export function createOriginalRadio({onState = () => {}, onSpeech = () => {}, on
     levels(1);
   }
   function clipBuffer(id,url) {
-    if (cache.has(id)) return cache.get(id);
+    if (cache.has(url)) return cache.get(url);
     const controller = new AbortController();
     const cancel = () => controller.abort();
     abort.signal.addEventListener('abort',cancel,{once:true});
@@ -133,9 +146,9 @@ export function createOriginalRadio({onState = () => {}, onSpeech = () => {}, on
         clearTimeout(timer);
         abort.signal.removeEventListener('abort',cancel);
       });
-    cache.set(id,promise);
+    cache.set(url,promise);
     if (cache.size > 24) cache.delete(cache.keys().next().value);
-    promise.catch(() => { if (cache.get(id) === promise) cache.delete(id); });
+    promise.catch(() => { if (cache.get(url) === promise) cache.delete(url); });
     return promise;
   }
   function playClip(buffer,id) {
@@ -164,8 +177,8 @@ export function createOriginalRadio({onState = () => {}, onSpeech = () => {}, on
       const url = clipURL(id);
       try {
         // Device speech has no AudioNode output to transmit through the radio.
-        if (!isRadioVoice(id) && !library?.filename?.(id)) {
-          const playback = speakOnDevice(spokenLines[id],environment);
+        if (!isRadioVoice(id) && !library?.filename?.(id,state.language)) {
+          const playback = speakOnDevice(captionFor(id),environment,state.language);
           if (playback) {
             deviceLine = playback;
             state.clip = id;
@@ -191,8 +204,8 @@ export function createOriginalRadio({onState = () => {}, onSpeech = () => {}, on
   }
   function mergedPhrase(ids) {
     if (!phraseURL || ids.length < 2 || !ids.every(isRadioVoice) ||
-      ids.some(id => library?.filename?.(id))) return null;
-    const phrase = phraseURL(ids);
+      ids.some(id => library?.filename?.(id,state.language))) return null;
+    const phrase = phraseURL(ids,state.language);
     return typeof phrase === 'string' ? {url:phrase} : phrase;
   }
   async function playMerged(job,token,phrase) {
@@ -201,7 +214,7 @@ export function createOriginalRadio({onState = () => {}, onSpeech = () => {}, on
       if (generation !== token || !audible()) return true;
       if (mergedPhrase(job.ids)?.url !== phrase.url) return false;
       job.merged = true;
-      job.caption?.(phrase.text);
+      caption(job,job.ids,phrase.text);
       await playClip(buffer,job.ids[0]);
       return mergedPhrase(job.ids)?.url === phrase.url;
     } catch { return false; } // The constituent clips remain playable.
@@ -217,12 +230,13 @@ export function createOriginalRadio({onState = () => {}, onSpeech = () => {}, on
       const phrase = mergedPhrase(job.ids);
       if (!(phrase && await playMerged(job,token,phrase))) {
         if (generation !== token || !audible()) return;
-        job.caption?.();
+        if (!job.break) caption(job);
         // Decode the next radio fragments before the microphone opens to avoid network gaps.
         if (job.ids.length > 1 && job.ids.every(isRadioVoice)) {
           for (const id of job.ids) void clipBuffer(id,clipURL(id)).catch(() => {});
         }
         for (const id of job.ids) {
+          if (job.break) caption(job,[id]);
           await speak(id,token);
           if (generation !== token) return;
         }
@@ -251,7 +265,7 @@ export function createOriginalRadio({onState = () => {}, onSpeech = () => {}, on
     const ids=speakingJob||queue.some(job=>!job.break)?[]:program.interlude(state.station,upcoming);
     if(!ids.length){playMusic();changed();return;}
     pendingBreak = true;
-    queue.push({ids,break:true});
+    queue.push({ids,break:true,event:{kind:'station',station:state.station}});
     changed();
     void pump();
   }
@@ -314,8 +328,21 @@ export function createOriginalRadio({onState = () => {}, onSpeech = () => {}, on
     }
     return true;
   }
+  function setLanguage(value) {
+    if (disposed || (value !== 'ko' && value !== 'en')) return false;
+    if (value === state.language) return true;
+    // Jobs contain clip IDs and the original event. Restart the current call and
+    // resolve every recording and caption in the chosen language at playback.
+    const interrupted = speakingJob && {...speakingJob,merged:false};
+    stopSpeech(false);
+    state.language = value;
+    if (interrupted) queue.unshift(interrupted);
+    changed();
+    void pump();
+    return true;
+  }
   function notify(event) {
-    const message = originalTransmission(event);
+    const message = originalTransmission(event,state.language);
     if (!message.ids.length || disposed) return false;
     const now = Date.now();
     if (event.id !== undefined) {
@@ -324,9 +351,8 @@ export function createOriginalRadio({onState = () => {}, onSpeech = () => {}, on
       recent.set(key,now);
       if (recent.size > 40) recent.delete(recent.keys().next().value);
     }
-    const caption = (text = message.text) => onSpeech({text,event,ids:[...message.ids]});
+    message.event = event;
     if (state.enabled && !paused && !doc?.hidden) {
-      message.caption = caption;
       message.megaphone = event.kind === 'megaphone';
       // Discard a queued introduction when dispatch takes the channel.
       if(pendingBreak&&!speakingJob?.break){
@@ -351,7 +377,7 @@ export function createOriginalRadio({onState = () => {}, onSpeech = () => {}, on
         if (discard >= 0) queue.splice(discard,1);
       }
       void pump();
-    } else caption();
+    } else caption(message);
     return true;
   }
   function dispose() {
@@ -372,9 +398,13 @@ export function createOriginalRadio({onState = () => {}, onSpeech = () => {}, on
     context?.close().catch(() => {});
     cache.clear();
   }
-  const unsubscribe = library?.subscribe(id => {
-    cache.delete(id);
+  const unsubscribe = library?.subscribe((id,language) => {
+    if (language && language !== state.language) return;
     if (state.track === id) playMusic();
+    if (speakingJob && !speakingJob.merged && speakingJob.ids.includes(id)) {
+      if (!speakingJob.break) caption(speakingJob);
+      else if (state.clip === id) caption(speakingJob,[id]);
+    }
     if (state.clip === id) deviceLine?.stop();
     if (spokenSource && (state.clip === id || (speakingJob?.merged && speakingJob.ids.includes(id)))) {
       try { spokenSource.stop(); } catch {}
@@ -387,7 +417,7 @@ export function createOriginalRadio({onState = () => {}, onSpeech = () => {}, on
     state.station = station;
     state.stationName = catalog.stations[station]?.name || 'OFF';
   }
-  return {state,init,notify,setStation,dispose,
+  return {state,init,notify,setStation,setLanguage,dispose,
     pause(value = true) { paused = !!value; reconcile(); },
     setEnabled(value) { state.enabled = !!value; reconcile(); }};
 }
