@@ -22,6 +22,7 @@
     <div class="plan-field"><label for="weatherSelect"><strong>기상 조건</strong></label><select id="weatherSelect" aria-describedby="departureWeather"><option value="auto">자동 · 변화하는 날씨</option><option value="calm">맑음 · 무풍</option><option value="breeze">산들바람</option><option value="drywind">건조한 강풍</option><option value="fog">안개</option><option value="rain">비</option><option value="squall">돌풍·폭우</option></select></div>
     <div class="plan-field departure-weather" id="departureWeather"><b>이륙장 예보</b><span id="departureConditions"></span><small id="departureVisibility"></small></div>
     </div><button type="submit" id="start" disabled>근무 시작 <span>↗</span></button>
+    <button type="button" id="fitMissionGear" hidden>격납고에서 화물 고리 장착</button>
     <div id="menuInfo" role="status">도시 자료를 읽는 중입니다.</div>
    </form>
   </section>
@@ -94,7 +95,7 @@
 <dialog id="network"><div class="inspectinner"><div class="inspecthead"><div><div class="kicker">NAVIGATION</div><h2 id="mapTitle">도시 지도</h2></div><button id="closeMap">비행 계속 ×</button></div>
  <div class="map-tools"><button id="surfaceTab">지상</button><button id="networkTab">지하 시설</button><button id="mapZoomOut" aria-label="전체 지도 축소">−</button><button id="mapZoomIn" aria-label="전체 지도 확대">+</button><small>흰색 기체 · 황색 선택 임무 · 청록색 다른 호출</small></div><button type="button" id="assignPriority">우선 출동</button><div id="callList" aria-label="접수된 호출"></div><canvas id="largeMap" width="640" height="640"></canvas><div class="map-read"><span id="tileInfo"></span><button hidden id="tileInspect">이 모델 열기 ↗</button></div><div id="callLog"></div></div></dialog>
 <div id="overlay" hidden><div class="dialog"><div class="kicker">OPERATIONS CONTROL</div><h2 id="dialogTitle"></h2><p id="dialogBody" role="status"></p><div id="loadline" hidden></div><div id="pauseContents" hidden>
- <dl><dt>게임패드</dt><dd>왼쪽 스틱 이동 · RT/LT 상승·하강 · B 하차</dd><dt>시점</dt><dd id="cameraHelp">T 또는 Xbox Y로 추적·조종석·상공 시점 전환</dd><dt>항법 지도</dt><dd>M 관제 지도 · 신고 우선순위와 경로 선택</dd><dt>현장 작업</dt><dd>Enter 또는 Xbox A · G 장비 전환 · Tab 호출</dd><dt>소방 양동이</dt><dd>V 내리기 · C 감기(방향키 모드) · Z 줄 전환 · B 길게 투하 · X 하방 시점. Xbox는 양동이 선택 뒤 ↓ 줄 전환 · A 길게 투하 · 오른쪽 스틱 클릭 하방 시점</dd></dl>
+ <dl><dt>게임패드</dt><dd>왼쪽 스틱 이동 · RT/LT 상승·하강 · B 하차</dd><dt>시점</dt><dd id="cameraHelp">T 또는 Xbox Y로 추적·조종석·상공 시점 전환</dd><dt>항법 지도</dt><dd>M 관제 지도 · 신고 우선순위와 경로 선택</dd><dt>현장 작업</dt><dd>Enter 또는 Xbox A · G 장비 전환 · Tab 호출</dd><dt>양동이 · 화물 고리</dt><dd>V 줄 내리기 · C 감기(방향키 모드) · Z 줄 전환 · X 하방 시점. B를 길게 눌러 물을 투하하거나 한 번 눌러 화물을 연결·해제합니다. Xbox는 해당 장비 선택 뒤 ↓ 줄 전환 · A 작동 · 오른쪽 스틱 클릭 하방 시점입니다.</dd></dl>
  <div class="opts"><button id="soundBtn">게임 소리 켜짐</button><button type="button" id="pauseSoundEditor" aria-haspopup="dialog">소리 설정</button><button id="fullBtn">전체 화면</button><button type="button" id="hapticToggle" aria-pressed="true">진동 켜짐</button><button type="button" id="hapticTest">진동 테스트</button><button type="button" id="invertCameraX" aria-pressed="false">시점 좌우 반전 꺼짐</button></div><small id="hapticStatus" role="status"></small><p id="schemeHelp"></p>
  <small id="fullscreenStatus" role="status" hidden></small>
  <div class="mobile-pause-help"><p>스틱을 놓으면 감속하고, 상승·하강 버튼을 놓으면 고도를 유지합니다.</p><button id="touchModeBtn" type="button">터치 조작 켜기</button>
@@ -122,10 +123,10 @@
     <dt>RT / LT</dt><dd>상승 / 하강</dd><dt>LB / RB</dt><dd>왼쪽 / 오른쪽 횡이동</dd>
     <dt>오른쪽 스틱</dt><dd>시선 이동</dd><dt>Y</dt><dd>추적·조종석·상공 시점 순환</dd>
     <dt>오른쪽 스틱 클릭</dt><dd>짧게 투하 시점 전환 · 길게 시점 초기화</dd>
-    <dt>A</dt><dd>현장 작업 · 물양동이 선택 시 누르는 동안 투하</dd>
+    <dt>A</dt><dd>현장 작업 · 양동이는 길게 눌러 투하 · 화물 고리는 한 번 눌러 연결·해제</dd>
     <dt>B</dt><dd>기체 탑승·하차</dd><dt>X</dt><dd>짧게 다음 장비 · 길게 구조 밧줄 사용</dd>
     <dt>왼쪽 스틱 클릭</dt><dd>다음 호출</dd>
-    <dt>방향패드</dt><dd>탐조등 조준 · 양동이 또는 투하 시점에서 ↓ 짧게 줄 전환</dd>
+    <dt>방향패드</dt><dd>탐조등 조준 · 양동이·화물 고리 선택 또는 하방 시점에서 ↓ 짧게 줄 전환</dd>
     <dt>View ▢▢</dt><dd>짧게 관제 지도 · 길게 비행 조작 메뉴</dd>
     <dt>Menu ☰</dt><dd>일시 정지·계속</dd>
   </dl>
@@ -137,7 +138,7 @@
   </dl><p>지원차 호출·복귀, 확성기, 방송국 선택과 카메라 미세 조정은 View를 길게 누르면 나옵니다.</p>
 </div></dialog>
 <noscript>비행하려면 JavaScript와 WebGL 2를 지원하는 브라우저가 필요합니다.</noscript>
-<dialog id="hangarDesk" aria-labelledby="deskTitle"><section class="hangar-window"><h2 id="deskTitle">정비 격납고</h2><div id="hangarPano" tabindex="0" aria-label="격납고 둘러보기"><img id="panoImage" src="./art/hangar-night.webp" alt="기지 정비 격납고 내부"></div><div id="deskLogbook" hidden></div><div class="hangar-dock"><button id="deskCatalog">카탈로그</button><button id="deskLog">비행 일지</button><button id="deskInventory">보유 목록</button><button id="nextCity" hidden>다음 도시 선택</button><button id="deskExit">기지로</button></div></section></dialog>
+<dialog id="hangarDesk" aria-labelledby="deskTitle"><section class="hangar-window"><h2 id="deskTitle">정비 격납고</h2><div id="hangarPano" tabindex="0" aria-label="격납고 둘러보기"><img id="panoImage" src="./art/hangar-night.webp" alt="기지 정비 격납고 내부"></div><div id="deskLogbook" hidden></div><div class="hangar-dock"><button id="deskCatalog">카탈로그</button><button id="deskRig">외부 장비 교체</button><button id="deskLog">비행 일지</button><button id="deskInventory">보유 목록</button><button id="nextCity" hidden>다음 도시 선택</button><button id="deskExit">기지로</button></div></section></dialog>
 <dialog id="serviceDialog" aria-labelledby="serviceTitle"><section class="shop-inner"><header class="inspecthead"><h2 id="serviceTitle">기체 검사</h2><button id="cancelService">닫기</button></header><p>현재 자금 <b id="serviceBalance"></b></p><div class="service-items"><label><input type="checkbox" id="repairChoice" checked> 피해 수리 <b id="repairPrice"></b></label><label><input type="checkbox" id="fuelChoice" checked> 연료 보충 <b id="fuelPrice"></b></label><label><input type="checkbox" id="gasChoice"> 최루가스 보충 <b id="gasPrice"></b></label></div><p id="serviceNote" role="status"></p><button id="payService">정비 확인</button></section></dialog>
 <script type="module" src="src/main.js"></script>
 </body></html>

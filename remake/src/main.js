@@ -39,7 +39,8 @@ let campaignCity=null,promotionCalled=false,currentProfile=null,departureLens=nu
 let homeBase,enteredDoor=false,wasOnFoot=true,lastConditionAt=0,radioUntil=0,noticeUntil=0,playerNotice='',swapJob=null;
 const shiftSeed=crypto.getRandomValues(new Uint32Array(1))[0];
 let plannedCityId,plannedCity;
-const valveHolds=new Set();
+const externalHolds=new Set();
+let heldTool=null;
 const flightPadGestures=createFlightPadGestures();
 let padDownControlsCable=false;
 const cockpit=createCockpitDisplay(tool=>action(tool));
@@ -108,8 +109,8 @@ const install=createInstallSupport({onChange:state=>{
 }});
 const touch=createTouchControls({root:$('touchControls'),inputMode:['auto','touch','off'].includes(savedControls)?savedControls:'auto',
   onInput:value=>flight?.setTouchInput(value),onCamera:()=>flight?.cycleCamera(),
-  onActionStart:(name,id)=>name==='use'&&beginValve('touch:'+id),
-  onActionEnd:(_name,id)=>releaseValve('touch:'+id),
+  onActionStart:(name,id)=>name==='use'&&beginExternalAction('touch:'+id),
+  onActionEnd:(_name,id)=>releaseExternalAction('touch:'+id),
   onAction:name=>{if(name==='use')action();else if(name==='next')nextCall();},
   onChange:({visible,inputMode})=>{
     const mobile=mobileDevice()||inputMode==='touch',selected=inputMode==='touch'||inputMode==='auto'&&mobileDevice();
@@ -120,10 +121,10 @@ const multiButtons=enableMultitouchButtons($('hud'),{enabled:()=>mode==='flight'
 const pauseButtons=enableMultitouchButtons($('overlay'),{enabled:()=>mode==='paused',includePrimaryTouch:true});
 function syncTouch(){touch.setEnabled(mode==='flight');radio.pause(!['flight','loading'].includes(mode));
   if(mode!=='paused')pauseButtons.reset();
-  if(mode!=='flight'){resetFlightPadHolds();cancelValve();multiButtons.reset();tilt.setFlying(false);haptics.stop();}
+  if(mode!=='flight'){resetFlightPadHolds();cancelExternalAction();multiButtons.reset();tilt.setFlying(false);haptics.stop();}
 }
-window.addEventListener('blur',()=>{resetFlightPadHolds();cancelValve();haptics.stop();});
-window.addEventListener('orientationchange',()=>{resetFlightPadHolds();cancelValve();});
+window.addEventListener('blur',()=>{resetFlightPadHolds();cancelExternalAction();haptics.stop();});
+window.addEventListener('orientationchange',()=>{resetFlightPadHolds();cancelExternalAction();});
 window.addEventListener('gamepaddisconnected',()=>{resetFlightPadHolds();haptics.stop();});
 function setPanels(collapsed){
   document.body.classList.toggle('touch-panels-collapsed',collapsed);
@@ -141,7 +142,7 @@ const shop=createHangarShop(pilot,async id=>{
     swapJob=switchStoredAircraft(id);
     try{return await swapJob;}finally{swapJob=null;}
   }else if(mode==='menu')await validateSelection();
-});
+}, id=>id!==activeAircraft||!missions?.state.hook?.attached);
 function updateCareer(){
   const p=pilot.snapshot();if(!p)return;
   currentProfile=p;
@@ -156,11 +157,12 @@ function updateCareer(){
   $('ownedKit').textContent='보유 헬기 '+p.ownedAircraft.length+'대 · 보유 부품 '+p.ownedEquipment.length+'종';
   for(const option of $('heliSelect').options){const h=AIRCRAFT_CATALOG.find(h=>h.id===option.value);if(h)option.textContent=h.name+(p.ownedAircraft.includes(h.id)?' · 보유':' · '+money(h.price));}
   const loadout=pilot.loadout($('heliSelect').value);
-  if(activeLoadout){
+  if(activeLoadout && (mode==='hangar'||mode==='loading')){
     Object.assign(activeLoadout,pilot.loadout(activeAircraft));
     flight?.refreshFit();
   }
-  for(const option of $('fieldTool').options){const equipment=requiredEquipment(option.value);option.disabled=!!equipment&&!loadout[equipment];}
+  const availableTools=activeLoadout??loadout;
+  for(const option of $('fieldTool').options){const equipment=requiredEquipment(option.value);option.disabled=!!equipment&&!availableTools[equipment];}
   if($('fieldTool').selectedOptions[0]?.disabled)$('fieldTool').value='context';
   if(menuReady&&mode==='menu')validateSelection().catch(failure);
 }
@@ -225,6 +227,9 @@ async function validateSelection(){
   if(plan&&['rescue','medevac','transport'].includes(plan.type)&&!cabinCapacity($('heliSelect').value))
     warning='이 출동에는 승객 좌석이 필요합니다. 민간 헬기를 선택하세요.';
   if(!warning&&plan?.type==='rescue'&&!pilot.loadout($('heliSelect').value).harness)warning='이 구조 임무에는 구조 밧줄이 필요합니다. 선택한 기체에 장착하세요.';
+  const needsHook=plan?.type==='cargo'&&!pilot.loadout($('heliSelect').value).hook;
+  $('fitMissionGear').hidden=!needsHook||!p?.ownedAircraft.includes($('heliSelect').value);
+  if(!warning&&needsHook)warning='화물 수송에는 화물 고리가 필요합니다. 격납고에서 외부 장비를 교체하세요.';
   const {id,district}=selectedWorld(p);
   $('start').disabled=true;
   if(plannedCityId!==id)updateWeatherForecast(null);
@@ -475,27 +480,46 @@ $('resetConfirm').onclick=async()=>{
 function action(tool=$('fieldTool').value){
   if(mode!=='flight')return;
   if(flight.state.onFoot){if(homeBase.nearDoor(flight.playerPosition))openHangar();else changeBoarding();return;}
-  if(bucketSelected(tool)){missions.act('bucket');drawHUD();return;}
+  if(externalSelected(tool)){
+    if(mountedExternalTool()==='hook'){missions.beginHook();missions.endHook();}
+    else missions.act('bucket');
+    drawHUD();return;
+  }
   missions.act(tool);sound.cue(false);drawHUD();
 }
-function bucketSelected(tool=$('fieldTool').value){
-  return (tool==='context'?missions?.state.suggestedTool:tool)==='bucket';
+function mountedExternalTool(){return activeLoadout?.hook?'hook':'bucket';}
+function externalSelected(tool=$('fieldTool').value){
+  const selected=tool==='context'?missions?.state.suggestedTool:tool;
+  return selected==='bucket'||selected==='hook';
 }
-function beginValve(source,direct=false){
-  if(mode!=='flight'||flight.state.onFoot||(!direct&&!bucketSelected()))return false;
-  if(!valveHolds.size)missions.beginBucket(performance.now());
-  valveHolds.add(source);
+function mountedRig(){return missions.state[mountedExternalTool()];}
+function beginExternalAction(source,direct=false){
+  if(mode!=='flight'||flight.state.onFoot||(!direct&&!externalSelected()))return false;
+  if(!externalHolds.size){
+    heldTool=mountedExternalTool();
+    if(heldTool==='hook')missions.beginHook();
+    else missions.beginBucket(performance.now());
+  }
+  externalHolds.add(source);
   return true;
 }
-function releaseValve(source){
-  if(valveHolds.delete(source)&&!valveHolds.size)missions.endBucket(performance.now());
+function releaseExternalAction(source){
+  if(externalHolds.delete(source)&&!externalHolds.size)finishExternalAction();
 }
-function cancelValve(){
-  if(valveHolds.size){valveHolds.clear();missions?.endBucket(performance.now());}
+function cancelExternalAction(){
+  if(externalHolds.size){externalHolds.clear();finishExternalAction();}
+}
+function finishExternalAction(){
+  if(heldTool==='hook')missions?.endHook();
+  else if(heldTool==='bucket')missions?.endBucket(performance.now());
+  heldTool=null;
 }
 function changeCable(lower){
   if(mode!=='flight'||flight.state.onFoot)return;
-  if(lower===undefined||lower!==missions.state.bucket.deployed)missions.toggleBucketCable();
+  if(lower===undefined||lower!==mountedRig().deployed){
+    if(mountedExternalTool()==='hook')missions.toggleHookCable();
+    else missions.toggleBucketCable();
+  }
   drawHUD();
 }
 function toggleDropView(){
@@ -503,7 +527,7 @@ function toggleDropView(){
   flight.toggleDropView();drawHUD();
 }
 function nextCall(){if(mode==='flight'){cockpit.changeTarget(1,missions);drawHUD();}}
-function nextTool(){cancelValve();const e=$('fieldTool');for(let i=0;i<e.length;i++){e.selectedIndex=(e.selectedIndex+1)%e.length;if(!e.selectedOptions[0].disabled)break;}drawHUD();}
+function nextTool(){cancelExternalAction();const e=$('fieldTool');for(let i=0;i<e.length;i++){e.selectedIndex=(e.selectedIndex+1)%e.length;if(!e.selectedOptions[0].disabled)break;}drawHUD();}
 function aircraftCondition(){
   const stock=missions?.state.supplies.gasStock;
   return {...flight.condition(),...(Number.isInteger(stock)&&(activeLoadout?.gas||stock<10)?{gas:stock}:{})};
@@ -520,6 +544,7 @@ async function switchStoredAircraft(id){
     $('heliSelect').value=activeAircraft;showPlane();
     return {ok:false,message:restored.ok?message:restored.message};
   }
+  if(missions.state.hook?.attached)return keepCurrent('컨테이너를 내려놓고 고리를 해제한 뒤 기체를 교체하세요.');
   if(missions.state.cabinUsed)return keepCurrent('승객 인계 후에 기체를 교체하세요.');
   const saved=await saveCondition();
   if(saved&&!saved.ok&&saved.code!=='aircraft-busy')return keepCurrent(saved.message);
@@ -545,8 +570,8 @@ function canPadCommand(command){
   if(!s)return false;
   if(command==='hangar')return s.onFoot&&homeBase.nearDoor(flight.playerPosition);
   if(command==='service')return s.onFoot&&s.grounded;
-  if(command==='board')return s.onFoot||s.grounded;
-  if(command==='cable')return !s.onFoot&&!!activeLoadout?.bucket&&missions.state.bucket.kind!=='tank';
+  if(command==='board')return s.onFoot||(s.grounded&&!missions.state.hook?.attached);
+  if(command==='cable')return !s.onFoot&&(activeLoadout?.hook||activeLoadout?.bucket&&missions.state.bucket.kind!=='tank');
   if(command.startsWith('use-')){
     const tool=command.slice(4),choice=Array.from($('fieldTool').options).find(o=>o.value===tool);
     return !s.onFoot&&!!choice&&!choice.disabled;
@@ -564,9 +589,9 @@ function runPadCommand(command){
   if(mode!=='flight'||!canPadCommand(command))return;
   if(command.startsWith('use-')){
     const tool=command.slice(4);
-    if(tool==='bucket'){
+    if(tool==='bucket'||tool==='hook'){
       $('fieldTool').value=tool;$('fieldTool').dispatchEvent(new Event('change'));
-      say('물 투하 준비 · A를 누르는 동안 방수합니다.');
+      say(tool==='hook'?'화물 고리 선택 · A로 컨테이너를 연결하거나 해제합니다.':'물 투하 준비 · A를 누르는 동안 방수합니다.');
     }else action(tool);
     return;
   }
@@ -596,21 +621,24 @@ const padActions=createPadActions({available:canPadCommand,run:runPadCommand,
   onClose:()=>{if(mode==='actions')returnToFlight();}});
 function openPadActions(){
   if(mode!=='flight'||document.hidden)return;
-  cancelValve();stopForPanel('actions');padActions.open();
+  cancelExternalAction();stopForPanel('actions');padActions.open();
 }
 $('openPadActions').onclick=openPadActions;
 $('padHelpMenu').onclick=$('padHelpPause').onclick=()=>{if(!$('padHelp').open)$('padHelp').showModal();};
 $('closePadHelp').onclick=()=>$('padHelp').close();
 function changeBoarding(){
   if(mode!=='flight')return;
+  if(!flight.state.onFoot&&missions.state.hook?.attached){
+    say('하차하려면 컨테이너를 지면에 내려놓고 고리를 먼저 해제하세요.');return;
+  }
   const result=flight.boardOrExit();say(result.message);
-  if(result.ok)cancelValve();
+  if(result.ok)cancelExternalAction();
   if(result.ok)sound.sceneCue(result.onFoot?'doorOpen':'doorClose',0);
   if(result.ok&&result.onFoot&&flight.state.atBase&&flight.serviceQuote({refuel:true,repair:true}).cost>0)openService();
 }
 function openHangar(){
   if(mode!=='flight'||!flight.state.onFoot||!homeBase.nearDoor(flight.playerPosition))return;
-  stopForPanel('hangar');enteredDoor=true;
+  stopForPanel('hangar');enteredDoor=true;updateCareer();
   $('panoImage').src='./art/hangar-'+(ctx.night?'night':'day')+'.webp';$('deskLogbook').hidden=true;$('hangarPano').hidden=false;
   $('hangarDesk').showModal();void reviewPromotion();
 }
@@ -630,6 +658,7 @@ $('hangarDesk').addEventListener('padview',event=>{
   if(!book.hidden&&y)book.scrollTop+=y*dt*350;
 });
 $('deskCatalog').onclick=()=>shop.open('aircraft');
+$('deskRig').onclick=()=>shop.open('equipment',activeAircraft);
 $('deskInventory').onclick=()=>shop.open('inventory');
 $('deskLog').onclick=()=>{
   const book=$('deskLogbook');book.hidden=!book.hidden;$('hangarPano').hidden=!book.hidden;
@@ -699,7 +728,7 @@ $('station').onchange=()=>{store.set('station',$('station').value);radio.setStat
 function missionKey(e){
   if(mode!=='flight'||e.defaultPrevented||e.repeat||e.altKey||e.ctrlKey||e.metaKey||e.target?.closest?.('input,select,textarea,[contenteditable=true]'))return;
   if(!flight.state.onFoot){
-    if(e.code==='KeyB'){e.preventDefault();beginValve('key:B',true);return;}
+    if(e.code==='KeyB'){e.preventDefault();beginExternalAction('key:B',true);return;}
     if(e.code==='KeyX'){e.preventDefault();toggleDropView();return;}
     if(e.code==='KeyZ'||e.code==='KeyV'||e.code==='KeyC'&&flight.state.controlScheme==='classic'){
       e.preventDefault();changeCable(e.code==='KeyZ'?undefined:e.code==='KeyV');return;
@@ -716,7 +745,7 @@ function missionKey(e){
   if(offset){e.preventDefault();missions.aim(...offset);}
 }
 window.addEventListener('keydown',missionKey);
-window.addEventListener('keyup',e=>{releaseValve(e.code==='KeyB'?'key:B':'key:'+e.code);});
+window.addEventListener('keyup',e=>{releaseExternalAction(e.code==='KeyB'?'key:B':'key:'+e.code);});
 function openMap(){if(mode!=='flight')return;mode='map';syncTouch();flight.setPaused(true);sound.setActive(false);showMap(city,flight,missions,routeId=>{if(routeId)cockpit.trackIncident(routeId);sound.init();mode='flight';flight.setPaused(false);syncTouch();sound.setActive(true);document.activeElement?.blur();last=performance.now();if(document.hidden)setPause(true);}).catch(failure);}
 function fullscreen(){if(document.fullscreenElement)document.exitFullscreen?.().catch(()=>{});else void install.enterPlay({fullscreen:true});}
 $('dispatch').addEventListener('submit',e=>{e.preventDefault();start();});$('heliSelect').onchange=showPlane;
@@ -728,33 +757,34 @@ for(const button of document.querySelectorAll('[data-aim]'))button.onclick=()=>{
 $('recallUnit').onclick=()=>{if(mode==='flight'){missions.recall($('fieldTool').value);drawHUD();}};
 $('installApp').onclick=async()=>{$('installHint').hidden=false;await install.requestInstall();$('installHint').textContent=install.state.instructions;};
 $('nextCall').onclick=nextCall;
-$('fieldTool').onchange=()=>{cancelValve();if(document.activeElement===$('fieldTool'))$('fieldTool').blur();if(mode==='flight')drawHUD();};
+$('fieldTool').onchange=()=>{cancelExternalAction();if(document.activeElement===$('fieldTool'))$('fieldTool').blur();if(mode==='flight')drawHUD();};
 $('bucketCable').onclick=()=>changeCable();
 $('bucketView').onclick=toggleDropView;
-function bindWaterButton(button,direct){
+function bindExternalButton(button,direct){
   const source=id=>button.id+':'+id;
   let consumed=false;
   button.addEventListener('pointerdown',e=>{
     if(e.button!==0)return;
-    consumed=beginValve(source(e.pointerId),direct);
+    consumed=beginExternalAction(source(e.pointerId),direct);
     if(!consumed)return;
     e.preventDefault();try{button.setPointerCapture(e.pointerId);}catch{}
   });
   for(const type of ['pointerup','pointercancel','lostpointercapture']){
-    button.addEventListener(type,e=>releaseValve(source(e.pointerId)));
+    button.addEventListener(type,e=>releaseExternalAction(source(e.pointerId)));
   }
   button.addEventListener('keydown',e=>{
     if(!['Space','Enter'].includes(e.code))return;
-    if(!e.repeat)consumed=beginValve('key:'+e.code,direct);
+    if(!e.repeat)consumed=beginExternalAction('key:'+e.code,direct);
     if(consumed){e.preventDefault();e.stopPropagation();}
   });
   button.onclick=e=>{
     if(consumed){consumed=false;e.preventDefault();return;}
-    action(direct?'bucket':$('fieldTool').value);
+    action(direct?mountedExternalTool():$('fieldTool').value);
   };
 }
-bindWaterButton($('useTool'),false);bindWaterButton($('bucketValve'),true);
+bindExternalButton($('useTool'),false);bindExternalButton($('bucketValve'),true);
 $('pauseBtn').onclick=()=>setPause(true);$('resume').onclick=()=>setPause(false);$('homeBtn').onclick=async()=>{const button=$('homeBtn');button.disabled=true;if(pilot.status.code==='profile-replaced'||await saveFlight(true)){install.leavePlay();location.href=location.pathname;}else{$('dialogBody').textContent=saveError+' 다시 눌러 정산을 재시도하세요.';button.disabled=false;}};
+$('fitMissionGear').onclick=()=>shop.open('equipment',$('heliSelect').value);
 $('openShop').onclick=()=>{if(mode==='menu')shop.open();};
 $('mapBtn').onclick=openMap;
 $('cockpitView').onclick=()=>{
@@ -765,14 +795,14 @@ $('cockpitView').onclick=()=>{
 $('fullBtn').onclick=fullscreen;$('soundBtn').onclick=()=>{soundOn=!soundOn;if(soundOn)sound.init();store.set('sound',soundOn?'on':'off');sound.setEnabled(soundOn);radio.setEnabled(soundOn);$('soundBtn').textContent='게임 소리 '+(soundOn?'켜짐':'꺼짐');};
 $('previewAircraft').onclick=()=>import('./inspect.js').then(m=>m.openInspection('',$('heliSelect').value)).catch(failure);
 $('inspect').onclick=()=>import('./inspect.js').then(m=>m.openInspection()).catch(failure);
-window.addEventListener('keydown',e=>{if(e.defaultPrevented||e.repeat||resetDialog.open||$('soundEditor').open||$('inspection').open||shop.openNow)return;if(mode==='menu'&&e.code==='KeyH'){e.preventDefault();shop.open();}else if(e.code==='Escape'){if(mode==='flight'||mode==='paused'){e.preventDefault();setPause(mode==='flight');}}else if(e.code==='KeyM'&&(mode==='flight'||mode==='map')){e.preventDefault();if(mode==='map')$('network').close();else openMap();}else if(mode==='flight'&&e.code==='KeyE'){e.preventDefault();if(flight.state.controlScheme==='classic')changeBoarding();else if(!beginValve('key:KeyE'))action();}else if(mode==='flight'&&e.code==='Enter'){e.preventDefault();if(!beginValve('key:Enter'))action();}else if((mode==='flight'||mode==='paused')&&e.code==='KeyF'){e.preventDefault();fullscreen();}});
+window.addEventListener('keydown',e=>{if(e.defaultPrevented||e.repeat||resetDialog.open||$('soundEditor').open||$('inspection').open||shop.openNow)return;if(mode==='menu'&&e.code==='KeyH'){e.preventDefault();shop.open();}else if(e.code==='Escape'){if(mode==='flight'||mode==='paused'){e.preventDefault();setPause(mode==='flight');}}else if(e.code==='KeyM'&&(mode==='flight'||mode==='map')){e.preventDefault();if(mode==='map')$('network').close();else openMap();}else if(mode==='flight'&&e.code==='KeyE'){e.preventDefault();if(flight.state.controlScheme==='classic')changeBoarding();else if(!beginExternalAction('key:KeyE'))action();}else if(mode==='flight'&&e.code==='Enter'){e.preventDefault();if(!beginExternalAction('key:Enter'))action();}else if((mode==='flight'||mode==='paused')&&e.code==='KeyF'){e.preventDefault();fullscreen();}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&mode==='flight'){setPause(true);void saveCondition();void saveFlight();}});
 window.addEventListener('pagehide',()=>{void saveCondition();touch.reset();if(mode==='flight')setPause(true);void saveFlight();});
 window.addEventListener('resize',resize);
 window.visualViewport?.addEventListener('resize',resize);
 new ResizeObserver(resize).observe($('viewport'));
 function resetFlightPadHolds(){
-  flightPadGestures.reset();padDownControlsCable=false;releaseValve('pad');
+  flightPadGestures.reset();padDownControlsCable=false;releaseExternalAction('pad');
 }
 function flightPadButtons(b,edge){
   const now=performance.now();
@@ -790,11 +820,11 @@ function flightPadButtons(b,edge){
   if(rs==='hold'&&!onFoot)flight.recenterCamera();
   if(tool==='tap')nextTool();
   if(tool==='hold'&&!onFoot)action('harness');
-  if(edge(0)&&!beginValve('pad',drop))action();
+  if(edge(0)&&!beginExternalAction('pad',drop))action();
   if(edge(1))changeBoarding();
   if(edge(10))nextCall();
   if(mode!=='flight'||onFoot)return;
-  if(edge(13))padDownControlsCable=drop||bucketSelected();
+  if(edge(13))padDownControlsCable=drop||externalSelected();
   const dpad=i=>{
     const event=read(i,true);
     if(i===13&&padDownControlsCable){
@@ -819,10 +849,10 @@ function pad(){
   document.body.classList.toggle('pad-connected',!!p);
   const key=p?p.index+'/'+p.id:null;
   if(key!==activePadKey){held=[];padUI.clear(p);resetFlightPadHolds();activePadKey=key;}
-  if(!p){releaseValve('pad');return;}
+  if(!p){releaseExternalAction('pad');return;}
   if(document.hidden||!document.hasFocus()){padUI.clear(p);resetFlightPadHolds();held=p.buttons.map(v=>v.pressed||v.value>.55);return;}
   const b=p.buttons.map(v=>v.pressed||v.value>.55),edge=i=>b[i]&&!held[i],current=mode;
-  if(!b[0])releaseValve('pad');
+  if(!b[0])releaseExternalAction('pad');
   if(padUI.poll(p,edge,{...uiPadActions,mode:current})||current!=='flight'||!flightPadAllowed(p)){
     resetFlightPadHolds();held=b;return;
   }
@@ -837,7 +867,7 @@ let beaconVec;
 const sight=$('dropSight');
 let impactVec;
 function drawDropSight(){
-  const impact=flight.state.cameraId==='drop'?missions.getBucketAim():null;
+  const impact=flight.state.cameraId==='drop'?(activeLoadout?.hook?missions.getHookAim():missions.getBucketAim()):null;
   if(!impact){sight.hidden=true;return;}
   impactVec??=new ctx.THREE.Vector3();
   impactVec.set(impact.x,impact.y,impact.z).project(ctx.camera);
@@ -852,23 +882,32 @@ function drawHUD(){
   const seconds=m.secondsLeft;
   $('dispatchTimer').textContent=Number.isFinite(seconds)?'남은 시간 '+Math.floor(seconds/60)+':'+String(Math.max(0,Math.floor(seconds)%60)).padStart(2,'0'):'순찰 무전';
   $('nextCall').textContent='호출 '+m.activeCount+'건 ↻';
-  const bucket=m.bucket,drop=s.cameraId==='drop';
+  const bucket=m.bucket,hook=m.loadout?.hook?m.hook:null,rig=hook||bucket,drop=s.cameraId==='drop';
   const litres=Math.round(m.supplies.water*bucket.capacityLitres/100);
-  $('cabinStatus').textContent='탑승 '+m.cabinUsed+'/'+m.cabinCapacity+'　물 '+litres+'/'+bucket.capacityLitres+' L　최루탄 '+m.supplies.gas;
-  $('bucketControls').hidden=s.onFoot||!m.loadout?.bucket||!(bucketSelected()||bucket.deployed||bucket.extension>.1||drop);
-  $('bucketCable').hidden=bucket.kind==='tank';
+  const cargoLabel=hook?.attached?'컨테이너 '+Math.round(hook.massKg)+' kg · '+(hook.grounded?'지면 안착':'인양 중'):'빈 고리';
+  const loadLabel=hook?cargoLabel:'물 '+litres+'/'+bucket.capacityLitres+' L';
+  $('cabinStatus').textContent='탑승 '+m.cabinUsed+'/'+m.cabinCapacity+'　'+loadLabel+'　최루탄 '+m.supplies.gas;
+  $('bucketControls').hidden=s.onFoot||!(hook||m.loadout?.bucket)||!(externalSelected()||rig.deployed||rig.extension>.1||drop);
+  $('bucketCable').hidden=!hook&&bucket.kind==='tank';
   const waterOption=$('fieldTool').querySelector('option[value="bucket"]');
   if(waterOption&&waterOption.textContent!==bucket.name)waterOption.textContent=bucket.name;
-  $('bucketCable').textContent=bucket.deployed?'줄 감기':'줄 내리기';
-  $('bucketCable').setAttribute('aria-pressed',String(bucket.deployed));
-  $('bucketView').textContent=drop?'시점 복귀':'투하 시점';$('bucketView').setAttribute('aria-pressed',String(drop));
-  $('bucketValve').setAttribute('aria-pressed',String(bucket.dispensing));
-  $('bucketValve').setAttribute('aria-label',bucket.name+' · 누르고 있는 동안 물 투하');
-  $('waterGauge').value=m.supplies.water;$('waterReadout').textContent=litres+' L';
-  $('waterGauge').setAttribute('aria-label',bucket.name+' 남은 물');
-  $('waterGauge').setAttribute('aria-valuetext',litres+' / '+bucket.capacityLitres+' L');
-  $('waterGauge').parentElement.title=bucket.name+' 남은 물';
-  $('waterReadout').title=bucket.filling?'급수 중':bucket.dispensing?'투하 중':'남은 물';
+  $('bucketCable').textContent=rig.deployed?'줄 감기':'줄 내리기';
+  $('bucketCable').setAttribute('aria-pressed',String(rig.deployed));
+  $('bucketView').textContent=drop?'시점 복귀':hook?'하방 시점':'투하 시점';
+  $('bucketView').setAttribute('aria-pressed',String(drop));
+  const valve=$('bucketValve');
+  valve.textContent=hook?(hook.attached?'고리 해제':'고리 연결'):'물 투하';
+  valve.title=hook?'B 또는 Xbox A 한 번: 컨테이너 연결 · 안착 후 해제':'B 또는 Xbox A를 누르는 동안 물 투하';
+  valve.setAttribute('aria-label',hook?valve.textContent:bucket.name+' · 누르고 있는 동안 물 투하');
+  valve.setAttribute('aria-pressed',String(hook?hook.attached:bucket.dispensing));
+  const gauge=$('waterGauge'),readout=$('waterReadout');
+  gauge.hidden=!!hook;
+  gauge.value=m.supplies.water;
+  gauge.setAttribute('aria-label',bucket.name+' 남은 물');
+  gauge.setAttribute('aria-valuetext',litres+' / '+bucket.capacityLitres+' L');
+  readout.textContent=hook?cargoLabel:litres+' L';
+  gauge.parentElement.title=hook?'화물 연결 상태':bucket.name+' 남은 물';
+  readout.title=hook?cargoLabel:bucket.filling?'급수 중':bucket.dispensing?'투하 중':'남은 물';
   const chosen=m.calls?.find(c=>c.focused),incident=chosen&&rankIncidents([chosen],flight.position)[0];
   $('incidentPriority').hidden=!incident;
   if(incident){$('incidentPriority').textContent=incident.label;$('incidentPriority').style.setProperty('--priority-color',incident.color);}
@@ -933,7 +972,8 @@ function animate(t){
   requestAnimationFrame(animate);pad();if(mode!=='flight')return;const raw=(t-last)/1000;last=t;if(raw<=0)return;
   try{
     const dt=Math.min(.1,raw);elapsed+=dt;
-    flight.setPayload({passengers:missions.state.cabinUsed,waterFraction:missions.state.supplies.water/100});
+    flight.setPayload({passengers:missions.state.cabinUsed,waterFraction:activeLoadout?.bucket?missions.state.supplies.water/100:0,
+      externalLoadKg:missions.state.hook?.externalLoadKg??0});
     flight.setFireSources(missions.getFireSources());
     const tiltFlying=touch.visible&&!flight.state.onFoot;
     tilt.setFlying(tiltFlying);
@@ -945,7 +985,7 @@ function animate(t){
     if(!flight.state.onFoot&&document.hasFocus())haptics.turbulence(flight.state.turbulence);
     const focus=flight.focusPosition;
     if((civicDue-=dt)<=0){civic.update(focus);civicDue=.14;}city.update?.(focus,elapsed);missions.update(dt);
-    flight.syncBucketView(missions.state.bucket);drawDropSight();
+    flight.syncBucketView(mountedRig());drawDropSight();
     transit.update(dt,focus);ctx.frame(city,flight);sound.frame(flight.state.rpm);
     const near=flight.state.onFoot&&homeBase.nearDoor(focus);
     if(near&&!enteredDoor&&flight.state.walkSpeed>.05){enteredDoor=true;openHangar();}

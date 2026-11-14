@@ -4,6 +4,7 @@ import { createDispatch } from './dispatch.js';
 import { roadDrivingPoint,roadEdgeLength } from './road-path.js';
 import { makeVehicleProxy } from './traffic-exterior.js';
 import {neighborhoodSites} from './incident-sites.js';
+import {cargoDepots} from './mission-cargo.js';
 
 const distance = (a, b) => Math.hypot(a.x - b.x, a.z - b.z);
 const clamp = (n, a, b) => Math.min(b, Math.max(a, n));
@@ -190,7 +191,8 @@ export function planDispatchSites(city) {
     const fire=neighborhoodSites(blocks.length?blocks:fireLand);
     if(!fire.length){const p=land.find(p=>served(p,byEngine));if(p)fire.push(p);}
     const riot=street.filter(p=>served(p,byPolice)&&!city.tileAt(p.x,p.z)?.water&&p.level==='street');
-    return {roads,water,street,harbor,hospitals,fire,airport,stations,pickup,medical,riot,
+    const cargo=cargoDepots(city,landings,lots);
+    return {roads,water,street,harbor,hospitals,fire,airport,stations,pickup,medical,riot,cargo,
         rescueWater:neighborhoodSites(wet)};
 }
 
@@ -669,6 +671,7 @@ export async function createMissions(ctx, city, flight, options = {}) {
     director.ready().then(()=>{dispatchSettled=true;checkReady();});
     return { state, ready, update, act:director.act, cycle:director.cycle, aim:director.aim,
         beginBucket:director.beginBucket,endBucket:director.endBucket,toggleBucketCable:director.toggleBucketCable,getBucketAim:director.getBucketAim,
+        beginHook:director.beginHook,endHook:director.endHook,toggleHookCable:director.toggleHookCable,getHookAim:director.getHookAim,
         choose:director.choose, recall:director.recall, getFireSources:director.getFireSources,
         reportIncident:director.reportIncident, getAdjustments:director.getAdjustments,
         ackAdjustments:director.ackAdjustments, dispose };

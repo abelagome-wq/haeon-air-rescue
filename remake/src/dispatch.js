@@ -7,18 +7,20 @@ import {createPassengerIncident} from './mission-passengers.js';
 import {createHazardIncident} from './mission-hazards.js';
 import {createBucketRig} from './bucket-rig.js';
 import {createBucketWater} from './bucket-water.js';
+import {createCargoSling} from './cargo-sling.js';
+import {createCargoIncident} from './mission-cargo.js';
 import {createIncidentPicker} from './incident-sites.js';
 import {BASE_WATER_LITRES} from './aircraft-loadout.js';
 import {ECONOMY_EVENTS, economyKey, MISSION_CONTROLS, REMAKE_SERVICE_FEES} from './original-mission-economy.js';
 export {ORIGINAL_END_REWARDS} from './original-mission-economy.js';
 
 const HANDLERS={speeder:createLawIncident,traffic:createLawIncident,criminal:createLawIncident,
-  rescue:createPassengerIncident,medevac:createPassengerIncident,transport:createPassengerIncident,fire:createHazardIncident,riot:createHazardIncident};
+  rescue:createPassengerIncident,medevac:createPassengerIncident,transport:createPassengerIncident,fire:createHazardIncident,riot:createHazardIncident,cargo:createCargoIncident};
 // Road response times depend on the actual network; the traffic handler owns its deadline.
-const LIMITS={speeder:Infinity,traffic:Infinity,criminal:520,fire:630,riot:540,rescue:660,medevac:600,transport:480};
+const LIMITS={speeder:Infinity,traffic:Infinity,criminal:520,fire:630,riot:540,rescue:660,medevac:600,transport:480,cargo:600};
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
-const EQUIPMENT={bucket:'급수 장비',cannon:'물대포',harness:'구조 밧줄',megaphone:'확성기',gas:'최루탄 발사기',spotlight:'탐조등'};
-const TOOL_EQUIPMENT={bucket:'bucket',cannon:'cannon',harness:'harness',gas:'gas',traffic:'megaphone',stop:'megaphone',evacuate:'megaphone',disperse:'megaphone',greet:'megaphone'};
+const EQUIPMENT={bucket:'급수 장비',cannon:'물대포',harness:'구조 밧줄',megaphone:'확성기',gas:'최루탄 발사기',spotlight:'탐조등',hook:'화물 고리'};
+const TOOL_EQUIPMENT={bucket:'bucket',cannon:'cannon',harness:'harness',gas:'gas',traffic:'megaphone',stop:'megaphone',evacuate:'megaphone',disperse:'megaphone',greet:'megaphone',hook:'hook'};
 
 function makeCabin(capacity){
   const seats=new Map();
@@ -93,7 +95,7 @@ export function createDispatch({ctx,city,flight,sites,parent,worldState,send,arr
   const pickSite=createIncidentPicker(city.cityId,rng,tabHistory);
   // An omitted loadout preserves the original sandbox/test API. An explicit
   // object is authoritative and is read live so a purchased item unlocks at once.
-  const owns=key=>loadout===undefined||!!loadout?.[key];
+  const owns=key=>loadout===undefined?key!=='hook':!!loadout?.[key];
   const missing=tool=>{
     const key=TOOL_EQUIPMENT[tool];
     if(key&&!owns(key))return key;
@@ -119,6 +121,8 @@ export function createDispatch({ctx,city,flight,sites,parent,worldState,send,arr
     sound:(name,p)=>ctx.sound?.sceneCue?.(name,distance(p,flight.position)),
     impact:(point,amount)=>{for(const c of calls)if(!c.done)c.handler?.waterImpact?.(point,amount);}});
   worldState.bucket=bucket.state;
+  const hook=createCargoSling({T:ctx.THREE,parent,city,flight,equipped:()=>owns('hook'),notice});
+  worldState.hook=hook.state;
   const events=[];
   function reportEvent(text){events.push({text,at:clock});if(events.length>2)events.shift();}
   const balance={score:0,cash:0,completed:0,failed:0,partial:0,ledger:0};
@@ -164,6 +168,7 @@ export function createDispatch({ctx,city,flight,sites,parent,worldState,send,arr
     light.update(flight,aim,owns('spotlight')&&(s.altitudeAGL??0)>1);
   }
   function available(type,variant){
+    if(type==='cargo')return owns('hook')&&sites.cargo?.length>=2;
     if(['medevac','transport','rescue'].includes(type)&&cabin.capacity<1)return false;
     if(type==='rescue'&&variant==='train')return !!ctx.transit?.trainRoof?.();
     if(type==='rescue'&&variant==='boat')return sites.harbor.length>0;
@@ -194,7 +199,7 @@ export function createDispatch({ctx,city,flight,sites,parent,worldState,send,arr
     return {tool:fallback??tool,key,fallback:!!fallback};
   }
   function selectRadio(){
-    const weights=profile?.weights??{traffic:1,fire:1,rescue:1,medevac:1,criminal:1,transport:1,riot:1};
+    const weights={...(profile?.weights??{traffic:1,fire:1,rescue:1,medevac:1,criminal:1,transport:1,riot:1}),cargo:2};
     const eligible=Object.keys(weights).filter(t=>weights[t]>0&&Object.keys(MISSIONS[t].variants).some(v=>automatic(t,v)));
     const candidates=eligible.filter(t=>!calls.some(c=>!c.done&&c.type===t));
     if(!candidates.length)return;
@@ -206,6 +211,7 @@ export function createDispatch({ctx,city,flight,sites,parent,worldState,send,arr
     if(call.done)return;
     const {outcome='success',points=0,cash=0,message='출동 완료'}=result;
     call.done=true;call.finishedAt=clock;call.outcome=outcome;
+    call.handler?.onFinish?.(outcome);
     record('completion',call.state.title+' '+call.id+' · '+(outcome==='failed'?'실패':'종료'),cash,points,call.id);
     if (cash > 0) ctx.sound?.cue?.(true);
     if(outcome==='failed')balance.failed++;else{balance.completed++;if(outcome==='partial')balance.partial++;}
@@ -231,7 +237,7 @@ export function createDispatch({ctx,city,flight,sites,parent,worldState,send,arr
       if(clip && focus===id)onRadio({kind:'field',clip,id:id+'/'+eventId});
       return true;
     }
-    const api={ctx,city,flight,sites,group,state,cabin,supplies,bucket,origin,serial:id,model:art.model,setClip:art.setClip,charge,event,aimPoint:aim,
+    const api={ctx,city,flight,sites,group,state,cabin,supplies,bucket,hook,origin,serial:id,model:art.model,setClip:art.setClip,charge,event,aimPoint:aim,
       pickSite:(role,candidates)=>pickSite(role,candidates,calls.filter(c=>c!==call&&!c.done)
         .map(c=>c.state.incidentSite??c.state.target).filter(Boolean)),
       sound:(name,target)=>ctx.sound?.sceneCue(name,distance(flight.position,target)),
@@ -309,6 +315,7 @@ export function createDispatch({ctx,city,flight,sites,parent,worldState,send,arr
   function update(dt){
     if(disposed)return;clock+=dt;refreshAim();
     bucket.update(dt);
+    hook.update(dt);
     for(const c of [...calls]){
       if(c.done){if(clock>=c.finishedAt+4)remove(c);continue;}
       c.handler.update(dt);c.art.update(dt);
@@ -353,6 +360,7 @@ export function createDispatch({ctx,city,flight,sites,parent,worldState,send,arr
     // An instant action has no elapsed hold. Leave the cable and valve
     // alone; interactive bucket controls use their paired down/up edges.
     if(tool==='bucket'){notice(bucket.state.kind==='tank'?'투하 버튼을 누르고 있는 동안 탱크에서 물이 나옵니다.':'줄을 내린 뒤 투하 버튼을 누르고 있는 동안 물이 나옵니다.');return false;}
+    if(tool==='hook'){const worked=hook.begin();hook.end();projected();return worked;}
     announce(tool);
     if(tool==='greet')return true;
     refreshAim();let current=calls.find(c=>c.id===focus&&!c.done);
@@ -367,6 +375,7 @@ export function createDispatch({ctx,city,flight,sites,parent,worldState,send,arr
     const resolved=advice?.tool??tool,key=missing(resolved);
     if(key){notice(shopMessage(key));projected();return false;}
     if(resolved==='bucket')return act('bucket');
+    if(resolved==='hook')return act('hook');
     // Criminal context deliberately sends police to the suspect, whereas F4
     // sends them to the aiming point. Preserve that distinction after gating.
     if (tool==='context') announce(resolved);
@@ -380,6 +389,9 @@ export function createDispatch({ctx,city,flight,sites,parent,worldState,send,arr
   return {update,act,cycle,reportIncident,
     beginBucket:stamp=>!disposed&&bucket.begin(stamp),endBucket:stamp=>{if(!disposed)bucket.end(stamp);},
     toggleBucketCable:()=>!disposed&&bucket.toggle(),getBucketAim:()=>!disposed?bucket.getAim():null,
+    beginHook:()=>{if(disposed)return false;const worked=hook.begin();projected();return worked;},
+    endHook:()=>{if(!disposed)hook.end();},
+    toggleHookCable:()=>!disposed&&hook.toggle(),getHookAim:()=>disposed?null:hook.getAim(),
     getAdjustments:(afterLedger=0)=>pendingAdjustments.filter(entry=>entry.id>afterLedger).map(entry=>({...entry})),
     ackAdjustments(ledger){
       if(!Number.isSafeInteger(ledger)||ledger<0||ledger>balance.ledger)return;
@@ -393,6 +405,6 @@ export function createDispatch({ctx,city,flight,sites,parent,worldState,send,arr
       if(kind&&release(focus,kind)){calls.find(c=>c.id===focus)?.units.delete(kind);notice('긴급 차량이 복귀합니다.');}},
     aim(yaw,range){yawOffset=Math.max(-75,Math.min(75,yawOffset+yaw));reach=Math.max(-20,Math.min(65,reach+range));refreshAim();},
     choose(id){if(calls.some(c=>c.id===id&&!c.done&&!c.state.hiddenTarget)){focus=id;projected();return true;}return false;},
-    dispose(){disposed=true;for(const c of [...calls])remove(c);bucket.dispose();light.dispose();}
+    dispose(){disposed=true;for(const c of [...calls])remove(c);bucket.dispose();hook.dispose();light.dispose();}
   };
 }

@@ -10,14 +10,14 @@ export const RADIO_STATIONS = Object.freeze(['off', 'jazz', 'rock', 'techno', 'c
 const sectorNumbers = {NE:1,N:2,NW:3,E:4,C:5,W:6,SE:7,S:8,SW:9,
   북동:1,북:2,북서:3,동:4,중앙:5,서:6,남동:7,남:8,남서:9};
 const baseCalls = {fire:'D1001', rescue:'D1005', transport:'D1006',
-  criminal:'D1007', medevac:'D1013', traffic:'D1014', riot:'D1015'};
+  criminal:'D1007', medevac:'D1013', traffic:'D1014', riot:'D1015', cargo:'D1024'};
 const variantCalls = {
   criminal:{arsonist:'D1009',robber:'D1010',mugger:'D1012',getaway:'D1008'},
   rescue:{roof:'D1017',boat:'D1018',train:'D1019'}, fire:{large:'D1020'},
   traffic:{burning:'D1021'},riot:{major:'D1016'},
 };
 const outcomes = {fire:'DIS053', transport:'DIS055', criminal:'DIS056', speeder:'DIS057',
-  traffic:'DIS059', riot:'DIS060', medevac:'DIS116', rescue:'DIS061'};
+  traffic:'DIS059', riot:'DIS060', medevac:'DIS116', rescue:'DIS061', cargo:'DIS123'};
 const incidentResults = {
   timeout:'DIS106', escapedSuspect:'DIS107', escapedDriver:'DIS108', reservationExpired:'DIS109',
   casualty:'DIS110', incompleteTransfer:'DIS111', fireLoss:'DIS112', groundFireCrew:'DIS113',
