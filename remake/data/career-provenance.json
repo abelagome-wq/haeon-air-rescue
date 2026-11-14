@@ -1,0 +1,569 @@
+{
+  "schemaVersion": 1,
+  "currency": "§",
+  "scope": "Read-only original Korean resources and executable, verified locally; no inferred currency conversion.",
+  "sources": [
+    {
+      "path": "SIMCOPT/SIMCOPT.EXE",
+      "bytes": 1273856,
+      "sha256": "cedfdd009e72cb207091f152dbb34a51a63ce3f7416df8da7c7ed3073ec9ebba"
+    },
+    {
+      "path": "SIMCOPT/TWEAK/HELI.TWK",
+      "bytes": 16029,
+      "sha256": "b647105e27cc5136facb8de1d785b789d73c5779bf5979b24580922c3f880991"
+    },
+    {
+      "path": "SIMCOPT/TWEAK/SIM3D.TWK",
+      "bytes": 10275,
+      "sha256": "dc008553edb312d4981a874bcea33f2ed507590428e56d05f41dfeeaa8bb3692"
+    },
+    {
+      "path": "SIMCOPT/TWEAK/CAREER.TWK",
+      "bytes": 31457,
+      "sha256": "72f8052778037e2a7943258e29a812c29e02f81138dfb39e3a9d43f29b782988"
+    },
+    {
+      "path": "SIMCOPT/HELP/ENGLISH/11TUT.HTM",
+      "bytes": 3647,
+      "sha256": "d482816e0407e08a0cf19e9401ec6545c35571f026ce934c9c4ad142f98d3229"
+    },
+    {
+      "path": "SIMCOPT/HELP/ENGLISH/31REF.HTM",
+      "bytes": 1064,
+      "sha256": "f1060d4e463cb717c25e93cb3b36116023e632ce4b51e883db27fa95d4e4bc17"
+    },
+    {
+      "path": "SIMCOPT/HELP/ENGLISH/32REF.HTM",
+      "bytes": 1468,
+      "sha256": "34bee6b3c550de72eedd67e9b7894dac9d4aca5ab57010a1f38ae79f54d57a9d"
+    }
+  ],
+  "aircraft": [
+    {
+      "id": "JETRANG",
+      "section": "Jet Ranger",
+      "price": 7800,
+      "source": "SIMCOPT/TWEAK/HELI.TWK",
+      "line": 62,
+      "control": "Ctrl11 New Cost ($)"
+    },
+    {
+      "id": "HUGH500",
+      "section": "Hughes 500",
+      "price": 8800,
+      "source": "SIMCOPT/TWEAK/HELI.TWK",
+      "line": 146,
+      "control": "Ctrl11 New Cost ($)"
+    },
+    {
+      "id": "BELL212",
+      "section": "Bell 212",
+      "price": 13500,
+      "source": "SIMCOPT/TWEAK/HELI.TWK",
+      "line": 232,
+      "control": "Ctrl11 New Cost ($)"
+    },
+    {
+      "id": "SCWZR300",
+      "section": "Schwiezer 300",
+      "price": 3400,
+      "source": "SIMCOPT/TWEAK/HELI.TWK",
+      "line": 318,
+      "control": "Ctrl11 New Cost ($)"
+    },
+    {
+      "id": "APACHE",
+      "section": "Apache",
+      "price": 50000,
+      "source": "SIMCOPT/TWEAK/HELI.TWK",
+      "line": 404,
+      "control": "Ctrl11 New Cost ($)"
+    },
+    {
+      "id": "AGUSTA",
+      "section": "Agusta",
+      "price": 16500,
+      "source": "SIMCOPT/TWEAK/HELI.TWK",
+      "line": 490,
+      "control": "Ctrl11 New Cost ($)"
+    },
+    {
+      "id": "DAUPHIN",
+      "section": "Dauphin",
+      "price": 18500,
+      "source": "SIMCOPT/TWEAK/HELI.TWK",
+      "line": 576,
+      "control": "Ctrl11 New Cost ($)"
+    },
+    {
+      "id": "MDEXPLRR",
+      "section": "MDEXPLORER",
+      "price": 20500,
+      "source": "SIMCOPT/TWEAK/HELI.TWK",
+      "line": 662,
+      "control": "Ctrl11 New Cost ($)"
+    },
+    {
+      "id": "MD520",
+      "section": "MD520",
+      "price": 11000,
+      "source": "SIMCOPT/TWEAK/HELI.TWK",
+      "line": 748,
+      "control": "Ctrl11 New Cost ($)"
+    }
+  ],
+  "equipment": [
+    {
+      "id": "bucket",
+      "price": 500,
+      "nativeIndex": 0,
+      "descriptionResourceId": 490
+    },
+    {
+      "id": "megaphone",
+      "price": 500,
+      "nativeIndex": 1,
+      "descriptionResourceId": 491
+    },
+    {
+      "id": "harness",
+      "price": 800,
+      "nativeIndex": 2,
+      "descriptionResourceId": 494
+    },
+    {
+      "id": "cannon",
+      "price": 1500,
+      "nativeIndex": 4,
+      "descriptionResourceId": 493
+    },
+    {
+      "id": "gas",
+      "price": 2500,
+      "nativeIndex": 3,
+      "descriptionResourceId": 492
+    }
+  ],
+  "equipmentEvidence": {
+    "nativeBuyPricesByIndex": [
+      500,
+      500,
+      800,
+      2500,
+      1500
+    ],
+    "catalogDescriptionOrder": [
+      "bucket",
+      "megaphone",
+      "gas",
+      "cannon",
+      "harness"
+    ],
+    "catalogToNativeIndex": [
+      0,
+      1,
+      3,
+      4,
+      2
+    ],
+    "descriptionStringResourceIds": [
+      490,
+      491,
+      492,
+      493,
+      494
+    ],
+    "buyPriceFunction": {
+      "va": "0x491d40",
+      "fileOffset": "0x91140",
+      "bytesHex": "83ec14b8f40100008944240089442404c744240820030000c744240cc40900008b4c2418c7442410dc0500008b448c0083c414c3",
+      "instructions": [
+        {
+          "va": "0x491d40",
+          "op": "sub esp, 0x14"
+        },
+        {
+          "va": "0x491d43",
+          "op": "mov eax, 0x1f4"
+        },
+        {
+          "va": "0x491d48",
+          "op": "mov dword ptr [esp], eax"
+        },
+        {
+          "va": "0x491d4c",
+          "op": "mov dword ptr [esp + 4], eax"
+        },
+        {
+          "va": "0x491d50",
+          "op": "mov dword ptr [esp + 8], 0x320"
+        },
+        {
+          "va": "0x491d58",
+          "op": "mov dword ptr [esp + 0xc], 0x9c4"
+        },
+        {
+          "va": "0x491d60",
+          "op": "mov ecx, dword ptr [esp + 0x18]"
+        },
+        {
+          "va": "0x491d64",
+          "op": "mov dword ptr [esp + 0x10], 0x5dc"
+        },
+        {
+          "va": "0x491d6c",
+          "op": "mov eax, dword ptr [esp + ecx*4]"
+        },
+        {
+          "va": "0x491d70",
+          "op": "add esp, 0x14"
+        },
+        {
+          "va": "0x491d73",
+          "op": "ret "
+        }
+      ]
+    },
+    "catalogIndexMapping": {
+      "va": "0x42da8f",
+      "fileOffset": "0x2ce8f",
+      "bytesHex": "c784242803000000000000c784242c03000001000000c784243003000003000000c784243403000004000000c7842438030000020000008b84142803000050e8cd420600",
+      "instructions": [
+        {
+          "va": "0x42da8f",
+          "op": "mov dword ptr [esp + 0x328], 0"
+        },
+        {
+          "va": "0x42da9a",
+          "op": "mov dword ptr [esp + 0x32c], 1"
+        },
+        {
+          "va": "0x42daa5",
+          "op": "mov dword ptr [esp + 0x330], 3"
+        },
+        {
+          "va": "0x42dab0",
+          "op": "mov dword ptr [esp + 0x334], 4"
+        },
+        {
+          "va": "0x42dabb",
+          "op": "mov dword ptr [esp + 0x338], 2"
+        },
+        {
+          "va": "0x42dac6",
+          "op": "mov eax, dword ptr [esp + edx + 0x328]"
+        },
+        {
+          "va": "0x42dacd",
+          "op": "push eax"
+        },
+        {
+          "va": "0x42dace",
+          "op": "call 0x491da0"
+        }
+      ]
+    },
+    "salePriceNote": "0x491DA0 computes 75 percent of the same table; selling is not exposed by this new purchase-only career module."
+  },
+  "startingProfile": {
+    "cash": 1000,
+    "ownedAircraft": [
+      "SCWZR300"
+    ],
+    "nativeAircraftMask": 16,
+    "nativeAircraftIndex": 4,
+    "ownedEquipment": [
+      "bucket",
+      "megaphone"
+    ],
+    "nativeEquipmentMask": 3,
+    "careerInitializer": {
+      "va": "0x47ab21",
+      "fileOffset": "0x79f21",
+      "bytesHex": "c705f4dd5500e8030000c705f8dd550010000000c705fcdd550003000000",
+      "instructions": [
+        {
+          "va": "0x47ab21",
+          "op": "mov dword ptr [0x55ddf4], 0x3e8"
+        },
+        {
+          "va": "0x47ab2b",
+          "op": "mov dword ptr [0x55ddf8], 0x10"
+        },
+        {
+          "va": "0x47ab35",
+          "op": "mov dword ptr [0x55ddfc], 3"
+        }
+      ]
+    },
+    "customInitializer": {
+      "va": "0x47ac57",
+      "fileOffset": "0x7a057",
+      "bytesHex": "c70580dd5500e8030000891d94dd5500391d14914f00c70584dd550010000000c70588dd550003000000c70598dd550001000000",
+      "instructions": [
+        {
+          "va": "0x47ac57",
+          "op": "mov dword ptr [0x55dd80], 0x3e8"
+        },
+        {
+          "va": "0x47ac61",
+          "op": "mov dword ptr [0x55dd94], ebx"
+        },
+        {
+          "va": "0x47ac67",
+          "op": "cmp dword ptr [0x4f9114], ebx"
+        },
+        {
+          "va": "0x47ac6d",
+          "op": "mov dword ptr [0x55dd84], 0x10"
+        },
+        {
+          "va": "0x47ac77",
+          "op": "mov dword ptr [0x55dd88], 3"
+        },
+        {
+          "va": "0x47ac81",
+          "op": "mov dword ptr [0x55dd98], 1"
+        }
+      ]
+    },
+    "moneyGetter": {
+      "va": "0x47a530",
+      "fileOffset": "0x79930",
+      "bytesHex": "833d98dd5500017506a180dd5500c3a1f4dd5500c3",
+      "instructions": [
+        {
+          "va": "0x47a530",
+          "op": "cmp dword ptr [0x55dd98], 1"
+        },
+        {
+          "va": "0x47a537",
+          "op": "jne 0x47a53f"
+        },
+        {
+          "va": "0x47a539",
+          "op": "mov eax, dword ptr [0x55dd80]"
+        },
+        {
+          "va": "0x47a53e",
+          "op": "ret "
+        },
+        {
+          "va": "0x47a53f",
+          "op": "mov eax, dword ptr [0x55ddf4]"
+        },
+        {
+          "va": "0x47a544",
+          "op": "ret "
+        }
+      ]
+    }
+  },
+  "rules": {
+    "equipmentScope": "profile-wide; automatically fitted to every owned aircraft, not bought separately per aircraft",
+    "cannonRequires": [
+      "bucket"
+    ],
+    "spotlight": "not one of the five purchasable tools; baseline flight equipment",
+    "newProfile": "1000 cash plus Schweizer, bucket, megaphone",
+    "legacyMigration": "Preserve simcopter.record.cash exactly, including zero/negative/fractional values. No additional 1000. Give the same starter airframe/tools; never modify the legacy record.",
+    "apache": "Original catalog offers eight civil aircraft; its UI index 8 is equipment. Apache has native helicopter index2 and HELI.TWK NewCost=50000 but is omitted from the ordinary catalog mapping [4,0,1,8,3,5,6,7]. The exact special acquisition condition was not established in this audit. Parent-authorized remake policy: allow a normal 50000 purchase, label it as a special original aircraft."
+  },
+  "helpEvidence": [
+    {
+      "source": "SIMCOPT/HELP/ENGLISH/11TUT.HTM",
+      "encoding": "cp949",
+      "matches": [
+        {
+          "line": 64,
+          "text": "어떤 장비를 구입하더라도 당신이 소유한 어느"
+        }
+      ]
+    },
+    {
+      "source": "SIMCOPT/HELP/ENGLISH/31REF.HTM",
+      "encoding": "cp949",
+      "matches": [
+        {
+          "line": 17,
+          "text": "도구들은 각각 제어 패널을 갖고 있고, 당신이 그 도구를 구입하면"
+        }
+      ]
+    },
+    {
+      "source": "SIMCOPT/HELP/ENGLISH/32REF.HTM",
+      "encoding": "cp949",
+      "matches": [
+        {
+          "line": 27,
+          "text": "더 큰 콥터는 더 많은 물을 운반할 수 있다.  양동이를 먼저 구입해야만 한다."
+        }
+      ]
+    },
+    {
+      "source": "SIMCOPT/HELP/ENGLISH/18REF.HTM",
+      "encoding": "cp949",
+      "matches": [
+        {
+          "line": 33,
+          "text": "어떤 임무를 완결했든  안했든 간에, 당신은 비행 시간에 따라  봉급을 받는다."
+        }
+      ]
+    }
+  ],
+  "originalMissionRewardSettings": [
+    {
+      "section": "General Miss",
+      "label": "UFO Money",
+      "value": 2000.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "General Miss",
+      "label": "UFO Points",
+      "value": 1000.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Riot Miss",
+      "label": "Riot End Money",
+      "value": 725.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Riot Miss",
+      "label": "Riot End Points",
+      "value": 505.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Riot Miss",
+      "label": "End Money Penalty",
+      "value": 0.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Riot Miss",
+      "label": "End Points Penalty",
+      "value": 250.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Rescue Miss",
+      "label": "Resc End Money(pp)",
+      "value": 200.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Rescue Miss",
+      "label": "Resc End Points(pp)",
+      "value": 100.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Rescue Miss",
+      "label": "Resc Inc Money(pp)",
+      "value": 50.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Transport Miss",
+      "label": "End Money(pp)",
+      "value": 100.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Transport Miss",
+      "label": "End Points(pp)",
+      "value": 50.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Medevac Miss",
+      "label": "Med End Money(pp)",
+      "value": 200.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Medevac Miss",
+      "label": "Med End Points(pp)",
+      "value": 100.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Fire Miss",
+      "label": "End Money(*size)",
+      "value": 150.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Fire Miss",
+      "label": "End Points(*size)",
+      "value": 100.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Fire Miss",
+      "label": "End Money Penalty",
+      "value": 0.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Fire Miss",
+      "label": "End Points Penalty",
+      "value": 50.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Criminal Miss",
+      "label": "End Money",
+      "value": 500.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Criminal Miss",
+      "label": "End Points",
+      "value": 300.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Speeder Miss",
+      "label": "End Money",
+      "value": 200.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Speeder Miss",
+      "label": "End Points",
+      "value": 100.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Speeder Miss",
+      "label": "Incmtl Points",
+      "value": 5.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Traffic Miss",
+      "label": "End Jam Money",
+      "value": 100.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    },
+    {
+      "section": "Traffic Miss",
+      "label": "End Jam Points",
+      "value": 50.0,
+      "source": "SIMCOPT/TWEAK/SIM3D.TWK"
+    }
+  ],
+  "integrationNotes": [
+    "Dispatch rewards are cumulative within a session, so settleSession applies the difference from the persistent prior receipt.",
+    "A session ledger number can be committed only once; lower ledger numbers are ignored, conflicting values at the same ledger fail, and closed sessions can never pay again.",
+    "All profile mutations are protected by Web Locks and one localStorage setItem commit. No unsafe cross-tab localStorage lease fallback.",
+    "In the user's Sea Cliff demonstration the balance moved from 1000 to 1240, 1480 and 1610 after two medical calls and a passenger transport. There was no periodic five-dollar balance increase in this session.",
+    "The demonstrated medical job credited 10 for pickup, 30 for hospital handover and 200 cash / 100 points for completion. Passenger transport credited 10 for pickup, 20 on arrival and 100 cash / 50 points on completion. These are separate once-only ledger entries.",
+    "Original intermediate awards and penalties, runtime price tables, and unresolved manual-only rules are documented by executable address in original-economy-evidence.json. Per-event cash and points are floored at zero when posted to the account."
+  ]
+}

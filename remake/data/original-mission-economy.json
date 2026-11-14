@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "sectionValues": "../src/original-mission-economy.js#MISSION_CONTROLS",
+  "binaryEvidence": "./original-economy-evidence.json",
+  "sources": {
+    "SIMCOPT.EXE": "cedfdd009e72cb207091f152dbb34a51a63ce3f7416df8da7c7ed3073ec9ebba",
+    "SIM3D.TWK": "dc008553edb312d4981a874bcea33f2ed507590428e56d05f41dfeeaa8bb3692",
+    "help": ["18REF", "19REF", "20REF", "21REF", "22REF", "23REF", "24REF", "25REF", "26REF", "35REF"]
+  },
+  "settlement": {
+    "intermediate": "004AB030 dispatches native events and chooses points or money. 004A98A0 updates the mission's typed counters separately. RT540 formats money and RT541 formats points.",
+    "end": "004ABAD0 computes the end payout. Total end cash is floored at zero at 004ABE2E; end points may be negative. Per-event lifetime balance floors belong to the career account.",
+    "passengers": "RT938 pickup +10 dollars; RT935 rescue +50; RT936 transport +20; RT937 hospital handoff +30. End amounts are separate. Rescued/delivered/lost people and full groups of four pickups contribute to end units. Native type bits 0x110 and 0x118 select RT574 (train rescue): double delivered people plus every pickup.",
+    "traffic": "RT941 +3 dollars per released car. RT940 +30 per extinguished car. Late clearance earns half the ordinary 100 dollars and 50 points. The bonus clock is the 60 second TWK setting. Far-away responders can still complete later.",
+    "speeder": "RT943 is cash +5 despite the 'Incmtl Points' label. 004A13CE reloads a 10.0-second timer. Waiting for police while stopped/illuminated is the remake's matching state. Capture pays 200 dollars and 100 points once, not an extra reward both at arrest and at call closure.",
+    "fire": "Fire[12] triggers -20 points for a spreading flame (RT930) and Fire[13] +50 dollars for a doused flame (RT931). A completely saved modeled building earns +150 dollars (RT933). A new building threatened by spread counts toward the Fire End Points Penalty (50). Original end amounts are scaled by source size, not increased merely by allowing spread.",
+    "riot": "Native event 20/RT961 grants 10 dollars and 10 points per departing rioter. The end action pays truncated (6-remaining)/6 shares of 725 dollars and 505 points for fewer than six remaining, otherwise zero. Actual civilian injury from a gas attack can incur RT954 once for that victim.",
+    "criminal": "Actual arrest pays 500 dollars and 300 points. Robbery, assault and an arsonist escape have separate native event deductions. A missed gas shot that injures nobody does not receive an invented penalty."
+  },
+  "implementationBoundaries": [
+    "Original fire size and fire crew contribution are approximated with the modeled initial fire patches and half credit for fire crew extinguishment. 21REF confirms partial credit, not the precise crew fraction.",
+    "26REF requires the warning/water/gas sequence but does not establish a fixed tactical fine. Departures forced by skipped escalation earn no per-person payment in the remake. A modeled injury from player gas can separately trigger the proven civilian-harm event.",
+    "The passenger model counts each completed harness retrieval as a pickup. VIP expiry maps an outstanding rider to the native missed-person counter. Native end arithmetic is verified, but these state boundaries are remake interpretations.",
+    "Incident cleanup allows physical road responders to reach distant junctions after the sixty-second bonus clock. This permits eventual half-pay clearance. Riot tactics and walker durations are simulation parameters.",
+    "The exact service, doctor, and officer prices are unverified; current fees of 10/25/25 are remake rates. Optional RT events for destruction, UFO, plane/train crashes and debris have no fabricated automatic incident in the current game.",
+    "The Riot End Points Penalty 250 and plane/train crash subtype constants are present in TWK. No separate debit or bonus is added merely because a slider exists."
+  ]
+}

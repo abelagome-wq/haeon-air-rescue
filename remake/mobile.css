@@ -1,0 +1,286 @@
+/* Touch presentation only. Desktop layout remains in style.css. */
+#touchControls,.touch-aim-controls,#touchPanelToggle,.mobile-pause-help,.mobile-install{display:none}
+
+body.mobile-layout{
+ --safe-top:env(safe-area-inset-top,0px);--safe-right:env(safe-area-inset-right,0px);
+ --safe-bottom:env(safe-area-inset-bottom,0px);--safe-left:env(safe-area-inset-left,0px);
+ --mobile-left:max(8px,var(--safe-left));--mobile-right:max(8px,var(--safe-right));
+ --stick-size:136px;--flight-button:52px;--touch-bottom:max(10px,var(--safe-bottom));
+ -webkit-text-size-adjust:100%;
+}
+body.mobile-layout button,body.mobile-layout select,body.mobile-layout input{min-height:44px}
+body.mobile-layout select,body.mobile-layout input{font-size:16px}
+body.mobile-layout button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+body.mobile-layout #hangar{min-height:100dvh;align-items:start}
+body.mobile-layout .home-inner{
+ width:min(1040px,calc(100% - max(16px,var(--safe-left)) - max(16px,var(--safe-right))));
+ padding-top:max(16px,var(--safe-top));padding-bottom:max(20px,var(--safe-bottom));
+}
+body.mobile-layout .brand{gap:10px;flex-wrap:wrap;padding-bottom:12px}
+body.mobile-layout .brand>b{font-size:20px}
+body.mobile-layout .intro{margin:20px 0 16px}
+body.mobile-layout .intro h1{font-size:36px}
+body.mobile-layout .intro p{font-size:14px;line-height:1.65}
+body.mobile-layout .hangar-grid{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:14px}
+body.mobile-layout .aircard{min-width:0;min-height:300px}
+body.mobile-layout .aircard img{object-fit:contain}
+body.mobile-layout .airfoot{padding:40px 18px 18px;gap:10px}
+body.mobile-layout .airfoot h2{font-size:24px}
+body.mobile-layout #dispatch{min-width:0;padding:18px}
+body.mobile-layout #dispatch h2{font-size:25px;margin-bottom:10px}
+body.mobile-layout #dispatch label{margin-top:12px}
+body.mobile-layout #dispatch select{min-height:46px}
+body.mobile-layout #start{min-height:52px;margin-top:16px}
+body.mobile-layout .career-strip{padding:15px;gap:14px;flex-wrap:wrap}
+body.mobile-layout .career-strip>div{gap:10px;flex:1;min-width:180px}
+body.mobile-layout .career-strip strong{font-size:25px}
+body.mobile-layout #openShop{min-height:48px}
+body.mobile-layout #openShop span{display:none}
+body.mobile-layout #ownedKit{width:100%;line-height:1.65}
+body.mobile-layout .mobile-install{
+ display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 0;
+ color:#c5d8cd;font-size:13px;line-height:1.65;
+}
+body.mobile-layout .mobile-install>div{min-width:0;flex:1}
+body.mobile-layout .tilt-options{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:8px}
+body.mobile-layout .tilt-options button{min-height:44px;padding:7px 12px;color:var(--paper);background:#253c38;border:1px solid #80988c}
+body.mobile-layout .tilt-options button[aria-pressed="true"]{border-color:#d8b875}
+body.mobile-layout .tilt-options small{flex-basis:100%;line-height:1.5}
+body.mobile-layout #installHint{margin-top:7px;color:#d9d4b9;overflow-wrap:anywhere}
+body.mobile-layout #installApp{flex:none;border:1px solid #7c9c8a;background:#25413c;color:var(--paper);padding:10px 14px;font-size:13px}
+body.mobile-layout footer{gap:10px;flex-wrap:wrap;line-height:1.7}
+body.mobile-layout #inspect{min-height:44px}
+
+/* Modal surfaces stay scrollable independently of the locked flight viewport. */
+body.mobile-layout #shop,body.mobile-layout #inspection,body.mobile-layout #network{
+ width:min(940px,calc(100% - max(12px,var(--safe-left)) - max(12px,var(--safe-right))));
+ max-height:calc(100dvh - max(12px,var(--safe-top)) - max(12px,var(--safe-bottom)));
+ padding:0;overscroll-behavior:contain;overflow:auto;
+}
+body.mobile-layout .shop-inner,body.mobile-layout .inspectinner{padding:16px}
+body.mobile-layout .inspecthead{gap:12px;align-items:center}
+body.mobile-layout .inspecthead h2{font-size:23px;line-height:1.3}
+body.mobile-layout .inspecthead button{flex-shrink:0;min-height:44px;min-width:68px;padding:8px 12px}
+body.mobile-layout .shop-toolbar{margin-top:16px;gap:12px;flex-wrap:wrap}
+body.mobile-layout .shop-tabs{gap:6px;flex-wrap:wrap;flex-shrink:0}
+body.mobile-layout .shop-tabs button{min-height:44px;padding:8px 16px;white-space:nowrap}
+body.mobile-layout #shopItems{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+body.mobile-layout .shop-card>img{object-fit:contain;background:#34464b}
+body.mobile-layout .shop-card-body{padding:14px}
+body.mobile-layout .shop-card button{min-width:80px;min-height:44px;font-size:14px}
+body.mobile-layout .shop-card p{line-height:1.65}
+body.mobile-layout .inspect-controls{flex-wrap:wrap;gap:10px;align-items:end}
+body.mobile-layout .inspect-controls label{flex:1 1 160px}
+body.mobile-layout .inspect-controls label:last-child{flex:1 1 220px}
+body.mobile-layout .inspect-controls input,body.mobile-layout .inspect-controls select{font-size:16px;min-height:44px}
+body.mobile-layout #inspectorView{height:min(42dvh,360px);min-height:180px}
+body.mobile-layout #modelInfo{flex:1 1 100%;overflow-wrap:anywhere;line-height:1.65}
+body.mobile-layout #animationLabel{max-width:none}
+body.mobile-layout #network{width:min(740px,calc(100% - max(12px,var(--safe-left)) - max(12px,var(--safe-right))))}
+body.mobile-layout #network .inspectinner{padding:12px}
+body.mobile-layout .map-tools{flex-wrap:wrap;gap:6px}
+body.mobile-layout .map-tools button,body.mobile-layout .map-read button,body.mobile-layout #callList button{min-height:44px;padding:8px 12px;font-size:13px}
+body.mobile-layout .map-tools small{flex:1 1 100%;margin:0;line-height:1.5}
+body.mobile-layout #callList{gap:6px}
+body.mobile-layout #largeMap{width:min(100%,48dvh);margin:10px auto;touch-action:manipulation}
+body.mobile-layout .map-read{gap:8px;align-items:center;flex-wrap:wrap}
+body.mobile-layout .map-read span{flex:1 1 170px;line-height:1.6}
+body.mobile-layout #callLog{line-height:1.6}
+body.mobile-layout #overlay{padding:max(10px,var(--safe-top)) max(12px,var(--safe-right)) max(10px,var(--safe-bottom)) max(12px,var(--safe-left))}
+body.mobile-layout .dialog{width:min(510px,100%);max-height:calc(100dvh - max(20px,var(--safe-top)) - max(20px,var(--safe-bottom)));overflow-y:auto;overscroll-behavior:contain;padding:20px}
+body.mobile-layout .dialog h2{font-size:26px}
+body.mobile-layout .dialog dl{display:none}
+body.mobile-layout .opts{margin-top:16px;display:grid;grid-template-columns:1fr 1fr}
+body.mobile-layout .opts button{min-height:44px}
+body.mobile-layout .mobile-pause-help{display:block;margin-top:15px}
+body.mobile-layout .mobile-pause-help p{font-size:13px;line-height:1.65}
+body.mobile-layout #touchModeBtn{min-height:44px;width:100%;margin-top:10px;border:1px solid #799c8c;background:#25453e;color:var(--paper);font-size:14px;padding:9px}
+body.mobile-layout #orientationHint{margin-top:8px;color:#e7cda2}
+body.mobile-layout #orientationHint:empty{display:none}
+body.mobile-layout #resume{min-height:48px;margin-top:14px}
+body.mobile-layout #resume span{display:none}
+body.mobile-layout #homeBtn{min-height:44px}
+
+/* Fixed flight HUD. Its controls never turn the game into a scrolling page. */
+body.mobile-layout.flying{height:100dvh;overflow:hidden;overscroll-behavior:none}
+body.mobile-layout #viewport,body.mobile-layout #hud{height:100dvh}
+body.mobile-layout #hud .topbar{
+ top:calc(var(--safe-top) + 6px);left:var(--mobile-left);right:var(--mobile-right);
+ height:48px;padding:0 5px 0 10px;gap:5px;font-size:12px;
+}
+body.mobile-layout .topbar .unit{display:none}
+body.mobile-layout .topbar #location{min-width:0;max-width:none;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body.mobile-layout #course,body.mobile-layout #performance{display:none}
+body.mobile-layout .topbar #wallet{flex-shrink:0;margin:0 104px 0 5px;font-size:12px;white-space:nowrap}
+body.mobile-layout .topbar button{min-width:44px;min-height:44px;padding:4px;font-size:16px}
+body.mobile-layout #mapBtn{font-size:13px}
+body.mobile-layout #touchPanelToggle{
+ display:block;position:fixed;top:calc(var(--safe-top) + 8px);right:calc(var(--mobile-right) + 103px);
+ height:44px;min-height:44px;width:98px;padding:4px;border:1px solid #9ab7a45e;
+ background:#25413c;color:#f0eedb;font-size:11px;line-height:1.3;word-break:keep-all;z-index:3;
+}
+body.mobile-layout .dispatch-msg{
+ top:calc(var(--safe-top) + 62px);left:var(--mobile-left);width:min(370px,calc(100% - 326px - var(--safe-left) - var(--safe-right)));
+ min-width:0;padding:10px 12px 9px;max-height:calc(100dvh - 236px - var(--safe-top) - var(--safe-bottom));
+ overflow-y:auto;overscroll-behavior:contain;pointer-events:auto;
+}
+body.mobile-layout .dispatch-msg .kicker{font-size:9px;letter-spacing:.07em}
+body.mobile-layout .dispatch-msg h2{font-size:20px;line-height:1.35;margin:2px 0 5px}
+body.mobile-layout .dispatch-msg p{font-size:13px;line-height:1.55}
+body.mobile-layout .dispatch-meta{flex-wrap:wrap;gap:3px 10px;font-size:10px;margin-top:6px}
+body.mobile-layout #prog{margin-top:6px}
+body.mobile-layout #fieldKit{
+ top:calc(var(--safe-top) + 62px);bottom:auto;right:var(--mobile-right);
+ width:300px;padding:5px 8px;font-size:12px;
+}
+body.mobile-layout #fieldKitPanel{
+ max-height:calc(100dvh - 276px - var(--safe-top) - var(--safe-bottom));
+ overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;
+}
+body.mobile-layout #fieldKit select{height:44px;min-height:44px;padding:5px;font-size:14px}
+body.mobile-layout .field-row{gap:6px;margin:3px 0}
+body.mobile-layout .field-row button{height:44px;min-height:44px;min-width:44px;padding:5px 9px;font-size:12px}
+body.mobile-layout #fieldKitPanel .field-row label{font-size:11px}
+body.mobile-layout #dispatchTimer{font-size:12px;white-space:nowrap}
+body.mobile-layout #cabinStatus,body.mobile-layout #unitStatus{font-size:11px;line-height:1.6;overflow-wrap:anywhere}
+body.mobile-layout .touch-aim-controls{display:grid;grid-template-columns:repeat(5,minmax(44px,1fr));gap:4px;margin:6px 0}
+body.mobile-layout .touch-aim-controls>span{display:none}
+body.mobile-layout .touch-aim-controls button{height:44px;min-width:44px;border:1px solid #78978b;background:#23433d;color:#f2ead8;font-size:20px}
+body.mobile-layout .touch-aim-controls #recallUnit{font-size:11px}
+body.mobile-layout.touch-panels-collapsed #fieldKitPanel,
+body.mobile-layout.touch-panels-collapsed #instruction{display:none}
+body.mobile-layout.touch-panels-collapsed .dispatch-msg{padding-top:8px;padding-bottom:8px}
+body.mobile-layout.touch-panels-collapsed #objective{margin-bottom:2px}
+body.mobile-layout #quick{display:none}
+body.mobile-layout .instruments{
+ left:50%;right:auto;bottom:var(--touch-bottom);transform:translateX(-50%);
+ padding:5px 0;background:#102326cc;z-index:1;
+}
+body.mobile-layout .instruments>div{min-width:72px;padding:0 9px}
+body.mobile-layout .instruments span{font-size:10px}
+body.mobile-layout .instruments b{font-size:21px;line-height:1.2}
+body.mobile-layout .instruments small{font-size:10px;margin-left:3px}
+body.mobile-layout .lowerleft{left:50%;bottom:calc(var(--touch-bottom) + 61px);transform:translateX(-50%)}
+body.mobile-layout .radarbox{width:120px;height:86px;padding:2px;background:#102326bd}
+body.mobile-layout .radarbox>span{font-size:8px;bottom:3px;left:3px}
+body.mobile-layout #navlabel{font-size:9px;padding:2px;line-height:1.4}
+body.mobile-layout #feedback{bottom:calc(var(--touch-bottom) + 171px);max-width:min(440px,78vw);width:max-content;max-height:80px;overflow-y:auto;font-size:12px;padding:7px 11px;pointer-events:auto;z-index:2}
+body.mobile-layout #beacon span{font-size:11px}
+
+body.touch-controls #touchControls:not([hidden]){display:block;position:absolute;inset:0;pointer-events:none;z-index:2}
+.touch-stick-zone{position:absolute;left:var(--mobile-left);bottom:var(--touch-bottom);width:var(--stick-size);height:calc(var(--stick-size) + 23px)}
+#touchStick{position:relative;width:var(--stick-size);height:var(--stick-size);border-radius:50%;border:1px solid #d5ebdd9c;background:radial-gradient(circle,#17312d7a 0 28%,#17312d35 29% 67%,#17312d85 68%);box-shadow:inset 0 0 0 9px #b8d4c110,0 2px 16px #06181542;pointer-events:auto;touch-action:none;-webkit-user-select:none;user-select:none}
+.touch-stick-axis{position:absolute;pointer-events:none;background:#d2e8d337}
+.touch-stick-axis-x{height:1px;left:13%;right:13%;top:50%}
+.touch-stick-axis-y{width:1px;top:13%;bottom:13%;left:50%}
+#touchKnob{position:absolute;left:50%;top:50%;margin:-24px 0 0 -24px;width:48px;height:48px;border-radius:50%;border:2px solid #e0e8d5cc;background:#c4d9be63;box-shadow:0 3px 10px #031a1645;pointer-events:none;will-change:transform}
+.touch-hint{display:block;position:absolute;bottom:0;left:0;right:0;text-align:center;font-size:11px;font-weight:700;line-height:20px;color:#ecf3dd;text-shadow:0 1px 4px #041c19}
+.touch-flight-buttons{position:absolute;right:var(--mobile-right);bottom:calc(var(--touch-bottom) + 15px);display:grid;grid-template-columns:repeat(3,var(--flight-button));grid-template-rows:repeat(2,var(--flight-button));gap:6px;pointer-events:none}
+.touch-flight-buttons button{min-height:44px;min-width:44px;padding:3px;border:1px solid #d2e5d08c;border-radius:12px;background:#17332ccc;color:#f5f0db;font-size:12px;font-weight:700;line-height:1.25;box-shadow:0 2px 10px #071b163b;pointer-events:auto;touch-action:none;user-select:none;-webkit-user-select:none}
+.touch-flight-buttons #touchLiftUp,.touch-flight-buttons #touchLiftDown{border-color:#f5ce8ea8;background:#4c452bd4}
+.touch-flight-buttons #touchUse{background:#d6b47ce8;color:#142a22}
+.touch-flight-buttons button.is-held,#touchStick.is-held,.touch-aim-controls button.is-held{border-color:#a5f5cf;background:#3d8068e8;color:#fff;box-shadow:0 0 0 2px #8fe5ba40}
+
+@media (max-width:700px){
+ body.mobile-layout .hangar-grid{grid-template-columns:1fr}
+ body.mobile-layout .aircard{height:210px;min-height:210px}
+ body.mobile-layout .aircard .strap{padding:14px 20px}
+ body.mobile-layout .airfoot{padding:34px 20px 14px}
+ body.mobile-layout .airfoot h2{font-size:23px}
+ body.mobile-layout .brand>span:not(.mark){font-size:11px}
+ body.mobile-layout .intro{margin-top:16px}
+ body.mobile-layout .mobile-install{flex-direction:column;align-items:stretch;gap:10px}
+ body.mobile-layout #installApp{align-self:start}
+ body.mobile-layout #shopItems{grid-template-columns:1fr}
+ body.mobile-layout .shop-toolbar{align-items:start;flex-direction:column}
+ body.mobile-layout .shop-tabs{width:100%}
+ body.mobile-layout .shop-tabs button{flex:1}
+ body.mobile-layout .inspect-controls label,body.mobile-layout .inspect-controls label:last-child{flex:1 1 100%}
+ body.mobile-layout .shop-inner,body.mobile-layout .inspectinner{padding:13px}
+}
+
+@media (orientation:portrait){
+ body.mobile-layout{--stick-size:132px;--flight-button:50px}
+ body.mobile-layout #hud{display:flex;flex-direction:column;gap:7px;padding:calc(var(--safe-top) + 62px) var(--mobile-right) 0 var(--mobile-left)}
+ body.mobile-layout .dispatch-msg{position:relative;left:auto;top:auto;width:100%;flex-shrink:0;max-height:25dvh}
+ body.mobile-layout #fieldKit{position:relative;right:auto;top:auto;width:100%;flex-shrink:0;padding:4px 9px}
+ body.mobile-layout #fieldKitPanel{max-height:24dvh}
+ body.mobile-layout #fieldKit select{font-size:16px}
+ body.mobile-layout .field-row{gap:7px}
+ body.mobile-layout .touch-aim-controls{grid-template-columns:repeat(5,minmax(44px,1fr))}
+ body.mobile-layout .instruments{bottom:calc(var(--touch-bottom) + 163px);width:max-content}
+ body.mobile-layout .instruments>div{min-width:88px;padding:0 12px}
+ body.mobile-layout .lowerleft{left:var(--mobile-left);bottom:calc(var(--touch-bottom) + 220px);transform:none}
+ body.mobile-layout .radarbox{width:96px;height:70px}
+ body.mobile-layout #navlabel{font-size:8px}
+ body.mobile-layout #feedback{bottom:calc(var(--touch-bottom) + 222px);left:auto;right:var(--mobile-right);transform:none;width:calc(100% - 128px);max-width:360px;max-height:76px}
+ body.mobile-layout .topbar #wallet{font-size:11px;margin-left:0;margin-right:96px}
+ body.mobile-layout #touchPanelToggle{right:calc(var(--mobile-right) + 102px);width:92px;font-size:10px}
+ body.mobile-layout .topbar #location{font-size:10px;line-height:1.4;white-space:normal;max-height:30px;overflow:hidden}
+}
+
+@media (orientation:landscape) and (max-height:500px){
+ body.mobile-layout{--stick-size:112px;--flight-button:48px}
+ body.mobile-layout .home-inner{padding-top:max(12px,var(--safe-top))}
+ body.mobile-layout .hangar-grid{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}
+ body.mobile-layout .aircard{height:280px;min-height:280px;align-self:start;position:sticky;top:max(12px,var(--safe-top))}
+ body.mobile-layout .intro h1{font-size:30px}
+ body.mobile-layout .intro{margin:12px 0}
+ body.mobile-layout .intro p{font-size:13px}
+ body.mobile-layout #dispatch{padding:14px}
+ body.mobile-layout .dispatch-msg{width:calc(100% - 318px - var(--mobile-left) - var(--mobile-right));max-width:360px;max-height:calc(100dvh - 213px - var(--safe-top) - var(--safe-bottom));padding:8px 10px}
+ body.mobile-layout .dispatch-msg h2{font-size:18px}
+ body.mobile-layout .dispatch-msg p{font-size:12px;line-height:1.5}
+ body.mobile-layout #fieldKit{width:300px}
+ body.mobile-layout #fieldKitPanel{max-height:calc(100dvh - 266px - var(--safe-top) - var(--safe-bottom))}
+ body.mobile-layout .instruments>div{min-width:66px;padding:0 8px}
+ body.mobile-layout .instruments b{font-size:19px}
+ body.mobile-layout .instruments span{font-size:9px}
+ body.mobile-layout .lowerleft{bottom:calc(var(--touch-bottom) + 55px)}
+ body.mobile-layout .radarbox{width:100px;height:70px}
+ body.mobile-layout #navlabel{font-size:8px}
+ body.mobile-layout #feedback{bottom:calc(var(--touch-bottom) + 147px);max-height:52px;font-size:11px;max-width:40vw}
+ body.mobile-layout .touch-flight-buttons{bottom:calc(var(--touch-bottom) + 8px)}
+ body.mobile-layout #shopItems{grid-template-columns:repeat(2,minmax(0,1fr))}
+ body.mobile-layout .shop-toolbar{flex-direction:row;align-items:center}
+ body.mobile-layout .shop-tabs{width:auto}
+ body.mobile-layout #network{width:calc(100% - max(12px,var(--safe-left)) - max(12px,var(--safe-right)))}
+ body.mobile-layout #network .inspectinner{display:grid;grid-template-columns:minmax(210px,1fr) minmax(220px,1fr);gap:5px 14px;padding:10px 12px}
+ body.mobile-layout #network .inspecthead{grid-column:1/-1}
+ body.mobile-layout #network .map-tools{grid-column:1;grid-row:2;margin:0}
+ body.mobile-layout #network #callList{grid-column:1;grid-row:3;margin:0;align-content:start}
+ body.mobile-layout #network #largeMap{grid-column:2;grid-row:2/6;width:min(100%,calc(100dvh - 100px));margin:0 auto;align-self:start}
+ body.mobile-layout #network .map-read{grid-column:1;grid-row:4}
+ body.mobile-layout #network #callLog{grid-column:1;grid-row:5;margin:0}
+ body.mobile-layout .dialog{padding:16px;max-height:calc(100dvh - 18px - var(--safe-top) - var(--safe-bottom))}
+ body.mobile-layout .dialog h2{font-size:23px;margin-bottom:8px}
+ body.mobile-layout .mobile-pause-help{margin-top:10px}
+}
+
+@media (orientation:landscape) and (max-width:740px){
+ body.mobile-layout .dispatch-msg{width:calc(100% - 300px - var(--mobile-left) - var(--mobile-right))}
+ body.mobile-layout #fieldKit{width:282px;padding-left:6px;padding-right:6px}
+ body.mobile-layout .topbar #location{font-size:11px}
+ body.mobile-layout .dispatch-meta{font-size:9px}
+}
+
+@media (orientation:portrait) and (max-height:720px){
+ body.mobile-layout{--stick-size:112px;--flight-button:46px}
+ body.mobile-layout .dispatch-msg{max-height:23dvh}
+ body.mobile-layout #fieldKitPanel{max-height:min(21dvh,calc(77dvh - 340px - var(--safe-top) - var(--safe-bottom)));min-height:44px}
+ body.mobile-layout #fieldKitPanel .field-row{margin-top:1px;margin-bottom:1px}
+ body.mobile-layout .touch-aim-controls{margin-top:2px;margin-bottom:2px}
+ body.mobile-layout .lowerleft{display:none}
+ body.mobile-layout .instruments{bottom:calc(var(--touch-bottom) + 139px)}
+ body.mobile-layout #feedback{bottom:calc(var(--touch-bottom) + 191px);left:50%;right:auto;transform:translateX(-50%);width:90%;max-width:90%;max-height:48px}
+}
+
+@media (min-width:900px) and (min-height:600px){
+ body.mobile-layout{--stick-size:154px;--flight-button:58px;--touch-bottom:max(16px,var(--safe-bottom))}
+ body.mobile-layout #fieldKitPanel{max-height:31dvh}
+ body.mobile-layout .dispatch-msg{max-height:31dvh}
+ body.mobile-layout .touch-flight-buttons button{font-size:13px}
+ body.mobile-layout .radarbox{width:146px;height:104px}
+ body.mobile-layout .lowerleft{bottom:calc(var(--touch-bottom) + 66px)}
+ body.mobile-layout #feedback{bottom:calc(var(--touch-bottom) + 196px)}
+}

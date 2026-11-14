@@ -1,0 +1,1075 @@
+/* Modern artwork, laid out like the Korean release's dashboard and hangar. */
+:root {
+  --classic-yellow: #ffdf72;
+  --classic-ink: #19191a;
+  --classic-light: #f3efdf;
+  --classic-metal: linear-gradient(168deg, #646463, #424246 26%, #333337 72%, #252527);
+  --classic-button: linear-gradient(#646465, #4d4d50 46%, #3a3a3d 52%, #49494b);
+  --classic-edge: inset 1px 1px #9b9890, inset -2px -2px #232326, 0 1px 3px #0009;
+  --classic-stripe: repeating-linear-gradient(132deg, #403c35 0 8px, #c69234 8px 15px, #dfa94d 15px 17px, #393630 17px 20px);
+  --classic-screw: radial-gradient(circle at 45% 38%,#c2bfb3 0 1px,#73736f 1.4px 2px,#252527 2.4px 3.1px,transparent 3.5px);
+  --classic-display: #17181a;
+}
+
+/* Desktop retains the original 640 × 480 frame. On touch screens the scene
+   extends under the edge controls and the camera fits the mobile viewport. */
+body.flying {background:#090b0c}
+#flightFrame {
+  position:fixed;inset:0;margin:auto;
+  width:min(100vw,calc(100dvh * 4 / 3));height:min(75vw,100dvh);
+  container:flight / size;contain:layout paint;visibility:hidden;
+}
+body.flying #flightFrame {visibility:visible}
+#flightFrame #viewport,#flightFrame #hud {position:absolute;inset:0}
+#flightFrame #viewport {z-index:0}
+body.flying #viewport canvas {pointer-events:auto;touch-action:none}
+#viewport #beacon {z-index:1}
+body.on-foot #viewport #beacon {display:none}
+body.touch-controls #cockpitView {display:none}
+#hud #cockpitView {white-space:nowrap}
+body.mobile-layout #flightFrame {width:100%;height:100dvh}
+body.mobile-layout #flightFrame #viewport {width:100%;height:100%}
+
+/* The display panels use small silver fasteners and a bevel. No artwork is
+   raster-scaled. Needles and the map remain live DOM/canvas components. */
+#hud .topbar,
+#hud #fieldKit,
+#hud .radarbox,
+#hud .instruments,
+#hud .status-bank {
+  color: var(--classic-light);
+  border: 2px solid #222224;
+  background-color: #37373a;
+  background-image: var(--classic-screw), var(--classic-screw), var(--classic-metal);
+  background-size: 7px 7px, 7px 7px, auto;
+  background-repeat: no-repeat;
+  background-position: 3px 3px, calc(100% - 3px) calc(100% - 3px), center;
+  box-shadow: var(--classic-edge);
+  text-shadow: 0 1px #181819;
+}
+#hud .topbar {border-radius: 3px; color: #e8e7dc}
+#hud .topbar .unit {color: #b7dec6}
+#hud .topbar em {background:#9ad4ae; box-shadow:0 0 4px #9ad4ae66}
+#hud .topbar #wallet {color: #efdab1; font-variant-numeric:tabular-nums}
+#hud .topbar button,
+#hud .field-row button,
+#hud .touch-aim-controls button,
+#hud .status-bank button,
+#hud #radioPanel button,
+#hud .lowerleft button,
+#hud #touchPanelToggle {
+  color: #f8f2d9;
+  background: var(--classic-button);
+  border: 1px solid #28282a;
+  border-radius: 3px;
+  box-shadow: inset 1px 1px #92918b, inset -1px -1px #242426;
+  font-weight: 650;
+}
+#hud button:active,
+#hud button[aria-pressed="true"] {
+  background: #3f3d35;
+  box-shadow: inset 1px 1px 3px #131415;
+  color: #ffe692;
+}
+#hud .dispatch-msg {
+  background: linear-gradient(90deg, #111112b0, #10101166 78%, transparent);
+  color: #fff;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+#hud .dispatch-msg .kicker {color:#d1c5a5; letter-spacing:.06em}
+#hud .dispatch-msg h2 {color:#fff0ba}
+#hud #instruction {
+  color: var(--classic-yellow);
+  font-weight: 700;
+  text-shadow: 1px 1px 0 #18160f, 0 1px 4px #000;
+}
+#hud .dispatch-meta {color: #f0e4c5}
+#hud #prog {background: #76726972}
+#hud #prog div {background:#e9b749}
+#hud #feedback {
+  color: #fff;
+  background: #151517bc;
+  border: 0;
+  box-shadow: none;
+  text-shadow: 0 1px 2px #000;
+  white-space: pre-line;
+  text-align: left;
+}
+#hud #fieldKit {
+  border-right: 5px solid #4d4d50;
+  border-radius: 7px 0 0 9px;
+}
+#hud #fieldKit select,
+#hud #station {
+  background: #252527;
+  color: #ffdd87;
+  border: 1px solid #77746b;
+  border-radius: 2px;
+  box-shadow: inset 1px 1px 3px #111;
+}
+#hud #fieldKit select option,
+#hud #station option {background: #242427; color: #f7e5b5}
+#hud #fieldKit label,
+#hud #engineState {color: #e0ddce}
+#hud #dispatchTimer {color: #ffda7b}
+#hud #cabinStatus {color: #d4d5c9}
+#hud #unitStatus {color: #f2d798}
+#hud #radioPanel {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  margin: 7px 0;
+  padding: 5px 6px;
+  background: #262629;
+  border: 1px solid #6b6864;
+  box-shadow: inset 1px 1px #141415;
+}
+#hud #radioPanel label {font: 600 10px var(--mono); color:#eae8d7}
+#hud #station {flex:1; min-width:70px; width:auto; padding:3px 5px}
+#hud #radioTrack {flex:1 1 100%; min-width:0; color:#e4d8ad; font-size:11px; overflow-wrap:anywhere}
+#hud #radioToggle {padding:3px 8px; font-size:12px}
+#hud .status-bank {padding:9px 11px; border-radius:5px}
+#hud .status-bank>div {min-width:0}
+#hud .status-bank button {pointer-events:auto; padding:5px 8px; font-size:12px}
+#hud #cashReading {
+  display: inline-block;
+  padding: 1px 7px;
+  background: var(--classic-display);
+  color: #faf4dd;
+  border: 1px solid #211f20;
+  box-shadow: inset 1px 1px 3px #080808;
+  font: bold 18px/1.25 Consolas, monospace;
+  letter-spacing: .06em;
+}
+#hud #damage {width:76px; height:15px; vertical-align:middle}
+#hud #damage::-webkit-meter-bar {background:#232426; border:1px solid #131415; border-radius:1px}
+#hud #damage::-webkit-meter-optimum-value {background:repeating-linear-gradient(90deg,#caa84e 0 17%,#29282a 17% 20%)}
+#hud #damage::-webkit-meter-suboptimum-value {background:repeating-linear-gradient(90deg,#df974c 0 17%,#29282a 17% 20%)}
+#hud #damage::-webkit-meter-even-less-good-value {background:repeating-linear-gradient(90deg,#dc6950 0 17%,#29282a 17% 20%)}
+#hud #damageValue {font:12px Consolas,monospace; color:#f2deae}
+#hud .radarbox {
+  padding: 7px;
+  background-image: var(--classic-screw), var(--classic-metal);
+  background-size:7px 7px,auto;
+  background-position:3px 3px,center;
+  border-radius: 10px 5px 0 0;
+}
+#hud .radarbox canvas {border:2px solid #171719; background:#131314}
+#hud .radarbox>b,
+#hud .radarbox>span {color:#f0d67e; background:#1c1c1ddd}
+#hud #navlabel {
+  background:#1c1c1f;
+  color:#f6d57e;
+  border: 3px solid #505054;
+  border-top: 0;
+  box-shadow: inset 1px 1px 3px #080808;
+  letter-spacing:.035em;
+}
+#hud .lowerleft button {pointer-events:auto}
+#hud #radarRange {color:#e9dab5; font:11px Consolas,monospace}
+#hud #quick {
+  color:#ede6d4;
+  background:#19191bbe;
+  border:1px solid #8c86795c;
+  box-shadow:none;
+}
+
+/* In a full cockpit the three large dials share one rail. Each pointer
+   rotates about the exact centre of its own SVG dial. */
+body:not(.mobile-layout) #hud {
+  --dial: clamp(86px, 7.9cqw, 126px);
+  --rail-height: calc(var(--dial) + 37px);
+  --cash-bank-width: clamp(154px, 13cqw, 214px);
+  --radar-width: clamp(180px, 16cqw, 265px);
+}
+body:not(.mobile-layout) #hud::before {
+  content:"";
+  position:absolute;
+  inset:auto 0 0;
+  height:var(--rail-height);
+  background: var(--classic-stripe) 0 0 / 100% 5px no-repeat,
+              repeating-linear-gradient(92deg,#434346 0 2px,#404043 2px 4px);
+  border-top:3px solid #1b1b1d;
+  box-shadow:inset 0 8px 7px #0005,0 -2px 6px #0006;
+  pointer-events:none;
+}
+body:not(.mobile-layout) #hud .topbar {top:7px; left:10px; right:10px; height:35px; gap:13px; padding:0 9px}
+body:not(.mobile-layout) #hud .topbar button {min-width:34px; height:26px; font-size:13px}
+body:not(.mobile-layout) #hud .dispatch-msg {
+  top:49px;
+  left:12px;
+  width:min(810px,calc(100% - 342px));
+  padding:5px 12px 6px;
+}
+body:not(.mobile-layout) #hud .dispatch-msg .kicker {font-size:9px; line-height:1.25}
+body:not(.mobile-layout) #hud .dispatch-msg h2 {font-size:16px; margin:2px 0; letter-spacing:0}
+body:not(.mobile-layout) #hud #instruction {font-size:15px; line-height:1.45}
+body:not(.mobile-layout) #hud .dispatch-meta {justify-content:flex-start; gap:16px; margin-top:3px; font-size:11px}
+body:not(.mobile-layout) #hud #prog {height:1px; max-width:220px; margin-top:4px}
+body:not(.mobile-layout) #hud #fieldKit {top:50px; right:0; bottom:auto; width:278px; padding:9px 11px}
+body:not(.mobile-layout) #hud #fieldKitPanel {max-height:calc(100cqh - var(--rail-height) - 195px); overflow-y:auto; scrollbar-width:thin}
+body:not(.mobile-layout) #hud .lowerleft {
+  left:auto;
+  right:7px;
+  bottom:6px;
+  width:var(--radar-width);
+  transform:none;
+}
+body:not(.mobile-layout) #hud .radarbox {width:100%; height:calc(var(--radar-width) * .70)}
+body:not(.mobile-layout) #hud #navlabel {font-size:11px}
+body:not(.mobile-layout) #hud .status-bank {
+  position:fixed;
+  left:8px;
+  bottom:6px;
+  width:var(--cash-bank-width);
+  max-height:calc(var(--rail-height) - 12px);
+  overflow:auto;
+  pointer-events:auto;
+  font-size:12px;
+}
+body:not(.mobile-layout) #hud .instruments {
+  left:calc(var(--cash-bank-width) + 16px);
+  bottom:5px;
+  right:auto;
+  height:calc(var(--rail-height) - 10px);
+  padding:0 5px;
+  align-items:stretch;
+  border-radius:5px;
+}
+body:not(.mobile-layout) #hud .instruments>div {
+  min-width:0;
+  position:relative;
+  width:calc(var(--dial) + 9px);
+  padding:0;
+  text-align:center;
+  align-self:stretch;
+  border-left:1px solid #252526;
+}
+body:not(.mobile-layout) #hud .instruments>div:has(#fuel) {--face:url("./art/classic-gauge-fuel.svg")}
+body:not(.mobile-layout) #hud .instruments>div:has(#alt) {--face:url("./art/classic-gauge-alt.svg")}
+body:not(.mobile-layout) #hud .instruments>div:has(#spd) {--face:url("./art/classic-gauge-speed.svg")}
+body:not(.mobile-layout) #hud .instruments>div:is(:has(#fuel),:has(#alt),:has(#spd))::before {
+  content:"";
+  position:absolute;
+  top:4px;
+  left:50%;
+  width:var(--dial);
+  height:var(--dial);
+  transform:translateX(-50%);
+  background:var(--face) center/contain no-repeat;
+}
+body:not(.mobile-layout) #hud .instruments>div:is(:has(#fuel),:has(#alt),:has(#spd))::after {
+  content:"";
+  position:absolute;
+  left:50%;
+  top:calc(4px + var(--dial) * .13);
+  width:3px;
+  height:calc(var(--dial) * .37);
+  transform-origin:center bottom;
+  transform:translateX(-50%) rotate(var(--gauge-angle,0deg));
+  background:linear-gradient(#f7f4df 0 70%,#cfc4aa);
+  clip-path:polygon(50% 0,100% 98%,0 100%);
+  pointer-events:none;
+}
+body:not(.mobile-layout) #hud .instruments>div>span {
+  position:absolute;
+  bottom:2px;
+  left:0;
+  right:0;
+  color:#dbd8c9;
+  font-size:9px;
+}
+body:not(.mobile-layout) #hud .instruments>div>b {
+  display:inline-block;
+  position:relative;
+  top:calc(var(--dial) - 1px);
+  padding:0 3px;
+  background:#1d1d1f;
+  color:#fff4d3;
+  font:700 14px/1.15 Consolas,monospace;
+}
+body:not(.mobile-layout) #hud .instruments>div>small {
+  position:relative;
+  top:calc(var(--dial) - 1px);
+  margin-left:2px;
+  font-size:10px;
+  color:#e7e0c8;
+}
+body:not(.mobile-layout) #hud .instruments>div:has(#hdg) {
+  width:clamp(60px,6cqw,90px);
+  align-self:center;
+  height:55px;
+  border:2px solid #222326;
+  border-radius:5px;
+  background:linear-gradient(#1d1e20,#353538 55%,#17181a);
+}
+body:not(.mobile-layout) #hud .instruments>div:has(#hdg)>b,
+body:not(.mobile-layout) #hud .instruments>div:has(#hdg)>small {top:4px; font-size:20px; line-height:1.2}
+body:not(.mobile-layout) #hud #quick {bottom:calc(var(--rail-height) + 9px)}
+body:not(.mobile-layout) #hud #feedback {left:24px; top:155px; bottom:auto; transform:none; max-width:min(680px,65cqw); font-size:13px}
+
+#hud .aircraft-faces {position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);pointer-events:none}
+body:not(.mobile-layout) #hud .instruments[data-aircraft]>div {opacity:0}
+#airframeSystems {font:600 11px/1.6 Consolas,monospace;color:var(--panel-accent,#ead4a2);border-left:2px solid currentColor;padding-left:6px}
+body.on-foot #airframeSystems {display:none}
+body.mobile-layout #hud .aircraft-faces {display:none}
+body.mobile-layout #hud .instruments[data-aircraft] {border-top:2px solid var(--panel-accent);background:var(--panel-metal)}
+body.mobile-layout #hud .instruments[data-aircraft]>div>b {color:var(--panel-accent)}
+body.mobile-layout #hud .instruments[data-aircraft]>div>span {white-space:nowrap;letter-spacing:-.03em}
+body.mobile-layout #hud .instruments [data-face="column"],
+body.mobile-layout #hud .instruments [data-face="tape"] {background:linear-gradient(to right,var(--panel-accent) var(--reading),transparent var(--reading)) left bottom/100% 2px no-repeat,#161d1c}
+body.mobile-layout #hud .instruments [data-face="drum"] {background:#191e1c;border-radius:4px}
+body.mobile-layout #hud .instruments [data-face="arc"] {border-top:1px solid var(--panel-accent);border-radius:12px 12px 0 0}
+#hud #radioMessage {
+  display:block;
+  color:#ffe16a;
+  font-weight:700;
+  line-height:1.4;
+  text-shadow:1px 1px 1px #242015,0 1px 3px #000;
+}
+#hud #radioMessage:empty,#hud #eventLog:empty {display:none}
+#hud #eventLog {
+  color:#faf9f1;
+  font-size:13px;
+  line-height:1.4;
+  white-space:pre-line;
+  text-shadow:0 1px 3px #000;
+}
+#hud #toolRack {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:5px;
+  margin-bottom:6px;
+}
+#hud #toolRack:empty {display:none}
+#hud #toolRack>button {
+  display:flex;
+  align-items:center;
+  min-height:34px;
+  gap:6px;
+  min-width:0;
+  padding:4px 6px;
+  border:2px solid #232326;
+  border-radius:4px;
+  box-shadow:inset 1px 1px #777773,inset -1px -1px #19191a;
+  background:repeating-linear-gradient(0deg,transparent 0 7px,#12121455 7px 8px),#373739;
+  color:#f9e1a1;
+  font-size:12px;
+  text-align:left;
+  pointer-events:auto;
+}
+#toolRack>button::before,.equipment-card::before {
+  content:"";
+  display:inline-block;
+  flex:0 0 29px;
+  width:29px;
+  height:26px;
+  background-image:url("./art/classic-equipment.svg");
+  background-size:500% 100%;
+  background-repeat:no-repeat;
+}
+[data-equipment="bucket"]::before {background-position:0% 50%}
+[data-equipment="cannon"]::before {background-position:25% 50%}
+[data-equipment="megaphone"]::before {background-position:50% 50%}
+[data-equipment="harness"]::before {background-position:75% 50%}
+[data-equipment="gas"]::before {background-position:100% 50%}
+#hud #toolRack>button[aria-pressed="true"] {outline:1px solid #f4d26b; outline-offset:-3px; background-color:#504735}
+#hud #seatRoster {display:flex; flex-wrap:wrap; gap:4px; align-items:center; color:#e4ddcb; font-size:11px}
+#hud #seatRoster img {height:32px; width:26px; object-fit:contain; background:#252528; border:1px solid #8d8980}
+#hud .walk-actions {pointer-events:auto}
+#hud .walk-actions button {
+  min-height:34px;
+  padding:4px 9px;
+  background:var(--classic-button);
+  color:#ffedbb;
+  border:1px solid #77746f;
+  box-shadow:var(--classic-edge);
+}
+body:not(.mobile-layout) #hud .walk-actions {
+  position:fixed;
+  left:12px;
+  bottom:calc(var(--rail-height) + 8px);
+  display:flex;
+  gap:5px;
+}
+body.on-foot #hud::before,
+body.on-foot #hud .instruments,
+body.on-foot #hud .lowerleft,
+body.on-foot #hud #fieldKit,
+body.on-foot #hud .status-bank,
+body.on-foot #hud #quick,
+body.on-foot #hud #beacon {display:none}
+body.on-foot #hud .dispatch-msg {
+  background:linear-gradient(90deg,#12121391,transparent);
+}
+body.on-foot:not(.mobile-layout) #hud .walk-actions {bottom:15px}
+body.on-foot #hud .topbar {
+  justify-content:flex-end;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+}
+body.on-foot #hud .topbar .unit,
+body.on-foot #hud .topbar #location,
+body.on-foot #hud .topbar #course,
+body.on-foot #hud .topbar #wallet,
+body.on-foot #hud .topbar #performance,
+body.on-foot #hud .dispatch-msg h2,
+body.on-foot #hud .dispatch-meta,
+body.on-foot #hud #prog,
+body.on-foot #hud .touch-flight-buttons button:not(#touchUse) {display:none}
+body.on-foot #hud #touchUse {grid-column:3; grid-row:2}
+
+/* On touch devices the active hand controls retain the proven safe-area
+   positions from mobile.css. The compact numeric gauges share one rail. */
+body.mobile-layout #hud .topbar,
+body.mobile-layout #hud #fieldKit {background-color:#3c3c3e}
+body.mobile-layout #hud #fieldKit {border-right-width:2px}
+body.mobile-layout #hud .instruments {padding:4px 0}
+body.mobile-layout #hud .instruments>div {
+  min-width:0;
+  width:clamp(48px,16.5vw,72px);
+  padding:0 5px;
+  text-align:center;
+  border-color:#72716d;
+}
+body.mobile-layout #hud .instruments span {color:#dedaca}
+body.mobile-layout #hud .instruments small {color:#d6ceae}
+body.mobile-layout #hud .instruments b {color:#ffedbe; font-variant-numeric:tabular-nums}
+body.mobile-layout #hud .dispatch-msg {background:#19191bc9}
+body.mobile-layout #hud #eventLog {font-size:11px}
+body.mobile-layout #hud #radioMessage {font-size:12px}
+body.mobile-layout #hud #toolRack>button,
+body.mobile-layout #hud .walk-actions button {min-height:44px}
+body.mobile-layout #hud .radarbox {padding:3px}
+body.mobile-layout #hud #navlabel {border-width:2px}
+body.mobile-layout #hud #radioPanel {margin:4px 0; padding:4px}
+body.mobile-layout #hud .status-bank {position:static; width:auto; padding:5px 7px; font-size:11px}
+body.mobile-layout #hud #cashReading {font-size:13px}
+body.mobile-layout #hud #radioPanel select {font-size:14px; flex-basis:100px}
+body.mobile-layout #hud .lowerleft #radarOut,
+body.mobile-layout #hud .lowerleft #radarIn {min-width:44px; min-height:44px}
+body.mobile-layout .touch-flight-buttons button {background:#39393dd9; border-color:#ccc6acb8; color:#fff1cf}
+body.mobile-layout .touch-flight-buttons #touchLiftUp,
+body.mobile-layout .touch-flight-buttons #touchLiftDown {background:#5e5033e5; border-color:#dab468}
+body.mobile-layout .touch-flight-buttons #touchUse {background:#e1bc78ec; color:#292519}
+body.mobile-layout .touch-flight-buttons button.is-held {background:#56523ce8; border-color:#ffe08a}
+body.mobile-layout #touchStick {border-color:#d3c8a3b8; background-color:#28272b50}
+body.mobile-layout #touchKnob {background:#d8c79978; border-color:#f0e2bebf}
+body.mobile-layout #hud .walk-actions {display:flex; flex-wrap:wrap; gap:4px}
+
+/* Steel console, warm clerestory light and a pinned dispatch sheet carry
+   the hangar palette through the existing HD aircraft previews. */
+#hangar {
+  background-color:#27292b;
+  background-image:
+    linear-gradient(116deg,transparent 36%,#e6cda714 37%,#e7d7bc09 43%,transparent 44%),
+    repeating-linear-gradient(90deg,transparent 0 103px,#13171c55 104px 108px,transparent 110px 200px),
+    linear-gradient(#24292e,#3c3936 52%,#242424);
+}
+#hangar .brand {
+  border-bottom:3px solid #262628;
+  box-shadow:0 1px #79756c;
+}
+#hangar .brand>b {
+  font:italic 900 26px/1.1 Arial,sans-serif;
+  color:#f4efdf;
+  letter-spacing:.025em;
+}
+#hangar .brand .mark {color:#edb653}
+#hangar .brand .radio {color:#d3d5cc}
+#hangar .intro .kicker,#hangar .airfoot small {color:#e5d0a4}
+#hangar .intro h1 {color:#f6efdf; letter-spacing:-.04em}
+#hangar .intro p {color:#d4d1c9}
+#hangar .aircard {
+  border:5px solid #343436;
+  border-radius:4px;
+  box-shadow:var(--classic-edge);
+  background:#40484a;
+}
+#hangar .aircard::before,#hangar .aircard::after {border-color:#e4bf74}
+#hangar .airfoot {background:linear-gradient(transparent,#222327ee)}
+#hangar .airfoot>span {color:#f2d18a}
+#hangar #dispatch {
+  border:3px solid #272729;
+  border-top-width:5px;
+  border-radius:4px;
+  box-shadow:var(--classic-edge);
+  background:var(--classic-stripe) 0 0 / 100% 5px no-repeat,var(--classic-metal);
+  color:#f2eddd;
+}
+#hangar #dispatch .dark,
+#hangar #dispatch label {color:#c9bc9d}
+#hangar #dispatch label strong {color:#f1eddf}
+#hangar #dispatch select {
+  border:1px solid #939189;
+  border-radius:2px;
+  color:#232421;
+  background:#ebe7d9;
+}
+#hangar #start {
+  border:1px solid #242427;
+  border-left:4px solid #d7a848;
+  border-radius:3px;
+  background:var(--classic-button);
+  color:#fff0c7;
+  box-shadow:var(--classic-edge);
+}
+#hangar #start span {color:#f6ce70}
+#hangar #menuInfo {color:#d3cdbf}
+#hangar .career-strip {
+  background:var(--classic-screw) 4px 4px / 7px 7px no-repeat,var(--classic-metal);
+  border:2px solid #262628;
+  border-radius:4px;
+  box-shadow:var(--classic-edge);
+}
+#hangar .career-strip small,#hangar #ownedKit {color:#d7cebc}
+#hangar #cashBalance {color:#fae098; background:#252526; padding:2px 8px}
+#hangar #openShop,#hangar #inspect,#hangar #installApp,#hangar #openSoundEditor,
+#overlay .opts button,#overlay #homeBtn,#overlay #touchModeBtn {
+  color:#ffedc8;
+  border:1px solid #242426;
+  border-radius:3px;
+  background:var(--classic-button);
+  box-shadow:var(--classic-edge);
+}
+#hangar footer {border-color:#77736d; color:#d1cabd}
+#hangar #openSoundEditor {padding:5px 14px;font:600 12px 'Malgun Gothic',sans-serif}
+#pauseContents .opts {flex-wrap:wrap}
+#soundEditor {
+  width:min(600px,calc(100% - 24px));
+  max-height:calc(100dvh - 24px);
+  margin:auto;padding:0;overflow:auto;overscroll-behavior:contain;
+  color:#292922;color-scheme:light;background:#eeece1;
+  border:4px solid #57564f;border-radius:6px;box-shadow:0 6px 30px #0009;
+}
+#soundEditor::backdrop {background:#111214d9}
+.sound-sheet {padding:20px;background:var(--classic-stripe) 0 0 / 100% 4px no-repeat}
+.sound-sheet .inspecthead {gap:12px;padding-bottom:10px;border-bottom:1px solid #a29c8b}
+.sound-sheet h2 {font-size:24px;line-height:1.3;letter-spacing:-.04em}
+.sound-sheet p {font-size:13px;overflow-wrap:anywhere}
+#soundStorageNote {margin-top:9px;color:#565246}
+#radioDemo {margin-top:8px}
+.sound-sheet .voice-mode {margin-top:12px}
+.sound-sheet .sound-hint {margin:8px 0;color:#565246}
+.sound-filters {display:grid;grid-template-columns:minmax(120px,1fr) minmax(0,1.6fr);gap:12px;margin:16px 0 10px}
+.sound-sheet label {display:block;min-width:0;font-size:13px;font-weight:650}
+.sound-sheet select,.sound-sheet input[type="search"] {
+  width:100%;min-width:0;margin-top:4px;padding:8px;
+  border:1px solid #918b7b;border-radius:2px;background:#fffef8;color:#252620;font:inherit;
+}
+.sound-sheet input:focus-visible {outline:3px solid #365b96;outline-offset:2px}
+#soundCount {float:right;font-weight:400;color:#58564b}
+#soundDetail {margin-top:16px;padding:14px;border:1px solid #aaa595;background:#faf9f3}
+#soundLabel {margin:0 0 4px;font-size:18px;line-height:1.45;overflow-wrap:anywhere}
+#soundSource {color:#565246}
+.sound-actions {display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.sound-edit-actions {border-top:1px solid #ccc6b8;padding-top:12px}
+.sound-sheet button {
+  min-height:36px;padding:6px 12px;border:1px solid #28282a;border-radius:3px;
+  color:#fff4d7;background:var(--classic-button);box-shadow:var(--classic-edge);font:600 13px 'Malgun Gothic',sans-serif;
+}
+.sound-sheet #replaceSound {background:#d6ae67;color:#24211b;box-shadow:inset 1px 1px #ffe3a5,inset -1px -1px #8a6a35}
+#soundNotice {min-height:1.5em;margin-top:8px;color:#6c4410}
+#soundNotice[data-error] {color:#9a281d}
+@media(max-width:460px) {
+  .sound-sheet {padding:15px}
+  .sound-filters {grid-template-columns:1fr;gap:8px;margin-top:12px}
+}
+@media(pointer:coarse) {
+  .sound-sheet button,.sound-sheet select,.sound-sheet input {min-height:44px}
+  .sound-sheet select,.sound-sheet input[type="search"] {font-size:16px}
+}
+#overlay .dialog,#serviceDialog {
+  color:#f6f0db;
+  border:4px solid #262629;
+  border-radius:6px;
+  background:var(--classic-stripe) 0 0 / 100% 5px no-repeat,var(--classic-metal);
+  box-shadow:var(--classic-edge);
+}
+#overlay .dialog p {color:#ede7d6}
+#overlay #resume {background:#c9a35c; color:#211f1c}
+#serviceDialog {width:min(450px,90vw); max-height:90dvh; overflow:auto}
+#serviceDialog button {padding:8px 12px; color:#ffefcd; background:var(--classic-button); border:1px solid #242427}
+body.mobile-layout #serviceDialog button {min-height:44px}
+
+/* Catalog sheets have a grey cover, actual pale ruled paper, and distinct
+   coloured index tabs referencing the catalog artwork. */
+#shop {
+  color:#242525;
+  border:5px solid #53514c;
+  border-radius:7px;
+  background:#e7e5dc;
+  box-shadow:0 4px 18px #0008,inset 0 0 0 2px #b7ada0;
+  color-scheme:light;
+}
+#shop .shop-inner {
+  padding-top:30px;
+  background:
+    repeating-linear-gradient(90deg,transparent 0 17px,#28272b 18px 20px,#c3c2b9 21px 22px,transparent 23px 29px) 8px 2px / calc(100% - 16px) 14px no-repeat,
+    repeating-linear-gradient(0deg,#f3f1e8 0 18px,#d5d3cb 18px 19px);
+}
+#shop .inspecthead {padding-bottom:9px; border-bottom:1px solid #85837b}
+#shop .inspecthead h2,#shop .shop-card h3 {color:#28292a}
+#shop .kicker {color:#665d49}
+#shop .inspecthead button,#shop .shop-tabs button,#shop .catalog-trade {
+  color:#f5edd4;
+  border:1px solid #262628;
+  border-radius:3px;
+  background:var(--classic-button);
+  box-shadow:var(--classic-edge);
+}
+#shop .shop-tabs button[aria-pressed="true"] {background:#b7924f; color:#201f1c}
+#shop .shop-toolbar {margin-top:10px}
+#shop .shop-toolbar>span,#shop .shop-help,#shop #shopDescription {color:#474944}
+#shop #shopNotice {color:#754613}
+#shop #shopNotice:empty {min-height:0; margin:8px 0}
+#shop #shopDescription:empty {display:none}
+#shop #shopBalance {color:#302c22}
+#shop #shopItems {display:block}
+#shop .catalog-page {
+  display:grid;
+  grid-template-columns:minmax(0,1.75fr) minmax(190px,1fr);
+  gap:9px;
+}
+#shop .catalog-plate {
+  margin:0;
+  position:relative;
+  display:grid;
+  align-items:center;
+  min-width:0;
+  overflow:hidden;
+  padding:10px;
+  border:2px solid #6d6b67;
+  background:
+    linear-gradient(#9c9dc240 1px,transparent 1px) 0 0 / 12px 12px,
+    linear-gradient(90deg,#9c9dc240 1px,transparent 1px) 0 0 / 12px 12px,#faf8f2;
+}
+#shop .catalog-plate img {display:block; width:100%; height:clamp(155px,30vh,275px); object-fit:contain}
+#shop .catalog-plate figcaption {width:max-content; max-width:100%; border:2px solid #575654; background:#f3f1e6d9; padding:1px 10px; font-weight:700}
+#shop .catalog-order {border:1px solid #96938b; background:#eeede5; padding:12px}
+#shop .catalog-order h3,#shop .equipment-card h3 {margin:0 0 8px; line-height:1.35; font-size:17px}
+#shop .catalog-spec {display:grid; grid-template-columns:auto 1fr; gap:4px 8px; margin:7px 0 12px; font-size:12px}
+#shop .catalog-spec dt {color:#606058}
+#shop .catalog-spec dd {margin:0; font-weight:700}
+#shop .catalog-trade {min-height:33px; padding:5px 12px}
+#shop .catalog-trade:disabled {color:#d8d6c7; background:#72726c; cursor:default; opacity:1}
+#shop .catalog-note {color:#54554d; margin-top:7px; font-size:11px}
+#shop .aircraft-index {
+  grid-column:1/-1;
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:3px;
+}
+#shop .aircraft-index button {
+  min-width:0;
+  padding:5px;
+  border:1px solid #6f675e;
+  border-radius:0 0 3px 3px;
+  color:#222321;
+  background:#cbbb82;
+  font-size:12px;
+  font-weight:700;
+  line-height:1.25;
+}
+#shop .aircraft-index button:nth-child(4n+2) {background:#acc1d7}
+#shop .aircraft-index button:nth-child(4n+3) {background:#bbb4d1}
+#shop .aircraft-index button:nth-child(4n+4) {background:#b1c390}
+#shop .aircraft-index button[aria-pressed="true"] {border:2px solid #322f28; box-shadow:inset 0 -3px #60533c}
+#shop .equipment-page {display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px}
+#shop .equipment-card {
+  position:relative;
+  border:1px solid #8b8982;
+  background:#f7f5ecc9;
+  padding:12px;
+  min-width:0;
+}
+#shop .equipment-card::before {float:right; margin-left:6px}
+#shop .equipment-card p {font-size:13px; line-height:1.5; color:#454640; margin-bottom:9px}
+#shop .equipment-card strong {color:#39392f; font-family:Consolas,monospace}
+#shop .inventory-sheet {width:100%; overflow:auto; background:#f8f7ee; border:1px solid #797770}
+#shop .inventory-sheet table {width:100%; border-collapse:collapse; font-size:13px; color:#30312c}
+#shop .inventory-sheet caption {text-align:left; padding:10px; font-weight:bold}
+#shop .inventory-sheet th,#shop .inventory-sheet td {padding:8px 5px; border:1px solid #aaa89e; text-align:center}
+#shop .inventory-sheet thead {background:#e0ded1}
+#shop .inventory-sheet tbody th {text-align:left}
+#shop .inventory-sheet .equipped {color:#2b4936; font-size:17px; font-weight:700}
+#shop #shopTarget:not([hidden]) {
+  display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-top:14px;
+}
+#shop #shopTarget label {font-size:13px; font-weight:700}
+#shop #shopTarget select {
+  max-width:100%; min-height:36px; padding:4px 8px; font:inherit; font-size:14px;
+  color:#213c4d; background:#fff; border:1px solid #9db1b9; border-radius:3px;
+}
+#shop .upgrade-page {display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px}
+#shop .equipment-card:not([data-equipment])::before {display:none}
+#shop .part-row {
+  display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap;
+  padding:9px 0; border-top:1px solid #9db1b9;
+}
+#shop .part-row:last-child {padding-bottom:0}
+#shop .part-description {display:grid; gap:3px; font-size:13px; line-height:1.5}
+#shop .part-description span {color:#3d5260}
+#shop .part-price {font-variant-numeric:tabular-nums}
+#shop .inventory-sheet td {text-align:left}
+body.mobile-layout #shop #shopTarget select {min-height:44px}
+body.mobile-layout #shop .catalog-trade,
+body.mobile-layout #shop .aircraft-index button {min-height:44px}
+@media(max-width:800px) {
+  #shop .upgrade-page {grid-template-columns:1fr}
+}
+@media(max-width:600px) {
+  #shop .catalog-page {grid-template-columns:1fr}
+  #shop .catalog-plate img {height:clamp(125px,23dvh,200px)}
+  #shop .aircraft-index {grid-template-columns:repeat(3,minmax(0,1fr))}
+  #shop .equipment-card {padding:8px}
+  #shop .equipment-card h3 {font-size:14px}
+  #shop .equipment-card p {font-size:12px}
+  #shop .inventory-sheet table {font-size:11px}
+  #shop .equipment-page {grid-template-columns:1fr}
+  #shop .shop-tabs,body.mobile-layout #shop .shop-tabs {display:grid; grid-template-columns:1fr 1fr; width:100%}
+  #shop .shop-tabs button {padding-left:9px; padding-right:9px}
+}
+
+#hud .radar-buttons {
+  position:absolute;
+  right:calc(100% - 1px);
+  top:34%;
+  display:grid;
+  grid-template-columns:repeat(2,29px);
+  gap:2px;
+  padding:5px 3px 5px 5px;
+  background:var(--classic-metal);
+  border:2px solid #29292b;
+  border-radius:5px 0 0 5px;
+  box-shadow:var(--classic-edge);
+}
+#hud .radar-buttons button {min-width:0; height:25px; padding:1px 2px; font:bold 13px Consolas,monospace}
+#hud .status-bank {
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:5px 7px;
+  align-items:center;
+}
+#hud .status-bank label {grid-column:1/-1}
+#hud .status-bank #serviceBtn {grid-column:1/-1}
+#hud #seatRoster:not(:empty) {
+  padding:3px;
+  background:#2a2a2d;
+  border:2px solid #565658;
+}
+#hud #seatRoster:empty {display:none}
+#serviceDialog .service-items {display:grid; gap:6px; margin:12px 0}
+#serviceDialog .service-items label {
+  display:flex;
+  align-items:center;
+  gap:7px;
+  min-height:34px;
+  padding:4px 8px;
+  background:#252527;
+  border:1px solid #73716c;
+}
+#serviceDialog .service-items b {margin-left:auto; color:#f2d18f}
+#serviceDialog #payService {margin-top:9px}
+#serviceDialog #serviceNote {color:#ffe0a0}
+body.mobile-layout #hud .radar-buttons {
+  top:0;
+  grid-template-columns:repeat(2,44px);
+  gap:1px;
+  padding:1px;
+}
+body.mobile-layout #hud .radar-buttons button {width:44px; height:44px; min-height:44px}
+body.mobile-layout #hud #seatRoster:not(:empty) {
+  position:absolute;
+  left:100%;
+  top:0;
+  max-height:86px;
+  max-width:65px;
+  overflow-y:auto;
+}
+body.mobile-layout #hud #seatRoster img {width:21px; height:25px}
+body.mobile-layout #hud .walk-actions {
+  position:absolute;
+  top:auto;
+  bottom:var(--touch-bottom);
+  left:calc(var(--mobile-left) + var(--stick-size) + 7px);
+  display:grid;
+  gap:3px;
+  width:67px;
+}
+body.mobile-layout #hud .walk-actions button {width:100%; padding:3px; font-size:12px}
+@media(orientation:portrait) {
+  body.mobile-layout #hud .walk-actions {
+    position:static;
+    flex:none;
+    display:flex;
+    width:100%;
+    justify-content:flex-end;
+  }
+  body.mobile-layout #hud .walk-actions button {width:auto; min-width:65px; padding:3px 8px}
+  body.mobile-layout #hud .radar-buttons {left:100%; right:auto; border-radius:0 5px 5px 0}
+  body.mobile-layout #hud #seatRoster:not(:empty) {left:0; right:0; top:auto; bottom:100%; max-width:none; max-height:30px}
+}
+@media(orientation:portrait) and (max-height:720px) {
+  body.mobile-layout #hud:has(.walk-actions:not([hidden])) #fieldKitPanel {
+    max-height: min(17dvh, calc(77dvh - 393px - var(--safe-top) - var(--safe-bottom)));
+    min-height:44px;
+  }
+}
+
+#hangarDesk {
+  width:min(1050px,94vw);
+  max-height:94dvh;
+  margin:auto;
+  padding:0;
+  overflow:auto;
+  color:#eee8d7;
+  border:5px solid #29292a;
+  border-radius:6px;
+  background:var(--classic-metal);
+  box-shadow:var(--classic-edge);
+}
+#hangarDesk::backdrop,#serviceDialog::backdrop {background:#141416d9}
+#hangarDesk .hangar-window {padding:10px; background:var(--classic-stripe) 0 0 / 100% 4px no-repeat,var(--classic-metal)}
+#hangarDesk .inspecthead {margin-bottom:8px}
+#hangarDesk h2 {font-size:22px; line-height:1.35}
+#hangarPano {
+  display:block;
+  width:100%;
+  height:clamp(190px,52dvh,480px);
+  overflow-x:auto;
+  overflow-y:hidden;
+  overscroll-behavior-x:contain;
+  scrollbar-width:thin;
+  border:2px solid #19191b;
+  background:#1c1d1e;
+}
+#hangarPano img {display:block; width:auto; max-width:none; height:100%; margin:auto}
+#hangarDesk .hangar-dock {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:7px;
+  margin-top:8px;
+}
+#hangarDesk .hangar-dock button {
+  min-width:0;
+  min-height:36px;
+  padding:5px 7px;
+  color:#f5efdc;
+  background:var(--classic-button);
+  border:2px solid #262629;
+  border-radius:3px;
+  box-shadow:var(--classic-edge);
+}
+#hangarDesk .hangar-dock button:active {background:#38383a; box-shadow:inset 1px 1px 3px #111}
+#deskLogbook {
+  margin-top:10px;
+  padding:12px;
+  max-height:25dvh;
+  overflow:auto;
+  color:#30312e;
+  background:repeating-linear-gradient(0deg,#f2f0e6 0 19px,#cecec4 19px 20px);
+  border:2px solid #7d786d;
+}
+#deskLogbook ol,#deskLogbook ul {margin:0; padding-left:20px}
+#deskLogbook li,#deskLogbook p {padding:3px 0; font-size:13px; line-height:1.5}
+#serviceDialog .service-items input[type="checkbox"] {width:18px; height:18px; min-height:0; accent-color:#cba353}
+body.mobile-layout #hangarDesk {
+  width:calc(100% - max(12px,var(--safe-left)) - max(12px,var(--safe-right)));
+  max-height:calc(100dvh - max(12px,var(--safe-top)) - max(12px,var(--safe-bottom)));
+}
+body.mobile-layout #hangarDesk .hangar-dock button,
+body.mobile-layout #serviceDialog .service-items label {min-height:44px}
+@media(orientation:portrait) and (max-width:600px) {
+  #hangarDesk .hangar-dock {grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(orientation:landscape) and (max-height:500px) {
+  #hangarPano {height:48dvh}
+  body.mobile-layout #hud .walk-actions {left:calc(var(--mobile-left) + var(--stick-size) + 3px); width:63px}
+}
+
+#hud #fieldKitPanel {display:flex; flex-direction:column}
+#hud #toolRack {order:-1}
+body.mobile-layout #hud .walk-actions button:disabled,
+body.mobile-layout #hud .walk-actions:not(:has(button:enabled)) {display:none}
+body.mobile-layout.touch-panels-collapsed #hud #fieldKitPanel {
+  display:contents;
+}
+body.mobile-layout.touch-panels-collapsed #hud #fieldKitPanel>:not(#toolRack) {
+  display:none;
+}
+body.mobile-layout.touch-panels-collapsed #hud #toolRack {
+  display:flex;
+  margin:1px 0 4px;
+  overflow-x:auto;
+  scrollbar-width:thin;
+}
+body.mobile-layout.touch-panels-collapsed #hud #toolRack:empty {display:none}
+body.mobile-layout.touch-panels-collapsed #hud #toolRack button {flex:1 0 auto; min-width:92px}
+@media(orientation:portrait) {
+  body.mobile-layout #hud .dispatch-msg {padding:6px 9px; max-height:18dvh}
+  body.mobile-layout #hud .dispatch-msg h2 {font-size:16px; margin:1px 0 3px}
+  body.mobile-layout #hud #instruction {font-size:12px; line-height:1.45}
+  body.mobile-layout #hud .dispatch-meta {margin-top:2px; font-size:9px}
+  body.mobile-layout #hud #eventLog {font-size:10px}
+  body.mobile-layout #hud #fieldKitPanel {max-height:min(16dvh,136px)}
+  body.mobile-layout #hud #fieldKitPanel>* {flex:none}
+}
+
+body:not(.mobile-layout) #hud {
+  --rail-height:calc(var(--dial) + 48px);
+  --mission-left:calc(var(--cash-bank-width) + 3 * (var(--dial) + 9px) + clamp(60px,6cqw,90px) + 43px);
+  --mission-right:calc(var(--radar-width) + 75px);
+}
+body:not(.mobile-layout) #hud .instruments>div:is(:has(#fuel),:has(#alt),:has(#spd)) {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:calc(var(--dial) + 4px) 15px 12px;
+  align-content:start;
+}
+body:not(.mobile-layout) #hud .instruments>div:is(:has(#fuel),:has(#alt),:has(#spd))>b {
+  position:static;
+  grid-area:2/1;
+  justify-self:end;
+}
+body:not(.mobile-layout) #hud .instruments>div:is(:has(#fuel),:has(#alt),:has(#spd))>small {
+  position:static;
+  grid-area:2/2;
+  justify-self:start;
+  align-self:center;
+  line-height:1;
+}
+body:not(.mobile-layout) #hud .instruments>div:is(:has(#fuel),:has(#alt),:has(#spd))>span {
+  position:static;
+  grid-area:3/1/4/3;
+  line-height:12px;
+}
+body:not(.mobile-layout) #hud #radioPanel {
+  position:fixed;
+  left:8px;
+  bottom:86px;
+  width:var(--cash-bank-width);
+  max-height:calc(var(--rail-height) - 87px);
+  margin:0;
+  overflow:auto;
+}
+body:not(.mobile-layout) #hud #radioTrack {flex:1 1 55px; font-size:10px}
+body:not(.mobile-layout) #hud #radioTuner {order:2; flex:1 0 100%}
+@container flight (min-width:1100px) {
+  body:not(.mobile-layout):not(.on-foot) #hud .dispatch-msg h2,
+  body:not(.mobile-layout):not(.on-foot) #hud #instruction,
+  body:not(.mobile-layout):not(.on-foot) #hud .dispatch-meta,
+  body:not(.mobile-layout):not(.on-foot) #hud #prog {
+    position:fixed;
+    left:var(--mission-left);
+    right:var(--mission-right);
+  }
+  body:not(.mobile-layout):not(.on-foot) #hud .dispatch-msg h2 {bottom:calc(var(--rail-height) - 33px)}
+  body:not(.mobile-layout):not(.on-foot) #hud #instruction {
+    top:calc(100cqh - var(--rail-height) + 41px);
+    bottom:auto;
+    max-height:calc(var(--rail-height) - 94px);
+    overflow:auto;
+    color:#f1e8cb;
+    font-size:13px;
+    font-weight:500;
+  }
+  body:not(.mobile-layout):not(.on-foot) #hud .dispatch-meta {bottom:24px; flex-wrap:wrap; gap:2px 8px}
+  body:not(.mobile-layout):not(.on-foot) #hud #prog {bottom:15px}
+  body:not(.mobile-layout) #hud #feedback {top:114px}
+}
+@container flight (max-width:815px) {
+  body:not(.mobile-layout) #hud {
+    --dial:clamp(38px,8cqw,64px);
+    --rail-height:calc(var(--dial) + 43px);
+    --radar-width:clamp(88px,17cqw,132px);
+    --cash-bank-width:clamp(122px,21cqw,151px);
+  }
+  body:not(.mobile-layout) #hud #fieldKit {width:min(240px,38cqw)}
+  body:not(.mobile-layout) #hud .dispatch-msg {width:calc(62% - 26px);min-width:0}
+  body:not(.mobile-layout) #hud #radioPanel {bottom:calc(var(--rail-height) - 31px);max-height:28px}
+  body:not(.mobile-layout) #hud #radioTrack {display:none}
+  body:not(.mobile-layout) #hud .status-bank {max-height:calc(var(--rail-height) - 37px);padding:3px 5px;gap:0 4px;grid-template-columns:minmax(0,1fr) auto}
+  body:not(.mobile-layout) #hud #engineState {white-space:nowrap}
+  body:not(.mobile-layout) #hud #quick {display:none}
+  body:not(.mobile-layout) #hud #feedback {top:auto;bottom:calc(var(--rail-height) + 52px)}
+  body:not(.mobile-layout) #hud .walk-actions button:disabled {display:none}
+}
+@media(orientation:portrait) and (min-height:721px) {
+  body.mobile-layout #hud .lowerleft {bottom:calc(var(--touch-bottom) + 228px)}
+  body.mobile-layout #hud #feedback {
+    left:auto;
+    right:var(--mobile-right);
+    width:calc(100% - 211px - var(--safe-left) - var(--safe-right));
+    max-width:370px;
+    padding:5px 7px;
+    font-size:11px;
+  }
+}
+
+/* A short portrait screen still has a reachable 2×2 navigation pad. The
+   boarding button sits beside the numeric rail when the aircraft is parked. */
+@media(orientation:portrait) and (max-height:720px) {
+  body.mobile-layout:not(.on-foot) #hud .dispatch-msg {max-height:22dvh}
+  body.mobile-layout:not(.on-foot) #hud .walk-actions {
+    position:absolute;
+    left:var(--mobile-left);
+    bottom:calc(var(--touch-bottom) + 139px);
+    width:44px;
+  }
+  body.mobile-layout:not(.on-foot) #hud .walk-actions button {
+    min-width:44px;
+    width:44px;
+    padding:2px;
+    font-size:11px;
+    word-break:keep-all;
+  }
+  body.mobile-layout:not(.on-foot) #hud #fieldKitPanel {max-height:44px; min-height:44px}
+  body.mobile-layout:not(.on-foot) #hud .lowerleft {
+    position:absolute;
+    display:grid;
+    grid-template-columns:90px;
+    grid-template-rows:54px 18px 90px;
+    top:calc(var(--safe-top) + 62px);
+    right:var(--mobile-right);
+    left:auto;
+    bottom:auto;
+    width:90px;
+    height:162px;
+    transform:none;
+  }
+  body.mobile-layout:not(.on-foot) #hud .dispatch-msg,
+  body.mobile-layout:not(.on-foot) #hud #fieldKit {width:calc(100% - 96px)}
+  body.mobile-layout:not(.on-foot) #hud .radarbox {grid-area:1/1; width:90px; height:54px}
+  body.mobile-layout:not(.on-foot) #hud .radar-buttons {position:static; grid-area:3/1; align-self:start; padding:0; border:0}
+  body.mobile-layout:not(.on-foot) #hud #navlabel {position:static;grid-area:2/1;width:90px;height:18px}
+  body.mobile-layout:not(.on-foot) #hud #seatRoster:not(:empty) {left:0; right:auto; top:100%; bottom:auto; max-width:90px; max-height:44px}
+  body.mobile-layout:not(.on-foot) #hud #fieldKit .touch-aim-controls {grid-template-columns:repeat(auto-fit,minmax(44px,1fr))}
+  body.mobile-layout:not(.on-foot) #hud #fieldTool {min-width:0}
+  body.mobile-layout.touch-panels-collapsed:not(.on-foot) #hud #toolRack button {
+    flex:0 0 calc((100% - 5px)/2);min-width:0;padding:3px;font-size:11px;
+  }
+  body.mobile-layout #hud .instruments span {font-size:9px; white-space:nowrap; letter-spacing:-.025em}
+  body.mobile-layout #hud #feedback {
+    position:absolute;
+    bottom:var(--safe-bottom);
+    left:var(--mobile-left);
+    right:var(--mobile-right);
+    width:auto;
+    max-width:none;
+    max-height:14px;
+    transform:none;
+    padding:0 3px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    font-size:10px;
+    line-height:14px;
+    pointer-events:none;
+  }
+  body.mobile-layout #hud:has(#feedback:not(:empty)) .touch-hint {visibility:hidden}
+}

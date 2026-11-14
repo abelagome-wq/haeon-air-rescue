@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="심콥터 항공 구조대">
+  <rect width="512" height="512" fill="#101d1e"/>
+  <rect x="40" y="40" width="432" height="432" rx="96" fill="none" stroke="#416462" stroke-width="3"/>
+  <circle cx="256" cy="256" r="168" fill="none" stroke="#416462" stroke-width="3"/>
+  <path d="M236 116h40l12 112 108 8v40l-108 12-12 108h-40l-12-108-108-12v-40l108-8z" fill="#e8e4d4"/>
+  <circle cx="256" cy="256" r="37" fill="#d7b35b"/>
+  <circle cx="256" cy="256" r="11" fill="#101d1e"/>
+  <path d="M237 65h38M237 447h38M65 237v38M447 237v38" fill="none" stroke="#d7b35b" stroke-width="7" stroke-linecap="round"/>
+</svg>

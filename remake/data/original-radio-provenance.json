@@ -1,0 +1,897 @@
+{
+  "scope": "This file inventories the archived source recordings. The current runtime catalog in src/sound-library.js uses art/audio/synth for its default Korean speech, effects and music, and can use local Korean device speech or a player's saved replacements.",
+  "sourceExeSha256": "cedfdd009e72cb207091f152dbb34a51a63ce3f7416df8da7c7ed3073ec9ebba",
+  "totalBytes": 11717219,
+  "format": "Music is the full original track in mono 11,025 Hz 32 kbps MP3. All other files are byte-for-byte PCM WAV.",
+  "captions": "Korean RT_STRING from SIMCOPT.EXE and matching numbered WAV names. D1xxx and D2xxx are dispatch fragments, L001..009 map to strings 3001..3009, DIS053..068 map to 4053..4068. The captions are localized game text, not transcripts of the recording.",
+  "sequencing": "The medical dispatch/center/injury and rescue completion/thanks sequences match the observed Korean game. The station interlude schedule and the other category/variant selections are remake choices.",
+  "files": {
+    "D1001": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D1001.WAV",
+      "sourceSha256": "f35faca57b873aca9d1ee649a6eb3ef12e461faeaf329f44f4755a13e9a4c00a",
+      "outputSha256": "f35faca57b873aca9d1ee649a6eb3ef12e461faeaf329f44f4755a13e9a4c00a",
+      "outputBytes": 15664,
+      "seconds": 1.4167,
+      "stringResourceId": 1001
+    },
+    "D1002": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D1002.WAV",
+      "sourceSha256": "ce0754eaa09d27d82f5eff02e1d8bb7d6464e114d4808f749993b6df199cb900",
+      "outputSha256": "ce0754eaa09d27d82f5eff02e1d8bb7d6464e114d4808f749993b6df199cb900",
+      "outputBytes": 17548,
+      "seconds": 1.5876,
+      "stringResourceId": 1002
+    },
+    "D1003": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D1003.WAV",
+      "sourceSha256": "36849d87dcd812d5f0004ea1a4b18251227594d1d632544bb899013052e0bb17",
+      "outputSha256": "36849d87dcd812d5f0004ea1a4b18251227594d1d632544bb899013052e0bb17",
+      "outputBytes": 10354,
+      "seconds": 0.9351,
+      "stringResourceId": 1003
+    },
+    "D1004": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D1004.WAV",
+      "sourceSha256": "291cd2611e7f90df40bc3a734a02c5be5f40ca51e082e5b882d20a3943cf95ba",
+      "outputSha256": "291cd2611e7f90df40bc3a734a02c5be5f40ca51e082e5b882d20a3943cf95ba",
+      "outputBytes": 19738,
+      "seconds": 1.7862,
+      "stringResourceId": 1004
+    },
+    "D1005": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D1005.WAV",
+      "sourceSha256": "9253bc721a963f536f483682141208335b5ac50868b55ed42b9c77eaf448026b",
+      "outputSha256": "9253bc721a963f536f483682141208335b5ac50868b55ed42b9c77eaf448026b",
+      "outputBytes": 19338,
+      "seconds": 1.75,
+      "stringResourceId": 1005
+    },
+    "D1006": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D1006.WAV",
+      "sourceSha256": "7300ee106f3b372c18c78e8222e36ff9f6cae548c1ed601bfd5675a832e8225e",
+      "outputSha256": "7300ee106f3b372c18c78e8222e36ff9f6cae548c1ed601bfd5675a832e8225e",
+      "outputBytes": 20908,
+      "seconds": 1.8924,
+      "stringResourceId": 1006
+    },
+    "D1007": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D1007.WAV",
+      "sourceSha256": "91b27e71b3c1b60cc555db7d47fae0d29a92c2ae72c75326cebd894bb88ab421",
+      "outputSha256": "91b27e71b3c1b60cc555db7d47fae0d29a92c2ae72c75326cebd894bb88ab421",
+      "outputBytes": 16836,
+      "seconds": 1.5231,
+      "stringResourceId": 1007
+    },
+    "D1008": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D1008.WAV",
+      "sourceSha256": "a315f517f08c5bf4bbdcd5f92850009156e2cda05f3b4f9e43b1cd07226812f4",
+      "outputSha256": "a315f517f08c5bf4bbdcd5f92850009156e2cda05f3b4f9e43b1cd07226812f4",
+      "outputBytes": 17500,
+      "seconds": 1.5833,
+      "stringResourceId": 1008
+    },
+    "D1009": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D1009.WAV",
+      "sourceSha256": "ace204e34c3bed268e4bfe6cda4cf2efe6b7734fba05ede0ca1796b9d8df1a8a",
+      "outputSha256": "ace204e34c3bed268e4bfe6cda4cf2efe6b7734fba05ede0ca1796b9d8df1a8a",
+      "outputBytes": 19338,
+      "seconds": 1.75,
+      "stringResourceId": 1009
+    },
+    "D1010": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D1010.WAV",
+      "sourceSha256": "1b0beb877875435231d6f3a36ade3d118f7ac3763dfa49b0ee7ee5329a1f9596",
+      "outputSha256": "1b0beb877875435231d6f3a36ade3d118f7ac3763dfa49b0ee7ee5329a1f9596",
+      "outputBytes": 16300,
+      "seconds": 1.4745,
+      "stringResourceId": 1010
+    },
+    "D1011": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D1011.WAV",
+      "sourceSha256": "9e4dfeb3bbe0136b14ca1b955536e3c5f2a642eff47855c53bae52b45d637b80",
+      "outputSha256": "9e4dfeb3bbe0136b14ca1b955536e3c5f2a642eff47855c53bae52b45d637b80",
+      "outputBytes": 14524,
+      "seconds": 1.3133,
+      "stringResourceId": 1011
+    },
+    "D1012": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D1012.WAV",
+      "sourceSha256": "39e049e302f1e160eaf596bb3107a25b06ed9ec2cdb0334a22b13b71f02da627",
+      "outputSha256": "39e049e302f1e160eaf596bb3107a25b06ed9ec2cdb0334a22b13b71f02da627",
+      "outputBytes": 17730,
+      "seconds": 1.6041,
+      "stringResourceId": 1012
+    },
+    "D1013": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D1013.WAV",
+      "sourceSha256": "f945c7e9c4d003a0a264fdf4c7c75985e062104cdd261935019a9bcd5f96768b",
+      "outputSha256": "f945c7e9c4d003a0a264fdf4c7c75985e062104cdd261935019a9bcd5f96768b",
+      "outputBytes": 22780,
+      "seconds": 2.0621,
+      "stringResourceId": 1013
+    },
+    "D1014": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D1014.WAV",
+      "sourceSha256": "e91105ef1ac3e799e15406766cda5020c4f94234069c5429a6272af29c3d310e",
+      "outputSha256": "e91105ef1ac3e799e15406766cda5020c4f94234069c5429a6272af29c3d310e",
+      "outputBytes": 20186,
+      "seconds": 1.8269,
+      "stringResourceId": 1014
+    },
+    "D1015": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D1015.WAV",
+      "sourceSha256": "2bcc6be4b51421f3d07f31f40edaf655c3de45303d9a2b7bd2a5d28eefd22a73",
+      "outputSha256": "2bcc6be4b51421f3d07f31f40edaf655c3de45303d9a2b7bd2a5d28eefd22a73",
+      "outputBytes": 22558,
+      "seconds": 2.042,
+      "stringResourceId": 1015
+    },
+    "D1016": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D1016.WAV",
+      "sourceSha256": "506826685206ab067aeb729daaaf59ec83315fd1be2b9045ffb5714c6d504bb1",
+      "outputSha256": "506826685206ab067aeb729daaaf59ec83315fd1be2b9045ffb5714c6d504bb1",
+      "outputBytes": 18144,
+      "seconds": 1.6417,
+      "stringResourceId": 1016
+    },
+    "D1017": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D1017.WAV",
+      "sourceSha256": "c28a461b2b36f2ce00965e6693d082e72a8e441d0354158d013aa81a576307f9",
+      "outputSha256": "c28a461b2b36f2ce00965e6693d082e72a8e441d0354158d013aa81a576307f9",
+      "outputBytes": 22444,
+      "seconds": 2.0317,
+      "stringResourceId": 1017
+    },
+    "D1018": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D1018.WAV",
+      "sourceSha256": "a677d8edcda8cffa889a11cc1820d8eefc96c7d360dcda847073d472549392d7",
+      "outputSha256": "a677d8edcda8cffa889a11cc1820d8eefc96c7d360dcda847073d472549392d7",
+      "outputBytes": 22732,
+      "seconds": 2.0579,
+      "stringResourceId": 1018
+    },
+    "D2001": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D2001.WAV",
+      "sourceSha256": "64ad80ecc4a4b5e96e94d4e2fc71a5a734ac90e4718902b510db660846b71a0c",
+      "outputSha256": "64ad80ecc4a4b5e96e94d4e2fc71a5a734ac90e4718902b510db660846b71a0c",
+      "outputBytes": 19660,
+      "seconds": 1.7792,
+      "stringResourceId": 2001
+    },
+    "D2002": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D2002.WAV",
+      "sourceSha256": "fe53b40ab0bf421befbe7d1c8ca74b07c35ffae6dd9ed00c165a1861c98e7242",
+      "outputSha256": "fe53b40ab0bf421befbe7d1c8ca74b07c35ffae6dd9ed00c165a1861c98e7242",
+      "outputBytes": 15596,
+      "seconds": 1.4106,
+      "stringResourceId": 2002
+    },
+    "D2003": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D2003.WAV",
+      "sourceSha256": "81824e8347f2432153671f1ab5c55bee90e72046fe46c329bfc691eda92f3b73",
+      "outputSha256": "81824e8347f2432153671f1ab5c55bee90e72046fe46c329bfc691eda92f3b73",
+      "outputBytes": 18508,
+      "seconds": 1.6747,
+      "stringResourceId": 2003
+    },
+    "D2004": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D2004.WAV",
+      "sourceSha256": "87ffd33ee17d1f08940e868d775e889525fad1f8434d0f7f3ed98609634611d7",
+      "outputSha256": "87ffd33ee17d1f08940e868d775e889525fad1f8434d0f7f3ed98609634611d7",
+      "outputBytes": 17960,
+      "seconds": 1.6249,
+      "stringResourceId": 2004
+    },
+    "D2005": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D2005.WAV",
+      "sourceSha256": "f7ade4a7fc03d0f99882c33ca64077d42b6030244ac8e09d03d18e9c4014503a",
+      "outputSha256": "f7ade4a7fc03d0f99882c33ca64077d42b6030244ac8e09d03d18e9c4014503a",
+      "outputBytes": 18060,
+      "seconds": 1.6341,
+      "stringResourceId": 2005
+    },
+    "D2006": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D2006.WAV",
+      "sourceSha256": "445e758f8979aeda575ca335d9537083a0c1ba2a55e21242e1250e609f8c2503",
+      "outputSha256": "445e758f8979aeda575ca335d9537083a0c1ba2a55e21242e1250e609f8c2503",
+      "outputBytes": 38668,
+      "seconds": 3.5033,
+      "stringResourceId": 2006
+    },
+    "D2007": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D2007.WAV",
+      "sourceSha256": "0d5ba60880b0e3c997f11f9cd2f7e8973af957fcf9b43a4d65d10eb8b4f2cfe3",
+      "outputSha256": "0d5ba60880b0e3c997f11f9cd2f7e8973af957fcf9b43a4d65d10eb8b4f2cfe3",
+      "outputBytes": 24652,
+      "seconds": 2.232,
+      "stringResourceId": 2007
+    },
+    "D2008": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D2008.WAV",
+      "sourceSha256": "142f38f082552fce65ed1358ed1995ec9af457d6e84587306cee7af61d86aa65",
+      "outputSha256": "142f38f082552fce65ed1358ed1995ec9af457d6e84587306cee7af61d86aa65",
+      "outputBytes": 34188,
+      "seconds": 3.097,
+      "stringResourceId": 2008
+    },
+    "D2009": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D2009.WAV",
+      "sourceSha256": "acf436f7da142f320ac29720eff59fb28a5ec1f0e1784bc5022ec72c60757311",
+      "outputSha256": "acf436f7da142f320ac29720eff59fb28a5ec1f0e1784bc5022ec72c60757311",
+      "outputBytes": 19116,
+      "seconds": 1.7299,
+      "stringResourceId": 2009
+    },
+    "D2010": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D2010.WAV",
+      "sourceSha256": "7adccdcf4f029ceaabbe23a87fe5b1f5429cdf9a0d7521bcc96fa7c771097acd",
+      "outputSha256": "7adccdcf4f029ceaabbe23a87fe5b1f5429cdf9a0d7521bcc96fa7c771097acd",
+      "outputBytes": 19372,
+      "seconds": 1.7531,
+      "stringResourceId": 2010
+    },
+    "D2011": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D2011.WAV",
+      "sourceSha256": "fe1332574f292de06171143bf30aea91867689d4ca3f987c135f894058f27f1f",
+      "outputSha256": "fe1332574f292de06171143bf30aea91867689d4ca3f987c135f894058f27f1f",
+      "outputBytes": 14236,
+      "seconds": 1.2873,
+      "stringResourceId": 2011
+    },
+    "D2012": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D2012.WAV",
+      "sourceSha256": "26133ad626a4791ee04a69d44457d175474f99cfd7568edf341d7c779cf18c92",
+      "outputSha256": "26133ad626a4791ee04a69d44457d175474f99cfd7568edf341d7c779cf18c92",
+      "outputBytes": 19148,
+      "seconds": 1.7328,
+      "stringResourceId": 2012
+    },
+    "D2013": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D2013.WAV",
+      "sourceSha256": "0dda95ea96579e7648db26e17c26a0944fe8f06a16a1e55e02913c3547eafb43",
+      "outputSha256": "0dda95ea96579e7648db26e17c26a0944fe8f06a16a1e55e02913c3547eafb43",
+      "outputBytes": 29868,
+      "seconds": 2.7051,
+      "stringResourceId": 2013
+    },
+    "D2014": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D2014.WAV",
+      "sourceSha256": "edb821fe2b6fc15de99354c96f64046d63fe13788fafb2c0d731fc611a7fc725",
+      "outputSha256": "edb821fe2b6fc15de99354c96f64046d63fe13788fafb2c0d731fc611a7fc725",
+      "outputBytes": 27148,
+      "seconds": 2.4584,
+      "stringResourceId": 2014
+    },
+    "D2015": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D2015.WAV",
+      "sourceSha256": "b4bcf67ecb04fe715b9977c5b63ffc77b62c2eed021cf08cf0979a80852019ec",
+      "outputSha256": "b4bcf67ecb04fe715b9977c5b63ffc77b62c2eed021cf08cf0979a80852019ec",
+      "outputBytes": 30316,
+      "seconds": 2.7458,
+      "stringResourceId": 2015
+    },
+    "D2016": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D2016.WAV",
+      "sourceSha256": "a0c84bbd961b73b0c81234463ce830f0229e48deba0f1b20e24a1b67e4db46a3",
+      "outputSha256": "a0c84bbd961b73b0c81234463ce830f0229e48deba0f1b20e24a1b67e4db46a3",
+      "outputBytes": 41772,
+      "seconds": 3.7849,
+      "stringResourceId": 2016
+    },
+    "D2017": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D2017.WAV",
+      "sourceSha256": "30d2e437782912659854bdb74edd95cd40373c76bc1674bb0b8a810caacd8831",
+      "outputSha256": "30d2e437782912659854bdb74edd95cd40373c76bc1674bb0b8a810caacd8831",
+      "outputBytes": 24524,
+      "seconds": 2.2204,
+      "stringResourceId": 2017
+    },
+    "D2018": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D2018.WAV",
+      "sourceSha256": "52c7d623868017f3a659dc9e540dd5600feacc3a8fc09fc3da38298941a9120a",
+      "outputSha256": "52c7d623868017f3a659dc9e540dd5600feacc3a8fc09fc3da38298941a9120a",
+      "outputBytes": 20172,
+      "seconds": 1.8257,
+      "stringResourceId": 2018
+    },
+    "D2019": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D2019.WAV",
+      "sourceSha256": "7cea5f99e52e42f3a5049abc508b22aca70fc3c58508a908d7ed7c2079f9c3a8",
+      "outputSha256": "7cea5f99e52e42f3a5049abc508b22aca70fc3c58508a908d7ed7c2079f9c3a8",
+      "outputBytes": 29036,
+      "seconds": 2.6297,
+      "stringResourceId": 2019
+    },
+    "D2020": {
+      "role": "dispatch",
+      "source": "SIMCOPT/SOUND/ENGLISH/D2020.WAV",
+      "sourceSha256": "64bbb744b49cfe281780ab41f489f14c0446f681071cb62854f55c44b51a39e3",
+      "outputSha256": "64bbb744b49cfe281780ab41f489f14c0446f681071cb62854f55c44b51a39e3",
+      "outputBytes": 28460,
+      "seconds": 2.5774,
+      "stringResourceId": 2020
+    },
+    "L001": {
+      "role": "sector",
+      "source": "SIMCOPT/SOUND/ENGLISH/L001.WAV",
+      "sourceSha256": "8cf8f09b996248f86a7b2c75fc4c1a58c689c6c5bd594550b4dec652dbe4cd4f",
+      "outputSha256": "8cf8f09b996248f86a7b2c75fc4c1a58c689c6c5bd594550b4dec652dbe4cd4f",
+      "outputBytes": 14744,
+      "seconds": 1.3333,
+      "stringResourceId": 3001
+    },
+    "L002": {
+      "role": "sector",
+      "source": "SIMCOPT/SOUND/ENGLISH/L002.WAV",
+      "sourceSha256": "9ad7fc06c79eb8ba95d66939feca953c44580db66792dccba77be73545bbf7b0",
+      "outputSha256": "9ad7fc06c79eb8ba95d66939feca953c44580db66792dccba77be73545bbf7b0",
+      "outputBytes": 15434,
+      "seconds": 1.3958,
+      "stringResourceId": 3002
+    },
+    "L003": {
+      "role": "sector",
+      "source": "SIMCOPT/SOUND/ENGLISH/L003.WAV",
+      "sourceSha256": "90511576b293ec343724a9d57fc21116e4860491cae88d18b0a419e925322160",
+      "outputSha256": "90511576b293ec343724a9d57fc21116e4860491cae88d18b0a419e925322160",
+      "outputBytes": 15204,
+      "seconds": 1.3751,
+      "stringResourceId": 3003
+    },
+    "L004": {
+      "role": "sector",
+      "source": "SIMCOPT/SOUND/ENGLISH/L004.WAV",
+      "sourceSha256": "c088607a43f4df07cab9f2fa165b02f96e9ccacecacadb06cd6514cf3973f1cc",
+      "outputSha256": "c088607a43f4df07cab9f2fa165b02f96e9ccacecacadb06cd6514cf3973f1cc",
+      "outputBytes": 15110,
+      "seconds": 1.3664,
+      "stringResourceId": 3004
+    },
+    "L005": {
+      "role": "sector",
+      "source": "SIMCOPT/SOUND/ENGLISH/L005.WAV",
+      "sourceSha256": "9b08fa619cfdb3b8621c0a49f1cd32ffc4e429b55f68d6f09191712253705ba0",
+      "outputSha256": "9b08fa619cfdb3b8621c0a49f1cd32ffc4e429b55f68d6f09191712253705ba0",
+      "outputBytes": 13140,
+      "seconds": 1.1878,
+      "stringResourceId": 3005
+    },
+    "L006": {
+      "role": "sector",
+      "source": "SIMCOPT/SOUND/ENGLISH/L006.WAV",
+      "sourceSha256": "a225b58ab9723a4dd2340cf3b6164971b3b7694ffb4a372008bec56add854063",
+      "outputSha256": "a225b58ab9723a4dd2340cf3b6164971b3b7694ffb4a372008bec56add854063",
+      "outputBytes": 16814,
+      "seconds": 1.5211,
+      "stringResourceId": 3006
+    },
+    "L007": {
+      "role": "sector",
+      "source": "SIMCOPT/SOUND/ENGLISH/L007.WAV",
+      "sourceSha256": "c2489aff03788edf35f73354d14aa3ac506c9118cca2342c9a991e69730ede2c",
+      "outputSha256": "c2489aff03788edf35f73354d14aa3ac506c9118cca2342c9a991e69730ede2c",
+      "outputBytes": 14742,
+      "seconds": 1.3332,
+      "stringResourceId": 3007
+    },
+    "L008": {
+      "role": "sector",
+      "source": "SIMCOPT/SOUND/ENGLISH/L008.WAV",
+      "sourceSha256": "b724d4da70c2ca6b6c7377374fd6a99b0c79ec168b37b48b5724dcc738c1c5e1",
+      "outputSha256": "b724d4da70c2ca6b6c7377374fd6a99b0c79ec168b37b48b5724dcc738c1c5e1",
+      "outputBytes": 16356,
+      "seconds": 1.4795,
+      "stringResourceId": 3008
+    },
+    "L009": {
+      "role": "sector",
+      "source": "SIMCOPT/SOUND/ENGLISH/L009.WAV",
+      "sourceSha256": "36021f1683195f4e496c9f942a6bef3d594cdb327c2e65f7ae251cd927855220",
+      "outputSha256": "36021f1683195f4e496c9f942a6bef3d594cdb327c2e65f7ae251cd927855220",
+      "outputBytes": 15430,
+      "seconds": 1.3956,
+      "stringResourceId": 3009
+    },
+    "DIS053": {
+      "role": "result",
+      "source": "SIMCOPT/SOUND/ENGLISH/DIS053.WAV",
+      "sourceSha256": "663373071c2003b4bf4914ce26539b2016082f0cf444d249fe481c0e5fd33765",
+      "outputSha256": "663373071c2003b4bf4914ce26539b2016082f0cf444d249fe481c0e5fd33765",
+      "outputBytes": 18662,
+      "seconds": 1.6887,
+      "stringResourceId": 4053
+    },
+    "DIS054": {
+      "role": "result",
+      "source": "SIMCOPT/SOUND/ENGLISH/DIS054.WAV",
+      "sourceSha256": "329f18ad30fc70b480baf1702e03d8269d021226308f1fb38f987cc5ab387e05",
+      "outputSha256": "329f18ad30fc70b480baf1702e03d8269d021226308f1fb38f987cc5ab387e05",
+      "outputBytes": 26952,
+      "seconds": 2.4406,
+      "stringResourceId": 4054
+    },
+    "DIS055": {
+      "role": "result",
+      "source": "SIMCOPT/SOUND/ENGLISH/DIS055.WAV",
+      "sourceSha256": "3624552608dc6642c758c4244a1597a6b2546015ae47f077818cabb8db54d44b",
+      "outputSha256": "3624552608dc6642c758c4244a1597a6b2546015ae47f077818cabb8db54d44b",
+      "outputBytes": 20124,
+      "seconds": 1.8213,
+      "stringResourceId": 4055
+    },
+    "DIS056": {
+      "role": "result",
+      "source": "SIMCOPT/SOUND/ENGLISH/DIS056.WAV",
+      "sourceSha256": "d74c6202cb6c0ade4413e36a06ce7e0caea01f38a3d5245c3deacb0604aa1fd3",
+      "outputSha256": "d74c6202cb6c0ade4413e36a06ce7e0caea01f38a3d5245c3deacb0604aa1fd3",
+      "outputBytes": 21428,
+      "seconds": 1.9396,
+      "stringResourceId": 4056
+    },
+    "DIS057": {
+      "role": "result",
+      "source": "SIMCOPT/SOUND/ENGLISH/DIS057.WAV",
+      "sourceSha256": "0588ee570182f5c2b4f025016f6630a3af285160402dd587f59d6e39181a10f2",
+      "outputSha256": "0588ee570182f5c2b4f025016f6630a3af285160402dd587f59d6e39181a10f2",
+      "outputBytes": 26916,
+      "seconds": 2.4374,
+      "stringResourceId": 4057
+    },
+    "DIS058": {
+      "role": "result",
+      "source": "SIMCOPT/SOUND/ENGLISH/DIS058.WAV",
+      "sourceSha256": "00985f51a5fdfbd79f2f9af1cbe592e599d3c3da9d7c5bb75fb63dba7aed604a",
+      "outputSha256": "00985f51a5fdfbd79f2f9af1cbe592e599d3c3da9d7c5bb75fb63dba7aed604a",
+      "outputBytes": 20716,
+      "seconds": 1.875,
+      "stringResourceId": 4058
+    },
+    "DIS059": {
+      "role": "result",
+      "source": "SIMCOPT/SOUND/ENGLISH/DIS059.WAV",
+      "sourceSha256": "31ce32940bb757a458889b7fdb42ea31fc48eb1a426e95a3bd0d06e66a4d1fc4",
+      "outputSha256": "31ce32940bb757a458889b7fdb42ea31fc48eb1a426e95a3bd0d06e66a4d1fc4",
+      "outputBytes": 19234,
+      "seconds": 1.7406,
+      "stringResourceId": 4059
+    },
+    "DIS060": {
+      "role": "result",
+      "source": "SIMCOPT/SOUND/ENGLISH/DIS060.WAV",
+      "sourceSha256": "f556c49cd6ae330d6ea290c06cf6503b407f63a6139280959fa283245e3f97c6",
+      "outputSha256": "f556c49cd6ae330d6ea290c06cf6503b407f63a6139280959fa283245e3f97c6",
+      "outputBytes": 19036,
+      "seconds": 1.7226,
+      "stringResourceId": 4060
+    },
+    "DIS061": {
+      "role": "result",
+      "source": "SIMCOPT/SOUND/ENGLISH/DIS061.WAV",
+      "sourceSha256": "d09b7218220cf58954b5b50460278152753596f5882ca6fa9538591fb9017e46",
+      "outputSha256": "d09b7218220cf58954b5b50460278152753596f5882ca6fa9538591fb9017e46",
+      "outputBytes": 21246,
+      "seconds": 1.923,
+      "stringResourceId": 4061
+    },
+    "DIS062": {
+      "role": "result",
+      "source": "SIMCOPT/SOUND/ENGLISH/DIS062.WAV",
+      "sourceSha256": "3a60e26e3fbd689754b7ed2485daf02e62ab1c50ca74e589bc099a1dff38f62a",
+      "outputSha256": "3a60e26e3fbd689754b7ed2485daf02e62ab1c50ca74e589bc099a1dff38f62a",
+      "outputBytes": 17094,
+      "seconds": 1.5465,
+      "stringResourceId": 4062
+    },
+    "DIS063": {
+      "role": "result",
+      "source": "SIMCOPT/SOUND/ENGLISH/DIS063.WAV",
+      "sourceSha256": "7dc845089d40ee92a79d105cf9f176abf70ab690cb202460654841eaf7b70179",
+      "outputSha256": "7dc845089d40ee92a79d105cf9f176abf70ab690cb202460654841eaf7b70179",
+      "outputBytes": 29394,
+      "seconds": 2.6621,
+      "stringResourceId": 4063
+    },
+    "DIS064": {
+      "role": "result",
+      "source": "SIMCOPT/SOUND/ENGLISH/DIS064.WAV",
+      "sourceSha256": "d682656b5ead2d7554c6f2fa263b009167c1ec1921ef7d2aeb1cda5c6e4cf31a",
+      "outputSha256": "d682656b5ead2d7554c6f2fa263b009167c1ec1921ef7d2aeb1cda5c6e4cf31a",
+      "outputBytes": 10454,
+      "seconds": 0.9441,
+      "stringResourceId": 4064
+    },
+    "DIS065": {
+      "role": "result",
+      "source": "SIMCOPT/SOUND/ENGLISH/DIS065.WAV",
+      "sourceSha256": "070ee4cad3c0464d2414c94ce48822e762708cc1be5273e7f925d399c7f3301a",
+      "outputSha256": "070ee4cad3c0464d2414c94ce48822e762708cc1be5273e7f925d399c7f3301a",
+      "outputBytes": 12172,
+      "seconds": 1.1,
+      "stringResourceId": 4065
+    },
+    "DIS066": {
+      "role": "result",
+      "source": "SIMCOPT/SOUND/ENGLISH/DIS066.WAV",
+      "sourceSha256": "074e95a5f276e61601540d352382e9455cee4f891f5871a571b8a4fbe960192d",
+      "outputSha256": "074e95a5f276e61601540d352382e9455cee4f891f5871a571b8a4fbe960192d",
+      "outputBytes": 17032,
+      "seconds": 1.5408,
+      "stringResourceId": 4066
+    },
+    "DIS067": {
+      "role": "result",
+      "source": "SIMCOPT/SOUND/ENGLISH/DIS067.WAV",
+      "sourceSha256": "55023db164586e037357634d5e7a9eb91978ad0fc505b0d8b69e9996960b3f6f",
+      "outputSha256": "55023db164586e037357634d5e7a9eb91978ad0fc505b0d8b69e9996960b3f6f",
+      "outputBytes": 13844,
+      "seconds": 1.2517,
+      "stringResourceId": 4067
+    },
+    "DIS068": {
+      "role": "result",
+      "source": "SIMCOPT/SOUND/ENGLISH/DIS068.WAV",
+      "sourceSha256": "7e453a67d9370ebae9a76f296cef9fd743c14e151e0d1d6a013f22e19bd7738d",
+      "outputSha256": "7e453a67d9370ebae9a76f296cef9fd743c14e151e0d1d6a013f22e19bd7738d",
+      "outputBytes": 25086,
+      "seconds": 2.2713,
+      "stringResourceId": 4068
+    },
+    "POL1": {
+      "role": "serviceVoice",
+      "source": "SIMCOPT/SOUND/ENGLISH/POL1.WAV",
+      "sourceSha256": "50a580ef3e3d49ea2d09dbc9f0d0a07894426091e3ccc61cac3931538e1d9977",
+      "outputSha256": "50a580ef3e3d49ea2d09dbc9f0d0a07894426091e3ccc61cac3931538e1d9977",
+      "outputBytes": 32588,
+      "seconds": 2.9518
+    },
+    "POL2": {
+      "role": "serviceVoice",
+      "source": "SIMCOPT/SOUND/ENGLISH/POL2.WAV",
+      "sourceSha256": "3b40a68181d9a437198009d62d472b8022c2e97cf5c1a8e7dedf26ddb0a8de50",
+      "outputSha256": "3b40a68181d9a437198009d62d472b8022c2e97cf5c1a8e7dedf26ddb0a8de50",
+      "outputBytes": 23084,
+      "seconds": 2.0898
+    },
+    "POL3": {
+      "role": "serviceVoice",
+      "source": "SIMCOPT/SOUND/ENGLISH/POL3.WAV",
+      "sourceSha256": "bb0a055ebb2bd71439ecdc2b8bad38eb83dfad7bc322a58949137d911f77dd66",
+      "outputSha256": "bb0a055ebb2bd71439ecdc2b8bad38eb83dfad7bc322a58949137d911f77dd66",
+      "outputBytes": 22924,
+      "seconds": 2.0753
+    },
+    "POL4": {
+      "role": "serviceVoice",
+      "source": "SIMCOPT/SOUND/ENGLISH/POL4.WAV",
+      "sourceSha256": "d2670994085f30b3491feb701829459985f46114c628f40018eeb2b239b043b9",
+      "outputSha256": "d2670994085f30b3491feb701829459985f46114c628f40018eeb2b239b043b9",
+      "outputBytes": 30572,
+      "seconds": 2.769
+    },
+    "POL5": {
+      "role": "serviceVoice",
+      "source": "SIMCOPT/SOUND/ENGLISH/POL5.WAV",
+      "sourceSha256": "106625329b6476f6efaca1b3cf13c643e8110dc675f93f68619f88b04d81fa77",
+      "outputSha256": "106625329b6476f6efaca1b3cf13c643e8110dc675f93f68619f88b04d81fa77",
+      "outputBytes": 34028,
+      "seconds": 3.0824
+    },
+    "POL6": {
+      "role": "serviceVoice",
+      "source": "SIMCOPT/SOUND/ENGLISH/POL6.WAV",
+      "sourceSha256": "6e899f2fdd681bdf78c1f2f3bba902caa827946a2433b5b084360a59ab79dc4e",
+      "outputSha256": "6e899f2fdd681bdf78c1f2f3bba902caa827946a2433b5b084360a59ab79dc4e",
+      "outputBytes": 20268,
+      "seconds": 1.8344
+    },
+    "MDVC1": {
+      "role": "serviceVoice",
+      "source": "SIMCOPT/SOUND/ENGLISH/MDVC1.WAV",
+      "sourceSha256": "1edee63a0b841f1cf3d6f022472a6c2e1f0a9068d74eafe0a14e42ee134e8a09",
+      "outputSha256": "1edee63a0b841f1cf3d6f022472a6c2e1f0a9068d74eafe0a14e42ee134e8a09",
+      "outputBytes": 24460,
+      "seconds": 2.2146
+    },
+    "MDVC2": {
+      "role": "serviceVoice",
+      "source": "SIMCOPT/SOUND/ENGLISH/MDVC2.WAV",
+      "sourceSha256": "f094d0f5513cd8c6f6def02a7a04791c7bf3dd1131f9a961de5092bc116b39f0",
+      "outputSha256": "f094d0f5513cd8c6f6def02a7a04791c7bf3dd1131f9a961de5092bc116b39f0",
+      "outputBytes": 19820,
+      "seconds": 1.7937
+    },
+    "MDVC3": {
+      "role": "serviceVoice",
+      "source": "SIMCOPT/SOUND/ENGLISH/MDVC3.WAV",
+      "sourceSha256": "1e9c53e133f2deb895ffa2ecdfa7b696724460fe3a2600d76646cab88c3ae626",
+      "outputSha256": "1e9c53e133f2deb895ffa2ecdfa7b696724460fe3a2600d76646cab88c3ae626",
+      "outputBytes": 20172,
+      "seconds": 1.8257
+    },
+    "MDVC4": {
+      "role": "serviceVoice",
+      "source": "SIMCOPT/SOUND/ENGLISH/MDVC4.WAV",
+      "sourceSha256": "f0eef1b42021f1b46d68609ddf20a7c744e8d5d3bce7e28ca422f28c1e144a5b",
+      "outputSha256": "f0eef1b42021f1b46d68609ddf20a7c744e8d5d3bce7e28ca422f28c1e144a5b",
+      "outputBytes": 15884,
+      "seconds": 1.4367
+    },
+    "JAZZ6MX1": {
+      "role": "music",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/JAZZ/MUSIC/JAZZ6MX1.WAV",
+      "sourceSha256": "723418a2075eaa8a183c0cb74c11bbeb0dd992b61cfa553bad0f606cb7b3be90",
+      "outputSha256": "82607eb8e1f2f283b024406c9df6997b60051ddaefa20cc4040f1c99fb6b6d22",
+      "outputBytes": 1152356,
+      "seconds": 287.8839
+    },
+    "JAZZ5MX1": {
+      "role": "music",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/JAZZ/MUSIC/JAZZ5MX1.WAV",
+      "sourceSha256": "09bed855af010bd5bc101468765b489c8d91c14cb628234dd2b73ac3b36227ce",
+      "outputSha256": "00f10a7125ea2b88bc5b75ecadddc668f99a0a6beb2e212d920a661543635310",
+      "outputBytes": 1185375,
+      "seconds": 296.1589
+    },
+    "DJ01": {
+      "role": "dj",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/JAZZ/DJ/ENGLISH/DJ01.WAV",
+      "sourceSha256": "3ef697be63afac01d8fb2017bdede7204cd2379013aacb66684071a89efd7bbe",
+      "outputSha256": "3ef697be63afac01d8fb2017bdede7204cd2379013aacb66684071a89efd7bbe",
+      "outputBytes": 97032,
+      "seconds": 8.797
+    },
+    "DJ04": {
+      "role": "dj",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/JAZZ/DJ/ENGLISH/DJ04.WAV",
+      "sourceSha256": "26de70513600bb0b7771d3c09da76add1f9ed42a383f56c142703fbecf7fb026",
+      "outputSha256": "26de70513600bb0b7771d3c09da76add1f9ed42a383f56c142703fbecf7fb026",
+      "outputBytes": 117386,
+      "seconds": 10.6433
+    },
+    "DJ07": {
+      "role": "dj",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/JAZZ/DJ/ENGLISH/DJ07.WAV",
+      "sourceSha256": "0c04748c8735bfd734ed17fc8aeb96d86cc5e721d4c5847af51e829f0e25b922",
+      "outputSha256": "0c04748c8735bfd734ed17fc8aeb96d86cc5e721d4c5847af51e829f0e25b922",
+      "outputBytes": 81182,
+      "seconds": 7.3594
+    },
+    "DJ10": {
+      "role": "dj",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/JAZZ/DJ/ENGLISH/DJ10.WAV",
+      "sourceSha256": "f098f8cd58d99d3773ff31344abd53b0e0d24ff724926bae581051a87f854b62",
+      "outputSha256": "f098f8cd58d99d3773ff31344abd53b0e0d24ff724926bae581051a87f854b62",
+      "outputBytes": 78030,
+      "seconds": 7.0736
+    },
+    "ROCK2MX2": {
+      "role": "music",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/ROCK/MUSIC/ROCK2MX2.WAV",
+      "sourceSha256": "699bfcd5ba7568d27e79134a69e7860f3a820b75f8360f80b8ce5723342a4cce",
+      "outputSha256": "56caad83346fc8d6b4ed6b006729f159efe38ea4e949ba0edf45134cf9304a59",
+      "outputBytes": 1083811,
+      "seconds": 270.7517
+    },
+    "ROCK3MX2": {
+      "role": "music",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/ROCK/MUSIC/ROCK3MX2.WAV",
+      "sourceSha256": "af3d85c1ac6fced72ab563c51619ea073bc9ccea6bd775967580c0eb9b729396",
+      "outputSha256": "97dc4c77037f208c95164f66ea515d3efbc698e5f24cf655c05a7c7a656409a0",
+      "outputBytes": 1226544,
+      "seconds": 306.4279
+    },
+    "DJ03": {
+      "role": "dj",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/ROCK/DJ/ENGLISH/DJ03.WAV",
+      "sourceSha256": "f61cb290e6f65c8151d89381bff88ce4ef0f4078a822d8598d6ae4d312a98ccf",
+      "outputSha256": "f61cb290e6f65c8151d89381bff88ce4ef0f4078a822d8598d6ae4d312a98ccf",
+      "outputBytes": 68076,
+      "seconds": 6.1707
+    },
+    "DJ06": {
+      "role": "dj",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/ROCK/DJ/ENGLISH/DJ06.WAV",
+      "sourceSha256": "772e4a93af1e814beae80e93c1a70d4b62bf27c94f5a62d2fbbdf7d2f7c301bd",
+      "outputSha256": "772e4a93af1e814beae80e93c1a70d4b62bf27c94f5a62d2fbbdf7d2f7c301bd",
+      "outputBytes": 57164,
+      "seconds": 5.181
+    },
+    "DJ09": {
+      "role": "dj",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/ROCK/DJ/ENGLISH/DJ09.WAV",
+      "sourceSha256": "f176c1725a8a9dc8fdcb01f20fedc7baabe7e24dc3138eb2ce1f9b581cbce131",
+      "outputSha256": "f176c1725a8a9dc8fdcb01f20fedc7baabe7e24dc3138eb2ce1f9b581cbce131",
+      "outputBytes": 40524,
+      "seconds": 3.6717
+    },
+    "DJ12": {
+      "role": "dj",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/ROCK/DJ/ENGLISH/DJ12.WAV",
+      "sourceSha256": "3ca3554fa9b318216f8290352267f786e7ffce8c1f44b50fead48b70e18abdc3",
+      "outputSha256": "3ca3554fa9b318216f8290352267f786e7ffce8c1f44b50fead48b70e18abdc3",
+      "outputBytes": 43644,
+      "seconds": 3.9546
+    },
+    "TKNO4MX2": {
+      "role": "music",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/TECHNO/MUSIC/TKNO4MX2.WAV",
+      "sourceSha256": "7fb7cea7ae516098eea10bc23fbcd191a3dc6294f36b69ec84bf71c833c8c686",
+      "outputSha256": "a84d88d477b837e3bf6d4a79db364d83cf7a7a08f1c3cfd4527cc262d2a3ed8e",
+      "outputBytes": 1111814,
+      "seconds": 277.7484
+    },
+    "TKNO2MX2": {
+      "role": "music",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/TECHNO/MUSIC/TKNO2MX2.WAV",
+      "sourceSha256": "ebc7e5f97cbeb582405b32d6e56af683e91e752f422d962e4cee865a20e80552",
+      "outputSha256": "25cce5c2c6bff6458fcff8496cf6f72e46f9e5b6ad93b4dcf397c1c22511cd35",
+      "outputBytes": 1134384,
+      "seconds": 283.3822
+    },
+    "DJ02": {
+      "role": "dj",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/TECHNO/DJ/ENGLISH/DJ02.WAV",
+      "sourceSha256": "3eda8c125e8d7144ab5fb7ba1e6ff4505ed3be14907fc01186df44d13894df69",
+      "outputSha256": "3eda8c125e8d7144ab5fb7ba1e6ff4505ed3be14907fc01186df44d13894df69",
+      "outputBytes": 60214,
+      "seconds": 5.4575
+    },
+    "DJ05": {
+      "role": "dj",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/TECHNO/DJ/ENGLISH/DJ05.WAV",
+      "sourceSha256": "fc79db63925ba8e308717c295f044279ac0ae90e9c6d2be4b79e0f6eb9c1de19",
+      "outputSha256": "fc79db63925ba8e308717c295f044279ac0ae90e9c6d2be4b79e0f6eb9c1de19",
+      "outputBytes": 43544,
+      "seconds": 3.9456
+    },
+    "DJ08": {
+      "role": "dj",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/TECHNO/DJ/ENGLISH/DJ08.WAV",
+      "sourceSha256": "ec7ac0ca8bd8f6b8520eef78180162c36e4ea533240a79bdffc3dd67c7ed775c",
+      "outputSha256": "ec7ac0ca8bd8f6b8520eef78180162c36e4ea533240a79bdffc3dd67c7ed775c",
+      "outputBytes": 41548,
+      "seconds": 3.7645
+    },
+    "DJ11": {
+      "role": "dj",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/TECHNO/DJ/ENGLISH/DJ11.WAV",
+      "sourceSha256": "a2662cf804945b40099d34f9852466e5d3e19c03135dec10356d79685ed076ad",
+      "outputSha256": "a2662cf804945b40099d34f9852466e5d3e19c03135dec10356d79685ed076ad",
+      "outputBytes": 65858,
+      "seconds": 5.9695
+    },
+    "SUMR3": {
+      "role": "music",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/CLASSIC/MUSIC/SUMR3.WAV",
+      "sourceSha256": "4861844961a9a8cb144c1881902bc77ca649903a834d9c332b44acf31a9d73a5",
+      "outputSha256": "0bc8cf7c856362ea70737cdad57a064f58417e8cab44bdaac3000158902cc1e6",
+      "outputBytes": 651014,
+      "seconds": 162.54
+    },
+    "SPRING3": {
+      "role": "music",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/CLASSIC/MUSIC/SPRING3.WAV",
+      "sourceSha256": "19264e929d4c6693470158361d8c9be2c24d9fd39954416011998bc013bc4c3f",
+      "outputSha256": "e1d73a2a7e9e24bd1540d0b66f48e235a55aba29731cfd938bd00cd9ce9ade4c",
+      "outputBytes": 931047,
+      "seconds": 232.5639
+    },
+    "DJ13": {
+      "role": "dj",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/CLASSIC/DJ/ENGLISH/DJ13.WAV",
+      "sourceSha256": "750771ac04885b7f78c8723688aefec0232d985f6fa7cb73ab7c92c4d98d6118",
+      "outputSha256": "750771ac04885b7f78c8723688aefec0232d985f6fa7cb73ab7c92c4d98d6118",
+      "outputBytes": 118520,
+      "seconds": 10.746
+    },
+    "DJ14": {
+      "role": "dj",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/CLASSIC/DJ/ENGLISH/DJ14.WAV",
+      "sourceSha256": "924bb28c2b0f3fab4229491f9f5ec917660b9e34176151c4c7e6a40689b73149",
+      "outputSha256": "924bb28c2b0f3fab4229491f9f5ec917660b9e34176151c4c7e6a40689b73149",
+      "outputBytes": 95052,
+      "seconds": 8.6175
+    },
+    "DJ15": {
+      "role": "dj",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/CLASSIC/DJ/ENGLISH/DJ15.WAV",
+      "sourceSha256": "11db8a1e6ede0363973ba2030d27d6054795eda79624b2da3b9a5abff8fe6efd",
+      "outputSha256": "11db8a1e6ede0363973ba2030d27d6054795eda79624b2da3b9a5abff8fe6efd",
+      "outputBytes": 65508,
+      "seconds": 5.9377
+    },
+    "DJ16": {
+      "role": "dj",
+      "source": "SIMCOPT/SOUND/RADIO/STATIONS/CLASSIC/DJ/ENGLISH/DJ16.WAV",
+      "sourceSha256": "40bb19f9d7ff0f3fe8fa005e5ff8e5092169cfb3ef038baef14d2f75f8ea8605",
+      "outputSha256": "40bb19f9d7ff0f3fe8fa005e5ff8e5092169cfb3ef038baef14d2f75f8ea8605",
+      "outputBytes": 109004,
+      "seconds": 9.883
+    },
+    "AD006": {
+      "role": "advert",
+      "source": "SIMCOPT/SOUND/RADIO/COMMERCL/ENGLISH/AD006.WAV",
+      "sourceSha256": "5b7048cb74ec50b6decb98916a828cea24523dfc852a0adcbe7481fa680811ac",
+      "outputSha256": "5b7048cb74ec50b6decb98916a828cea24523dfc852a0adcbe7481fa680811ac",
+      "outputBytes": 60324,
+      "seconds": 5.4676
+    },
+    "AD004": {
+      "role": "advert",
+      "source": "SIMCOPT/SOUND/RADIO/COMMERCL/ENGLISH/AD004.WAV",
+      "sourceSha256": "572b269df6070802100617c2dda3fb009daffd68734942c751cf9106649c3e1e",
+      "outputSha256": "572b269df6070802100617c2dda3fb009daffd68734942c751cf9106649c3e1e",
+      "outputBytes": 68656,
+      "seconds": 6.2233
+    },
+    "AD042": {
+      "role": "advert",
+      "source": "SIMCOPT/SOUND/RADIO/COMMERCL/ENGLISH/AD042.WAV",
+      "sourceSha256": "37f6043cd6c9df337f7a77724f4e6fb49a9701066ee55156d94cf141bc6f7bb9",
+      "outputSha256": "37f6043cd6c9df337f7a77724f4e6fb49a9701066ee55156d94cf141bc6f7bb9",
+      "outputBytes": 90366,
+      "seconds": 8.1925
+    },
+    "AD027": {
+      "role": "advert",
+      "source": "SIMCOPT/SOUND/RADIO/COMMERCL/ENGLISH/AD027.WAV",
+      "sourceSha256": "c3ee96b5456374b5df4732d7cd3c0386be99e5bab6ea6ad992a2b11c2e64cf3e",
+      "outputSha256": "c3ee96b5456374b5df4732d7cd3c0386be99e5bab6ea6ad992a2b11c2e64cf3e",
+      "outputBytes": 94540,
+      "seconds": 8.5711
+    },
+    "AD009": {
+      "role": "advert",
+      "source": "SIMCOPT/SOUND/RADIO/COMMERCL/ENGLISH/AD009.WAV",
+      "sourceSha256": "a80db1c5a32042d5c92c456cff5b82825d7876dcc4b5b8b1256df7f99e5dbcaf",
+      "outputSha256": "a80db1c5a32042d5c92c456cff5b82825d7876dcc4b5b8b1256df7f99e5dbcaf",
+      "outputBytes": 106382,
+      "seconds": 9.6452
+    },
+    "AD003": {
+      "role": "advert",
+      "source": "SIMCOPT/SOUND/RADIO/COMMERCL/ENGLISH/AD003.WAV",
+      "sourceSha256": "20223c8f336ec6a393f76186ff2eb181aa3e63f150e938ba22b24323a8b6b8d2",
+      "outputSha256": "20223c8f336ec6a393f76186ff2eb181aa3e63f150e938ba22b24323a8b6b8d2",
+      "outputBytes": 113074,
+      "seconds": 10.2522
+    }
+  }
+}

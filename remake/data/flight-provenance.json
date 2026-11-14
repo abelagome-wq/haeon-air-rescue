@@ -1,0 +1,33 @@
+{
+  "sources": {
+    "SIMCOPT/HELP/ENGLISH/04TUT.HTM": "The pilot starts on foot, turns toward the parked aircraft, walks into its side door and then sees the chase view.",
+    "SIMCOPT/HELP/ENGLISH/05TUT.HTM": "Arrow keys move and turn; A/S slide; Q starts the rotor and climbs, W descends, E exits on the ground.",
+    "SIMCOPT/HELP/ENGLISH/07TUT.HTM": "T cycles chase, forward cockpit and vertical view down from above the tail. I/K zoom, J/L raise/lower the camera and O/P change its aim.",
+    "SIMCOPT/HELP/ENGLISH/10TUT.HTM": "Obstacles and abrupt landings can cause damage. Descent continues briefly after releasing W.",
+    "SIMCOPT/HELP/ENGLISH/13TUT.HTM": "Turning can reduce forward momentum. Approach a landing in stages, avoiding slopes.",
+    "SIMCOPT/HELP/ENGLISH/14TUT.HTM": "Fuel exhaustion causes descent. Forward flight supports autorotation and a correctly timed backward flare softens touchdown.",
+    "SIMCOPT/HELP/ENGLISH/99REF.HTM": "The manual describes field fuel and hangar repairs. The shipped binary also has a field repair transaction.",
+    "SIMCOPT/TWEAK/HELI.TWK": "Ctrl7 climb, Ctrl8 Max Load, Ctrl10 hourly fuel burn, Ctrl12 damage limit, Ctrl13 tank gallons. The runtime registers only controls 0..13.",
+    "SIMCOPT/HELP/ENGLISH/15TUT.HTM": "Rotor wash at low altitude can spread fire. Rising hot air buffets the aircraft and close flames cause damage.",
+    "SIMCOPT/HELP/ENGLISH/40REF.HTM": "Empty kg and rotor diameter in metres for the eight civilian aircraft.",
+    "SIMCOPT/SIMCOPT.EXE": "Maintenance prices, field multiplier and gas see original-economy-evidence.json.",
+    "Apache empty mass": "AH-64A, 10267 lb. https://www.army.mil/article/35056/technology-gives-apache-block-iii-more-lift-capability-landing-ability/",
+    "Rotor calibration": "Ideal axial-flow disk power from NASA TM-20210021872. https://ntrs.nasa.gov/citations/20210021872",
+    "Fuel mass": "FAA-H-8083-1B figure 3-4, 59 °F standard weights, 6.01 lb/US gal AVGAS and 6.68 lb/US gal JET A. https://www.faa.gov/sites/faa.gov/files/regulations_policies/handbooks_manuals/aviation/FAA-H-8083-1.pdf"
+  },
+  "remakeImplementation": [
+    "Door and eye positions use the fan model's pilot seat and local metres. Walking speed, door approach radius, starting distance, and the approximate low, distant chase framing are remake choices informed by the observed original.",
+    "Neutral acceleration, turn braking, ground slope thresholds, collision severity, autorotation, flare and damage-related loss of control are simulation tuning. The original integrator and the units of the Heli Landing thresholds have not been recovered.",
+    "The twelve longitudinal hull sections provide a broad phase. Model vertex projections refine contact with a facade, and the main and tail rotor sweeps use the actual mesh radii and blade heights. Building exteriors, roof fittings and civic models keep fixed world-space geometry through an approach. Render and collision use matching instance transformations. Flight sweeps the hull between poses, and movement, walking and chase-camera clearance sample the same physical scene.",
+    "The rebound is remake tuning. A closing velocity relative to the contact face rebounds away from it while retaining tangential motion. Simultaneous contacts separate the hull from corners, and a low-speed skid touchdown can still be a landing.",
+    "The original README documents 640x480 fullscreen. The remake retains its 4:3 play area under resize, separately from render density and touch controls. The in-cabin view uses each aircraft's authored seat and follows its orientation.",
+    "Moving fuselage and rotor vibrations, progressive blade-tip deflection above 24 percent and exhaust smoke above 52 percent damage are fan animation choices. They follow the persistent airframe condition and reset when repaired. Damage deforms the loaded instance only.",
+    "15TUT describes rising hot air, low rotor wash and flame damage. FIRE.TWK gives Fire Radius 43.9 and HELI.TWK lists Min/Max Fire Alt -48.0/61.1; their exact native spatial scaling and gust integrator were not established. The plume width, height, phased lateral acceleration, upward force, pitch/roll coupling and near-flame damage rate are remake tuning. Extinguished sources cease applying forces while existing aircraft momentum decays.",
+    "Fuel consumption scales the original hourly configuration by rotor speed. The executable's fixed-point unit prices are truncated to whole currency before the field multiplier of three. The remake uses the assigned home base for the location check.",
+    "The source HUD divides current load by Max Load. Its mass unit and the exact native force integrator are unknown. This reconstruction interprets Max Load as pounds of useful load, uses an 80 kg pilot or rider, and sizes a full water bucket to half the useful load. The hoist reserves passenger mass as soon as a rider attaches.",
+    "Maximum static thrust is inferred from disk area, empty mass, useful load and original climb rate using ideal axial momentum theory at sea level. Normalized climb is calibrated to original ClimbRate with a healthy helicopter, full tank and pilot. Rotor authority scales with squared RPM and health. The UI reports available thrust / current weight at full collective for that RPM, rather than commanded hover thrust.",
+    "The nine instrument layouts are fan-designed. Analog pointers, arcs, numeric tapes and drums read live flight data. They are not claims about original model-specific dashboards.",
+    "Condition is stored as gallons and raw damage points. An accepted service quote returns the resulting condition for the same career transaction as its cost.",
+    "The classic key scheme is the default. The optional modern scheme preserves WASD, Space/Shift, Q/R and C. Xbox/touch flight axes remain supported."
+  ]
+}

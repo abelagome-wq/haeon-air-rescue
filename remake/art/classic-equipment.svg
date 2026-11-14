@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 56">
+  <title>물양동이, 물대포, 확성기, 구조 밧줄, 최루탄</title>
+  <defs>
+    <linearGradient id="gold" x2=".7" y2="1"><stop stop-color="#fff0ad"/><stop offset=".48" stop-color="#edc262"/><stop offset="1" stop-color="#98652d"/></linearGradient>
+    <linearGradient id="pipe" x2="0" y2="1"><stop stop-color="#c6c7c2"/><stop offset=".4" stop-color="#777a7a"/><stop offset=".7" stop-color="#b5b6b0"/><stop offset="1" stop-color="#535556"/></linearGradient>
+  </defs>
+  <g stroke="#29272a" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+    <g transform="translate(3 2)">
+      <path d="M14 24C14 4 43 4 43 24" fill="none" stroke="#e3c273" stroke-width="3"/>
+      <path d="M9 19L47 22 41 45 16 43Z" fill="url(#gold)"/>
+      <path d="M10 20Q26 13 47 21Q30 26 10 20Z" fill="#715b3a"/>
+      <path d="M18 27l3 12M27 27l1 13" fill="none" stroke="#f8dc8e"/>
+    </g>
+    <g transform="translate(64 1) rotate(-27 32 28)">
+      <path d="M8 19h30v16H8z" fill="url(#pipe)"/>
+      <path d="M29 18h17v17H29zM6 18h6v18H6z" fill="url(#gold)"/>
+      <path d="M44 20h11v13H44z" fill="#c7c4ab"/>
+      <path d="M12 17v20m5-20v20m5-20v20" fill="none" stroke="#454545"/>
+      <path d="M28 32h10v13h-8z" fill="#a47f42"/>
+    </g>
+    <g transform="translate(128 1)">
+      <path d="M13 22l24-12v33L13 31z" fill="url(#gold)"/>
+      <path d="M37 10q5 1 5 16t-5 17z" fill="#c39340"/>
+      <path d="M9 22h7v10H9zM14 31l7 1 3 12-8 1z" fill="url(#pipe)"/>
+      <path d="M46 18l8-6m-6 14h9m-11 8l8 6" fill="none" stroke="#f1ce76"/>
+    </g>
+    <g transform="translate(192 0)">
+      <path d="M10 7l17 13c16-7 30 7 23 21-8 14-33 4-29-8 2-7 6-12 11-16" fill="none" stroke="#282629" stroke-width="6"/>
+      <path d="M10 7l17 13c16-7 30 7 23 21-8 14-33 4-29-8 2-7 6-12 11-16" fill="none" stroke="#e8c46d" stroke-width="3"/>
+      <path d="M26 16l8 6-3 4-8-7z" fill="url(#pipe)"/>
+    </g>
+    <g transform="translate(256 1)" fill="url(#gold)">
+      <path d="M9 11h45v33H9z" fill="#4b4948"/>
+      <g stroke-width="1.5">
+        <circle cx="15" cy="20" r="4"/><circle cx="24" cy="20" r="4"/><circle cx="33" cy="20" r="4"/><circle cx="42" cy="20" r="4"/><circle cx="51" cy="20" r="4"/>
+        <circle cx="15" cy="34" r="4"/><circle cx="24" cy="34" r="4"/><circle cx="33" cy="34" r="4"/><circle cx="42" cy="34" r="4"/><circle cx="51" cy="34" r="4"/>
+      </g>
+    </g>
+  </g>
+</svg>

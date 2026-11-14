@@ -1,0 +1,2977 @@
+{
+  "schemaVersion": 1,
+  "imageBase": "0x400000",
+  "evidenceStandard": "Static inspection of the supplied Korean executable. VA, RVA and raw offset are recorded. Untraced behavior has no invented numeral.",
+  "sources": [
+    {
+      "path": "SIMCOPT/SIMCOPT.EXE",
+      "bytes": 1273856,
+      "sha256": "cedfdd009e72cb207091f152dbb34a51a63ce3f7416df8da7c7ed3073ec9ebba"
+    },
+    {
+      "path": "SIMCOPT/TWEAK/SIM3D.TWK",
+      "bytes": 10275,
+      "sha256": "dc008553edb312d4981a874bcea33f2ed507590428e56d05f41dfeeaa8bb3692"
+    },
+    {
+      "path": "SIMCOPT/TWEAK/HELI.TWK",
+      "bytes": 16029,
+      "sha256": "b647105e27cc5136facb8de1d785b789d73c5779bf5979b24580922c3f880991"
+    },
+    {
+      "path": "SIMCOPT/TWEAK/CAREER.TWK",
+      "bytes": 31457,
+      "sha256": "72f8052778037e2a7943258e29a812c29e02f81138dfb39e3a9d43f29b782988"
+    },
+    {
+      "path": "SIMCOPT/HELP/ENGLISH/11TUT.HTM",
+      "bytes": 3647,
+      "sha256": "d482816e0407e08a0cf19e9401ec6545c35571f026ce934c9c4ad142f98d3229"
+    },
+    {
+      "path": "SIMCOPT/HELP/ENGLISH/18REF.HTM",
+      "bytes": 1676,
+      "sha256": "8ee687e4123c39b63a6c78ff78131aa5ca2b48ab4e0e7e9334243587f422a8c0"
+    },
+    {
+      "path": "SIMCOPT/HELP/ENGLISH/39REF.HTM",
+      "bytes": 3212,
+      "sha256": "cdf37a4b4763e7095d33075c7d2a94e59f179b99857972dc49d56eae9796b315"
+    },
+    {
+      "path": "SIMCOPT/HELP/ENGLISH/99REF.HTM",
+      "bytes": 2345,
+      "sha256": "e54d9998fbdd33afadda4fc7b8c1b4294b1cb17dafd61e258eec9b58341d855c"
+    }
+  ],
+  "ledger": {
+    "cashAdjust": {
+      "va": "0x47a550",
+      "rva": "0x7a550",
+      "fileOffset": "0x79950",
+      "instructions": [
+        "0047A550 cmp dword ptr [0x55dd98], 1",
+        "0047A557 mov edx, 0x55dd40",
+        "0047A55C je 0x47a563",
+        "0047A55E mov edx, 0x55ddb4",
+        "0047A563 mov eax, dword ptr [esp + 4]",
+        "0047A567 add eax, dword ptr [edx + 0x40]",
+        "0047A56A mov dword ptr [edx + 0x40], eax",
+        "0047A56D jns 0x47a576",
+        "0047A56F mov dword ptr [edx + 0x40], 0",
+        "0047A576 ret"
+      ]
+    },
+    "scoreAdjust": {
+      "va": "0x47a5f0",
+      "rva": "0x7a5f0",
+      "fileOffset": "0x799f0",
+      "instructions": [
+        "0047A5F0 cmp dword ptr [0x4fa4ec], 0",
+        "0047A5F7 je 0x47a614",
+        "0047A5F9 cmp dword ptr [0x55dd98], 1",
+        "0047A600 mov eax, 0x55dd40",
+        "0047A605 je 0x47a60c",
+        "0047A607 mov eax, 0x55ddb4",
+        "0047A60C mov dword ptr [eax + 0x50], 0x270f",
+        "0047A613 ret",
+        "0047A614 cmp dword ptr [0x55dd98], 1",
+        "0047A61B mov edx, 0x55dd40",
+        "0047A620 je 0x47a627",
+        "0047A622 mov edx, 0x55ddb4",
+        "0047A627 mov eax, dword ptr [esp + 4]",
+        "0047A62B add eax, dword ptr [edx + 0x50]",
+        "0047A62E mov dword ptr [edx + 0x50], eax",
+        "0047A631 jns 0x47a63a",
+        "0047A633 mov dword ptr [edx + 0x50], 0",
+        "0047A63A ret"
+      ]
+    },
+    "zeroFloor": "Native cash and ordinary score adjustments both clamp at zero. A special promotion flag can hold score at 9999.",
+    "allDirectCashCallSites": [
+      {
+        "va": "0x42eeb5",
+        "rva": "0x2eeb5",
+        "fileOffset": "0x2e2b5"
+      },
+      {
+        "va": "0x42f072",
+        "rva": "0x2f072",
+        "fileOffset": "0x2e472"
+      },
+      {
+        "va": "0x443c39",
+        "rva": "0x43c39",
+        "fileOffset": "0x43039"
+      },
+      {
+        "va": "0x444fed",
+        "rva": "0x44fed",
+        "fileOffset": "0x443ed"
+      },
+      {
+        "va": "0x44501c",
+        "rva": "0x4501c",
+        "fileOffset": "0x4441c"
+      },
+      {
+        "va": "0x445047",
+        "rva": "0x45047",
+        "fileOffset": "0x44447"
+      },
+      {
+        "va": "0x455462",
+        "rva": "0x55462",
+        "fileOffset": "0x54862"
+      },
+      {
+        "va": "0x4554fe",
+        "rva": "0x554fe",
+        "fileOffset": "0x548fe"
+      },
+      {
+        "va": "0x4a2c88",
+        "rva": "0xa2c88",
+        "fileOffset": "0xa2088"
+      },
+      {
+        "va": "0x4ab0f1",
+        "rva": "0xab0f1",
+        "fileOffset": "0xaa4f1"
+      },
+      {
+        "va": "0x4ab139",
+        "rva": "0xab139",
+        "fileOffset": "0xaa539"
+      },
+      {
+        "va": "0x4ab162",
+        "rva": "0xab162",
+        "fileOffset": "0xaa562"
+      },
+      {
+        "va": "0x4ab18b",
+        "rva": "0xab18b",
+        "fileOffset": "0xaa58b"
+      },
+      {
+        "va": "0x4ab1b4",
+        "rva": "0xab1b4",
+        "fileOffset": "0xaa5b4"
+      },
+      {
+        "va": "0x4ab1dd",
+        "rva": "0xab1dd",
+        "fileOffset": "0xaa5dd"
+      },
+      {
+        "va": "0x4ab206",
+        "rva": "0xab206",
+        "fileOffset": "0xaa606"
+      },
+      {
+        "va": "0x4ab22d",
+        "rva": "0xab22d",
+        "fileOffset": "0xaa62d"
+      },
+      {
+        "va": "0x4ab299",
+        "rva": "0xab299",
+        "fileOffset": "0xaa699"
+      },
+      {
+        "va": "0x4ab2c2",
+        "rva": "0xab2c2",
+        "fileOffset": "0xaa6c2"
+      },
+      {
+        "va": "0x4ab30a",
+        "rva": "0xab30a",
+        "fileOffset": "0xaa70a"
+      },
+      {
+        "va": "0x4ab346",
+        "rva": "0xab346",
+        "fileOffset": "0xaa746"
+      },
+      {
+        "va": "0x4ab38c",
+        "rva": "0xab38c",
+        "fileOffset": "0xaa78c"
+      },
+      {
+        "va": "0x4ab481",
+        "rva": "0xab481",
+        "fileOffset": "0xaa881"
+      },
+      {
+        "va": "0x4ab4a7",
+        "rva": "0xab4a7",
+        "fileOffset": "0xaa8a7"
+      },
+      {
+        "va": "0x4ab4ca",
+        "rva": "0xab4ca",
+        "fileOffset": "0xaa8ca"
+      },
+      {
+        "va": "0x4ab4ed",
+        "rva": "0xab4ed",
+        "fileOffset": "0xaa8ed"
+      },
+      {
+        "va": "0x4ab510",
+        "rva": "0xab510",
+        "fileOffset": "0xaa910"
+      },
+      {
+        "va": "0x4ab533",
+        "rva": "0xab533",
+        "fileOffset": "0xaa933"
+      },
+      {
+        "va": "0x4ab553",
+        "rva": "0xab553",
+        "fileOffset": "0xaa953"
+      },
+      {
+        "va": "0x4ac058",
+        "rva": "0xac058",
+        "fileOffset": "0xab458"
+      }
+    ],
+    "cashCallClasses": {
+      "shopBuySell": [
+        "0x42EEB5",
+        "0x42F072"
+      ],
+      "inputCheat": [
+        "0x443C39"
+      ],
+      "repairFuelGas": [
+        "0x444FED",
+        "0x44501C",
+        "0x445047"
+      ],
+      "customThresholdReward": [
+        "0x455462"
+      ],
+      "careerPromotion": [
+        "0x4554FE"
+      ],
+      "actorContingentOneDollar": [
+        "0x4A2C88"
+      ],
+      "incidentEvents": [
+        "0x4AB0F1..0x4AB553"
+      ],
+      "incidentCompletion": [
+        "0x4AC058"
+      ]
+    }
+  },
+  "tweakStartup": {
+    "registerMissionPointers": {
+      "va": "0x477fb8",
+      "rva": "0x77fb8",
+      "fileOffset": "0x773b8"
+    },
+    "loadSim3dTwk": {
+      "va": "0x477fc7",
+      "rva": "0x77fc7",
+      "fileOffset": "0x773c7"
+    },
+    "registration": {
+      "va": "0x4629f0",
+      "rva": "0x629f0",
+      "fileOffset": "0x61df0"
+    },
+    "loadValues": {
+      "va": "0x462b80",
+      "rva": "0x62b80",
+      "fileOffset": "0x61f80"
+    },
+    "controls": [
+      {
+        "section": "General Miss",
+        "control": 0,
+        "label": "Max Easy",
+        "value": 2,
+        "slot": {
+          "va": "0x507138",
+          "rva": "0x107138",
+          "fileOffset": "0x105b38"
+        },
+        "compiledRaw": 1
+      },
+      {
+        "section": "General Miss",
+        "control": 1,
+        "label": "Easy Interval (secs)",
+        "value": 380.0,
+        "slot": {
+          "va": "0x507134",
+          "rva": "0x107134",
+          "fileOffset": "0x105b34"
+        },
+        "compiledRaw": 39321600
+      },
+      {
+        "section": "General Miss",
+        "control": 2,
+        "label": "Interval Adj",
+        "value": 0.2,
+        "slot": {
+          "va": "0x507140",
+          "rva": "0x107140",
+          "fileOffset": "0x105b40"
+        },
+        "compiledRaw": 13107
+      },
+      {
+        "section": "General Miss",
+        "control": 3,
+        "label": "UFO Money",
+        "value": 2000,
+        "slot": {
+          "va": "0x5071d8",
+          "rva": "0x1071d8",
+          "fileOffset": "0x105bd8"
+        },
+        "compiledRaw": 1500
+      },
+      {
+        "section": "General Miss",
+        "control": 4,
+        "label": "UFO Points",
+        "value": 1000,
+        "slot": {
+          "va": "0x5071dc",
+          "rva": "0x1071dc",
+          "fileOffset": "0x105bdc"
+        },
+        "compiledRaw": 900
+      },
+      {
+        "section": "Riot Miss",
+        "control": 0,
+        "label": "Riot End Money",
+        "value": 725,
+        "slot": {
+          "va": "0x50715c",
+          "rva": "0x10715c",
+          "fileOffset": "0x105b5c"
+        },
+        "compiledRaw": 1300
+      },
+      {
+        "section": "Riot Miss",
+        "control": 1,
+        "label": "Riot End Points",
+        "value": 505,
+        "slot": {
+          "va": "0x507160",
+          "rva": "0x107160",
+          "fileOffset": "0x105b60"
+        },
+        "compiledRaw": 600
+      },
+      {
+        "section": "Riot Miss",
+        "control": 2,
+        "label": "End Money Penalty",
+        "value": 0,
+        "slot": {
+          "va": "0x507164",
+          "rva": "0x107164",
+          "fileOffset": "0x105b64"
+        },
+        "compiledRaw": 100
+      },
+      {
+        "section": "Riot Miss",
+        "control": 3,
+        "label": "End Points Penalty",
+        "value": 250,
+        "slot": {
+          "va": "0x507168",
+          "rva": "0x107168",
+          "fileOffset": "0x105b68"
+        },
+        "compiledRaw": 50
+      },
+      {
+        "section": "Riot Miss",
+        "control": 4,
+        "label": "Riot Timer (secs)",
+        "value": 197.8,
+        "slot": {
+          "va": "0x50716c",
+          "rva": "0x10716c",
+          "fileOffset": "0x105b6c"
+        },
+        "compiledRaw": 11796480
+      },
+      {
+        "section": "Rescue Miss",
+        "control": 0,
+        "label": "Resc End Money(pp)",
+        "value": 200,
+        "slot": {
+          "va": "0x507170",
+          "rva": "0x107170",
+          "fileOffset": "0x105b70"
+        },
+        "compiledRaw": 110
+      },
+      {
+        "section": "Rescue Miss",
+        "control": 1,
+        "label": "Resc End Points(pp)",
+        "value": 100,
+        "slot": {
+          "va": "0x507174",
+          "rva": "0x107174",
+          "fileOffset": "0x105b74"
+        },
+        "compiledRaw": 60
+      },
+      {
+        "section": "Rescue Miss",
+        "control": 2,
+        "label": "Resc Inc Money(pp)",
+        "value": 50,
+        "slot": {
+          "va": "0x507220",
+          "rva": "0x107220",
+          "fileOffset": "0x105c20"
+        },
+        "compiledRaw": 50
+      },
+      {
+        "section": "Transport Miss",
+        "control": 0,
+        "label": "End Money(pp)",
+        "value": 100,
+        "slot": {
+          "va": "0x507180",
+          "rva": "0x107180",
+          "fileOffset": "0x105b80"
+        },
+        "compiledRaw": 70
+      },
+      {
+        "section": "Transport Miss",
+        "control": 1,
+        "label": "End Points(pp)",
+        "value": 50,
+        "slot": {
+          "va": "0x507184",
+          "rva": "0x107184",
+          "fileOffset": "0x105b84"
+        },
+        "compiledRaw": 35
+      },
+      {
+        "section": "Transport Miss",
+        "control": 2,
+        "label": "Inc Trans (pp$)",
+        "value": 20,
+        "slot": {
+          "va": "0x507224",
+          "rva": "0x107224",
+          "fileOffset": "0x105c24"
+        },
+        "compiledRaw": 30
+      },
+      {
+        "section": "Transport Miss",
+        "control": 3,
+        "label": "Inc Pickup (pp$)",
+        "value": 10,
+        "slot": {
+          "va": "0x50722c",
+          "rva": "0x10722c",
+          "fileOffset": "0x105c2c"
+        },
+        "compiledRaw": 10
+      },
+      {
+        "section": "Medevac Miss",
+        "control": 0,
+        "label": "Med End Money(pp)",
+        "value": 200,
+        "slot": {
+          "va": "0x507178",
+          "rva": "0x107178",
+          "fileOffset": "0x105b78"
+        },
+        "compiledRaw": 140
+      },
+      {
+        "section": "Medevac Miss",
+        "control": 1,
+        "label": "Med End Points(pp)",
+        "value": 100,
+        "slot": {
+          "va": "0x50717c",
+          "rva": "0x10717c",
+          "fileOffset": "0x105b7c"
+        },
+        "compiledRaw": 70
+      },
+      {
+        "section": "Medevac Miss",
+        "control": 2,
+        "label": "Inc Medevac (pp$)",
+        "value": 30,
+        "slot": {
+          "va": "0x507228",
+          "rva": "0x107228",
+          "fileOffset": "0x105c28"
+        },
+        "compiledRaw": 70
+      },
+      {
+        "section": "Fire Miss",
+        "control": 0,
+        "label": "End Money(*size)",
+        "value": 150,
+        "slot": {
+          "va": "0x507188",
+          "rva": "0x107188",
+          "fileOffset": "0x105b88"
+        },
+        "compiledRaw": 200
+      },
+      {
+        "section": "Fire Miss",
+        "control": 1,
+        "label": "End Points(*size)",
+        "value": 100,
+        "slot": {
+          "va": "0x50718c",
+          "rva": "0x10718c",
+          "fileOffset": "0x105b8c"
+        },
+        "compiledRaw": 100
+      },
+      {
+        "section": "Fire Miss",
+        "control": 2,
+        "label": "End Money Penalty",
+        "value": 0,
+        "slot": {
+          "va": "0x507190",
+          "rva": "0x107190",
+          "fileOffset": "0x105b90"
+        },
+        "compiledRaw": 100
+      },
+      {
+        "section": "Fire Miss",
+        "control": 3,
+        "label": "End Points Penalty",
+        "value": 50,
+        "slot": {
+          "va": "0x507194",
+          "rva": "0x107194",
+          "fileOffset": "0x105b94"
+        },
+        "compiledRaw": 50
+      },
+      {
+        "section": "Fire Miss",
+        "control": 4,
+        "label": "Plane Crash($)",
+        "value": 200,
+        "slot": {
+          "va": "0x507198",
+          "rva": "0x107198",
+          "fileOffset": "0x105b98"
+        },
+        "compiledRaw": 100
+      },
+      {
+        "section": "Fire Miss",
+        "control": 5,
+        "label": "Plane Crash(pts)",
+        "value": 100,
+        "slot": {
+          "va": "0x50719c",
+          "rva": "0x10719c",
+          "fileOffset": "0x105b9c"
+        },
+        "compiledRaw": 50
+      },
+      {
+        "section": "Fire Miss",
+        "control": 6,
+        "label": "Train Crash($)",
+        "value": 100,
+        "slot": {
+          "va": "0x5071a0",
+          "rva": "0x1071a0",
+          "fileOffset": "0x105ba0"
+        },
+        "compiledRaw": 100
+      },
+      {
+        "section": "Fire Miss",
+        "control": 7,
+        "label": "Train Crash(pts)",
+        "value": 100,
+        "slot": {
+          "va": "0x5071a4",
+          "rva": "0x1071a4",
+          "fileOffset": "0x105ba4"
+        },
+        "compiledRaw": 50
+      },
+      {
+        "section": "Fire Miss",
+        "control": 8,
+        "label": "Car Fire($)",
+        "value": 100,
+        "slot": {
+          "va": "0x5071c8",
+          "rva": "0x1071c8",
+          "fileOffset": "0x105bc8"
+        },
+        "compiledRaw": 80
+      },
+      {
+        "section": "Fire Miss",
+        "control": 9,
+        "label": "Car Fire(pts)",
+        "value": 50,
+        "slot": {
+          "va": "0x5071cc",
+          "rva": "0x1071cc",
+          "fileOffset": "0x105bcc"
+        },
+        "compiledRaw": 50
+      },
+      {
+        "section": "Fire Miss",
+        "control": 10,
+        "label": "Debris Fire($)",
+        "value": 50,
+        "slot": {
+          "va": "0x5071d0",
+          "rva": "0x1071d0",
+          "fileOffset": "0x105bd0"
+        },
+        "compiledRaw": 40
+      },
+      {
+        "section": "Fire Miss",
+        "control": 11,
+        "label": "Debris Fire(pts)",
+        "value": 50,
+        "slot": {
+          "va": "0x5071d4",
+          "rva": "0x1071d4",
+          "fileOffset": "0x105bd4"
+        },
+        "compiledRaw": 20
+      },
+      {
+        "section": "Fire Miss",
+        "control": 12,
+        "label": "Flame($)",
+        "value": 20,
+        "slot": {
+          "va": "0x507208",
+          "rva": "0x107208",
+          "fileOffset": "0x105c08"
+        },
+        "compiledRaw": 20
+      },
+      {
+        "section": "Fire Miss",
+        "control": 13,
+        "label": "Flame(neg pts)",
+        "value": 50,
+        "slot": {
+          "va": "0x50720c",
+          "rva": "0x10720c",
+          "fileOffset": "0x105c0c"
+        },
+        "compiledRaw": 50
+      },
+      {
+        "section": "Fire Miss",
+        "control": 14,
+        "label": "Bldg Dest(neg pts)",
+        "value": 200,
+        "slot": {
+          "va": "0x507210",
+          "rva": "0x107210",
+          "fileOffset": "0x105c10"
+        },
+        "compiledRaw": 100
+      },
+      {
+        "section": "Fire Miss",
+        "control": 15,
+        "label": "Bldg Saved($)",
+        "value": 150,
+        "slot": {
+          "va": "0x507214",
+          "rva": "0x107214",
+          "fileOffset": "0x105c14"
+        },
+        "compiledRaw": 100
+      },
+      {
+        "section": "Fire Miss",
+        "control": 16,
+        "label": "New Debris(neg pts)",
+        "value": 50,
+        "slot": {
+          "va": "0x507218",
+          "rva": "0x107218",
+          "fileOffset": "0x105c18"
+        },
+        "compiledRaw": 10
+      },
+      {
+        "section": "Fire Miss",
+        "control": 17,
+        "label": "Debris Doused($)",
+        "value": 20,
+        "slot": {
+          "va": "0x50721c",
+          "rva": "0x10721c",
+          "fileOffset": "0x105c1c"
+        },
+        "compiledRaw": 20
+      },
+      {
+        "section": "Fire Miss",
+        "control": 18,
+        "label": "Car Doused($)",
+        "value": 30,
+        "slot": {
+          "va": "0x507230",
+          "rva": "0x107230",
+          "fileOffset": "0x105c30"
+        },
+        "compiledRaw": 30
+      },
+      {
+        "section": "Fire Miss",
+        "control": 19,
+        "label": "Car Burned(neg pts)",
+        "value": 20,
+        "slot": {
+          "va": "0x507238",
+          "rva": "0x107238",
+          "fileOffset": "0x105c38"
+        },
+        "compiledRaw": 10
+      },
+      {
+        "section": "Criminal Miss",
+        "control": 0,
+        "label": "End Money",
+        "value": 500,
+        "slot": {
+          "va": "0x5071a8",
+          "rva": "0x1071a8",
+          "fileOffset": "0x105ba8"
+        },
+        "compiledRaw": 900
+      },
+      {
+        "section": "Criminal Miss",
+        "control": 1,
+        "label": "End Points",
+        "value": 300,
+        "slot": {
+          "va": "0x5071ac",
+          "rva": "0x1071ac",
+          "fileOffset": "0x105bac"
+        },
+        "compiledRaw": 400
+      },
+      {
+        "section": "Speeder Miss",
+        "control": 0,
+        "label": "End Money",
+        "value": 200,
+        "slot": {
+          "va": "0x5071b0",
+          "rva": "0x1071b0",
+          "fileOffset": "0x105bb0"
+        },
+        "compiledRaw": 100
+      },
+      {
+        "section": "Speeder Miss",
+        "control": 1,
+        "label": "End Points",
+        "value": 100,
+        "slot": {
+          "va": "0x5071b4",
+          "rva": "0x1071b4",
+          "fileOffset": "0x105bb4"
+        },
+        "compiledRaw": 30
+      },
+      {
+        "section": "Speeder Miss",
+        "control": 2,
+        "label": "Incmtl Points",
+        "value": 5,
+        "slot": {
+          "va": "0x5071b8",
+          "rva": "0x1071b8",
+          "fileOffset": "0x105bb8"
+        },
+        "compiledRaw": 10
+      },
+      {
+        "section": "Traffic Miss",
+        "control": 0,
+        "label": "End Jam Money",
+        "value": 100,
+        "slot": {
+          "va": "0x5071bc",
+          "rva": "0x1071bc",
+          "fileOffset": "0x105bbc"
+        },
+        "compiledRaw": 50
+      },
+      {
+        "section": "Traffic Miss",
+        "control": 1,
+        "label": "End Jam Points",
+        "value": 50,
+        "slot": {
+          "va": "0x5071c0",
+          "rva": "0x1071c0",
+          "fileOffset": "0x105bc0"
+        },
+        "compiledRaw": 30
+      },
+      {
+        "section": "Traffic Miss",
+        "control": 2,
+        "label": "Jam Timer (secs)",
+        "value": 60.0,
+        "slot": {
+          "va": "0x5071c4",
+          "rva": "0x1071c4",
+          "fileOffset": "0x105bc4"
+        },
+        "compiledRaw": 3932160
+      }
+    ]
+  },
+  "events": {
+    "switch": {
+      "va": "0x4ab0ab",
+      "rva": "0xab0ab",
+      "fileOffset": "0xaa4ab"
+    },
+    "indexTable": {
+      "va": "0x4aba8c",
+      "rva": "0xaba8c",
+      "fileOffset": "0xaae8c"
+    },
+    "targets": {
+      "va": "0x4ab9f8",
+      "rva": "0xab9f8",
+      "fileOffset": "0xaadf8"
+    },
+    "rows": [
+      {
+        "id": 1,
+        "key": "fireSpread",
+        "handler": {
+          "va": "0x4ab0c2",
+          "rva": "0xab0c2",
+          "fileOffset": "0xaa4c2"
+        },
+        "resourceId": 930,
+        "localizedText": "화재가 확산중.",
+        "directCash": 0,
+        "directPoints": -20,
+        "balanceCalls": [
+          {
+            "va": "0x4ab0d4",
+            "rva": "0xab0d4",
+            "fileOffset": "0xaa4d4"
+          }
+        ],
+        "quantityFactors": {
+          "ebp": {
+            "slot": {
+              "va": "0x507208",
+              "rva": "0x107208",
+              "fileOffset": "0x105c08"
+            },
+            "control": {
+              "section": "Fire Miss",
+              "control": 12,
+              "label": "Flame($)",
+              "value": 20,
+              "slot": {
+                "va": "0x507208",
+                "rva": "0x107208",
+                "fileOffset": "0x105c08"
+              },
+              "compiledRaw": 20
+            },
+            "compiledRaw": 20,
+            "multiplier": "event.quantity"
+          }
+        }
+      },
+      {
+        "id": 2,
+        "key": "fireExtinguished",
+        "handler": {
+          "va": "0x4ab0e1",
+          "rva": "0xab0e1",
+          "fileOffset": "0xaa4e1"
+        },
+        "resourceId": 931,
+        "localizedText": "화재가 진압됨.",
+        "directCash": 50,
+        "directPoints": 0,
+        "balanceCalls": [
+          {
+            "va": "0x4ab0f1",
+            "rva": "0xab0f1",
+            "fileOffset": "0xaa4f1"
+          }
+        ],
+        "quantityFactors": {
+          "ebx": {
+            "slot": {
+              "va": "0x50720c",
+              "rva": "0x10720c",
+              "fileOffset": "0x105c0c"
+            },
+            "control": {
+              "section": "Fire Miss",
+              "control": 13,
+              "label": "Flame(neg pts)",
+              "value": 50,
+              "slot": {
+                "va": "0x50720c",
+                "rva": "0x10720c",
+                "fileOffset": "0x105c0c"
+              },
+              "compiledRaw": 50
+            },
+            "compiledRaw": 50,
+            "multiplier": "event.quantity"
+          }
+        }
+      },
+      {
+        "id": 3,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 4,
+        "key": "burnedArea",
+        "handler": {
+          "va": "0x4ab10a",
+          "rva": "0xab10a",
+          "fileOffset": "0xaa50a"
+        },
+        "resourceId": 932,
+        "localizedText": "화재로 황페된 지역.",
+        "directCash": 0,
+        "directPoints": -200,
+        "balanceCalls": [
+          {
+            "va": "0x4ab11c",
+            "rva": "0xab11c",
+            "fileOffset": "0xaa51c"
+          }
+        ],
+        "quantityFactors": {
+          "ebp": {
+            "slot": {
+              "va": "0x507210",
+              "rva": "0x107210",
+              "fileOffset": "0x105c10"
+            },
+            "control": {
+              "section": "Fire Miss",
+              "control": 14,
+              "label": "Bldg Dest(neg pts)",
+              "value": 200,
+              "slot": {
+                "va": "0x507210",
+                "rva": "0x107210",
+                "fileOffset": "0x105c10"
+              },
+              "compiledRaw": 100
+            },
+            "compiledRaw": 100,
+            "multiplier": "event.quantity"
+          }
+        }
+      },
+      {
+        "id": 5,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 6,
+        "key": "areaSaved",
+        "handler": {
+          "va": "0x4ab129",
+          "rva": "0xab129",
+          "fileOffset": "0xaa529"
+        },
+        "resourceId": 933,
+        "localizedText": "지역이 보전됨.",
+        "directCash": 150,
+        "directPoints": 0,
+        "balanceCalls": [
+          {
+            "va": "0x4ab139",
+            "rva": "0xab139",
+            "fileOffset": "0xaa539"
+          }
+        ],
+        "quantityFactors": {
+          "ebx": {
+            "slot": {
+              "va": "0x507214",
+              "rva": "0x107214",
+              "fileOffset": "0x105c14"
+            },
+            "control": {
+              "section": "Fire Miss",
+              "control": 15,
+              "label": "Bldg Saved($)",
+              "value": 150,
+              "slot": {
+                "va": "0x507214",
+                "rva": "0x107214",
+                "fileOffset": "0x105c14"
+              },
+              "compiledRaw": 100
+            },
+            "compiledRaw": 100,
+            "multiplier": "event.quantity"
+          }
+        }
+      },
+      {
+        "id": 7,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 8,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 9,
+        "key": "debrisCleared",
+        "handler": {
+          "va": "0x4ab152",
+          "rva": "0xab152",
+          "fileOffset": "0xaa552"
+        },
+        "resourceId": 934,
+        "localizedText": "잔해가 제거됨.",
+        "directCash": 20,
+        "directPoints": 0,
+        "balanceCalls": [
+          {
+            "va": "0x4ab162",
+            "rva": "0xab162",
+            "fileOffset": "0xaa562"
+          }
+        ],
+        "quantityFactors": {
+          "ebx": {
+            "slot": {
+              "va": "0x50721c",
+              "rva": "0x10721c",
+              "fileOffset": "0x105c1c"
+            },
+            "control": {
+              "section": "Fire Miss",
+              "control": 17,
+              "label": "Debris Doused($)",
+              "value": 20,
+              "slot": {
+                "va": "0x50721c",
+                "rva": "0x10721c",
+                "fileOffset": "0x105c1c"
+              },
+              "compiledRaw": 20
+            },
+            "compiledRaw": 20,
+            "multiplier": "event.quantity"
+          }
+        }
+      },
+      {
+        "id": 10,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 11,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 12,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 13,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 14,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 15,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 16,
+        "key": "rescued",
+        "handler": {
+          "va": "0x4ab17b",
+          "rva": "0xab17b",
+          "fileOffset": "0xaa57b"
+        },
+        "resourceId": 935,
+        "localizedText": "'심시민'이 구조됨.",
+        "directCash": 50,
+        "directPoints": 0,
+        "balanceCalls": [
+          {
+            "va": "0x4ab18b",
+            "rva": "0xab18b",
+            "fileOffset": "0xaa58b"
+          }
+        ],
+        "quantityFactors": {
+          "ebx": {
+            "slot": {
+              "va": "0x507220",
+              "rva": "0x107220",
+              "fileOffset": "0x105c20"
+            },
+            "control": {
+              "section": "Rescue Miss",
+              "control": 2,
+              "label": "Resc Inc Money(pp)",
+              "value": 50,
+              "slot": {
+                "va": "0x507220",
+                "rva": "0x107220",
+                "fileOffset": "0x105c20"
+              },
+              "compiledRaw": 50
+            },
+            "compiledRaw": 50,
+            "multiplier": "event.quantity"
+          }
+        }
+      },
+      {
+        "id": 17,
+        "key": "transported",
+        "handler": {
+          "va": "0x4ab1a4",
+          "rva": "0xab1a4",
+          "fileOffset": "0xaa5a4"
+        },
+        "resourceId": 936,
+        "localizedText": "'심시민'이 수송됨.",
+        "directCash": 20,
+        "directPoints": 0,
+        "balanceCalls": [
+          {
+            "va": "0x4ab1b4",
+            "rva": "0xab1b4",
+            "fileOffset": "0xaa5b4"
+          }
+        ],
+        "quantityFactors": {
+          "ebx": {
+            "slot": {
+              "va": "0x507224",
+              "rva": "0x107224",
+              "fileOffset": "0x105c24"
+            },
+            "control": {
+              "section": "Transport Miss",
+              "control": 2,
+              "label": "Inc Trans (pp$)",
+              "value": 20,
+              "slot": {
+                "va": "0x507224",
+                "rva": "0x107224",
+                "fileOffset": "0x105c24"
+              },
+              "compiledRaw": 30
+            },
+            "compiledRaw": 30,
+            "multiplier": "event.quantity"
+          }
+        }
+      },
+      {
+        "id": 18,
+        "key": "evacuated",
+        "handler": {
+          "va": "0x4ab1cd",
+          "rva": "0xab1cd",
+          "fileOffset": "0xaa5cd"
+        },
+        "resourceId": 937,
+        "localizedText": "'심시민'이 구출됨.",
+        "directCash": 30,
+        "directPoints": 0,
+        "balanceCalls": [
+          {
+            "va": "0x4ab1dd",
+            "rva": "0xab1dd",
+            "fileOffset": "0xaa5dd"
+          }
+        ],
+        "quantityFactors": {
+          "ebx": {
+            "slot": {
+              "va": "0x507228",
+              "rva": "0x107228",
+              "fileOffset": "0x105c28"
+            },
+            "control": {
+              "section": "Medevac Miss",
+              "control": 2,
+              "label": "Inc Medevac (pp$)",
+              "value": 30,
+              "slot": {
+                "va": "0x507228",
+                "rva": "0x107228",
+                "fileOffset": "0x105c28"
+              },
+              "compiledRaw": 70
+            },
+            "compiledRaw": 70,
+            "multiplier": "event.quantity"
+          }
+        }
+      },
+      {
+        "id": 19,
+        "key": "pickedUp",
+        "handler": {
+          "va": "0x4ab1f6",
+          "rva": "0xab1f6",
+          "fileOffset": "0xaa5f6"
+        },
+        "resourceId": 938,
+        "localizedText": "'심시민'을 데려감.",
+        "directCash": 10,
+        "directPoints": 0,
+        "balanceCalls": [
+          {
+            "va": "0x4ab206",
+            "rva": "0xab206",
+            "fileOffset": "0xaa606"
+          }
+        ],
+        "quantityFactors": {
+          "ebx": {
+            "slot": {
+              "va": "0x50722c",
+              "rva": "0x10722c",
+              "fileOffset": "0x105c2c"
+            },
+            "control": {
+              "section": "Transport Miss",
+              "control": 3,
+              "label": "Inc Pickup (pp$)",
+              "value": 10,
+              "slot": {
+                "va": "0x50722c",
+                "rva": "0x10722c",
+                "fileOffset": "0x105c2c"
+              },
+              "compiledRaw": 10
+            },
+            "compiledRaw": 10,
+            "multiplier": "event.quantity"
+          }
+        }
+      },
+      {
+        "id": 20,
+        "key": "riotersRemaining",
+        "handler": {
+          "va": "0x4ab21f",
+          "rva": "0xab21f",
+          "fileOffset": "0xaa61f"
+        },
+        "resourceId": 961,
+        "localizedText": "폭도들이 남아 있음.",
+        "multiplier": "signed event.quantity; the LEAs multiply by 10",
+        "directCash": 10,
+        "directPoints": 10,
+        "balanceCalls": [
+          {
+            "va": "0x4ab22d",
+            "rva": "0xab22d",
+            "fileOffset": "0xaa62d"
+          },
+          {
+            "va": "0x4ab248",
+            "rva": "0xab248",
+            "fileOffset": "0xaa648"
+          }
+        ]
+      },
+      {
+        "id": 21,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 22,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 23,
+        "key": "citizenDied",
+        "handler": {
+          "va": "0x4ab261",
+          "rva": "0xab261",
+          "fileOffset": "0xaa661"
+        },
+        "resourceId": 939,
+        "localizedText": "'심시민'이 죽었음.",
+        "condition": "Only this central branch when incident index == -1. A separate incident-specific death branch also reads the same -40.",
+        "directCash": 0,
+        "directPoints": -40,
+        "balanceCalls": [
+          {
+            "va": "0x4ab27c",
+            "rva": "0xab27c",
+            "fileOffset": "0xaa67c"
+          }
+        ],
+        "quantityFactors": {
+          "ebp": {
+            "slot": {
+              "va": "0x5071e0",
+              "rva": "0x1071e0",
+              "fileOffset": "0x105be0"
+            },
+            "control": null,
+            "compiledRaw": 40,
+            "multiplier": "event.quantity"
+          }
+        }
+      },
+      {
+        "id": 24,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 25,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 26,
+        "key": "vehicleCleared",
+        "handler": {
+          "va": "0x4ab289",
+          "rva": "0xab289",
+          "fileOffset": "0xaa689"
+        },
+        "resourceId": 940,
+        "localizedText": "차량이 제거됨.",
+        "directCash": 30,
+        "directPoints": 0,
+        "balanceCalls": [
+          {
+            "va": "0x4ab299",
+            "rva": "0xab299",
+            "fileOffset": "0xaa699"
+          }
+        ],
+        "quantityFactors": {
+          "ebx": {
+            "slot": {
+              "va": "0x507230",
+              "rva": "0x107230",
+              "fileOffset": "0x105c30"
+            },
+            "control": {
+              "section": "Fire Miss",
+              "control": 18,
+              "label": "Car Doused($)",
+              "value": 30,
+              "slot": {
+                "va": "0x507230",
+                "rva": "0x107230",
+                "fileOffset": "0x105c30"
+              },
+              "compiledRaw": 30
+            },
+            "compiledRaw": 30,
+            "multiplier": "event.quantity"
+          }
+        }
+      },
+      {
+        "id": 27,
+        "key": "vehicleUnblocked",
+        "handler": {
+          "va": "0x4ab2b2",
+          "rva": "0xab2b2",
+          "fileOffset": "0xaa6b2"
+        },
+        "resourceId": 941,
+        "localizedText": "차량이 풀림.",
+        "directCash": 3,
+        "directPoints": 0,
+        "balanceCalls": [
+          {
+            "va": "0x4ab2c2",
+            "rva": "0xab2c2",
+            "fileOffset": "0xaa6c2"
+          }
+        ],
+        "quantityFactors": {
+          "ebx": {
+            "slot": {
+              "va": "0x507234",
+              "rva": "0x107234",
+              "fileOffset": "0x105c34"
+            },
+            "control": null,
+            "compiledRaw": 3,
+            "multiplier": "event.quantity"
+          }
+        }
+      },
+      {
+        "id": 28,
+        "key": "vehicleBurned",
+        "handler": {
+          "va": "0x4ab2db",
+          "rva": "0xab2db",
+          "fileOffset": "0xaa6db"
+        },
+        "resourceId": 942,
+        "localizedText": "차량이 전소됨.",
+        "directCash": 0,
+        "directPoints": -20,
+        "balanceCalls": [
+          {
+            "va": "0x4ab2ed",
+            "rva": "0xab2ed",
+            "fileOffset": "0xaa6ed"
+          }
+        ],
+        "quantityFactors": {
+          "ebp": {
+            "slot": {
+              "va": "0x507238",
+              "rva": "0x107238",
+              "fileOffset": "0x105c38"
+            },
+            "control": {
+              "section": "Fire Miss",
+              "control": 19,
+              "label": "Car Burned(neg pts)",
+              "value": 20,
+              "slot": {
+                "va": "0x507238",
+                "rva": "0x107238",
+                "fileOffset": "0x105c38"
+              },
+              "compiledRaw": 10
+            },
+            "compiledRaw": 10,
+            "multiplier": "event.quantity"
+          }
+        }
+      },
+      {
+        "id": 29,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 30,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 31,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 32,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 33,
+        "key": "waitForHelicopter",
+        "handler": {
+          "va": "0x4ab2fa",
+          "rva": "0xab2fa",
+          "fileOffset": "0xaa6fa"
+        },
+        "resourceId": 943,
+        "localizedText": "헬기를 기다림.",
+        "directCash": 5,
+        "directPoints": 0,
+        "balanceCalls": [
+          {
+            "va": "0x4ab30a",
+            "rva": "0xab30a",
+            "fileOffset": "0xaa70a"
+          }
+        ],
+        "quantityFactors": {
+          "ebx": {
+            "slot": {
+              "va": "0x5071b8",
+              "rva": "0x1071b8",
+              "fileOffset": "0x105bb8"
+            },
+            "control": {
+              "section": "Speeder Miss",
+              "control": 2,
+              "label": "Incmtl Points",
+              "value": 5,
+              "slot": {
+                "va": "0x5071b8",
+                "rva": "0x1071b8",
+                "fileOffset": "0x105bb8"
+              },
+              "compiledRaw": 10
+            },
+            "compiledRaw": 10,
+            "multiplier": "event.quantity"
+          }
+        }
+      },
+      {
+        "id": 34,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 35,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 36,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 37,
+        "key": null,
+        "handler": {
+          "va": "0x4ab55d",
+          "rva": "0xab55d",
+          "fileOffset": "0xaa95d"
+        },
+        "directCash": 0,
+        "directPoints": 0,
+        "meaning": "No direct balance delta in this switch. Incident-state handlers can still react."
+      },
+      {
+        "id": 38,
+        "key": "speederCaught",
+        "handler": {
+          "va": "0x4ab323",
+          "rva": "0xab323",
+          "fileOffset": "0xaa723"
+        },
+        "resourceId": 944,
+        "localizedText": "폭주족이 잡혔음.",
+        "directCash": 200,
+        "directPoints": 100,
+        "balanceCalls": [
+          {
+            "va": "0x4ab32e",
+            "rva": "0xab32e",
+            "fileOffset": "0xaa72e"
+          },
+          {
+            "va": "0x4ab346",
+            "rva": "0xab346",
+            "fileOffset": "0xaa746"
+          }
+        ],
+        "quantityFactors": {
+          "ebp": {
+            "slot": {
+              "va": "0x5071b4",
+              "rva": "0x1071b4",
+              "fileOffset": "0x105bb4"
+            },
+            "control": {
+              "section": "Speeder Miss",
+              "control": 1,
+              "label": "End Points",
+              "value": 100,
+              "slot": {
+                "va": "0x5071b4",
+                "rva": "0x1071b4",
+                "fileOffset": "0x105bb4"
+              },
+              "compiledRaw": 30
+            },
+            "compiledRaw": 30,
+            "multiplier": "event.quantity"
+          },
+          "ebx": {
+            "slot": {
+              "va": "0x5071b0",
+              "rva": "0x1071b0",
+              "fileOffset": "0x105bb0"
+            },
+            "control": {
+              "section": "Speeder Miss",
+              "control": 0,
+              "label": "End Money",
+              "value": 200,
+              "slot": {
+                "va": "0x5071b0",
+                "rva": "0x1071b0",
+                "fileOffset": "0x105bb0"
+              },
+              "compiledRaw": 100
+            },
+            "compiledRaw": 100,
+            "multiplier": "event.quantity"
+          }
+        }
+      },
+      {
+        "id": 39,
+        "key": "ufoShotDown",
+        "handler": {
+          "va": "0x4ab369",
+          "rva": "0xab369",
+          "fileOffset": "0xaa769"
+        },
+        "resourceId": 945,
+        "localizedText": "UFO가 격추됨.",
+        "directCash": 2000,
+        "directPoints": 1000,
+        "balanceCalls": [
+          {
+            "va": "0x4ab374",
+            "rva": "0xab374",
+            "fileOffset": "0xaa774"
+          },
+          {
+            "va": "0x4ab38c",
+            "rva": "0xab38c",
+            "fileOffset": "0xaa78c"
+          }
+        ],
+        "quantityFactors": {
+          "ebp": {
+            "slot": {
+              "va": "0x5071dc",
+              "rva": "0x1071dc",
+              "fileOffset": "0x105bdc"
+            },
+            "control": {
+              "section": "General Miss",
+              "control": 4,
+              "label": "UFO Points",
+              "value": 1000,
+              "slot": {
+                "va": "0x5071dc",
+                "rva": "0x1071dc",
+                "fileOffset": "0x105bdc"
+              },
+              "compiledRaw": 900
+            },
+            "compiledRaw": 900,
+            "multiplier": "event.quantity"
+          },
+          "ebx": {
+            "slot": {
+              "va": "0x5071d8",
+              "rva": "0x1071d8",
+              "fileOffset": "0x105bd8"
+            },
+            "control": {
+              "section": "General Miss",
+              "control": 3,
+              "label": "UFO Money",
+              "value": 2000,
+              "slot": {
+                "va": "0x5071d8",
+                "rva": "0x1071d8",
+                "fileOffset": "0x105bd8"
+              },
+              "compiledRaw": 1500
+            },
+            "compiledRaw": 1500,
+            "multiplier": "event.quantity"
+          }
+        }
+      },
+      {
+        "id": 40,
+        "key": "citizenAttacked",
+        "handler": {
+          "va": "0x4ab3b1",
+          "rva": "0xab3b1",
+          "fileOffset": "0xaa7b1"
+        },
+        "resourceId": 946,
+        "localizedText": "'심시민'이 습격당했음.",
+        "directCash": 0,
+        "directPoints": -10,
+        "balanceCalls": [
+          {
+            "va": "0x4ab3bc",
+            "rva": "0xab3bc",
+            "fileOffset": "0xaa7bc"
+          }
+        ]
+      },
+      {
+        "id": 41,
+        "key": "sos",
+        "handler": {
+          "va": "0x4ab3c9",
+          "rva": "0xab3c9",
+          "fileOffset": "0xaa7c9"
+        },
+        "resourceId": 947,
+        "localizedText": "SOS!",
+        "alternativePoints": -20,
+        "condition": "-20 when an associated incident has byte +0x51 bit 0x10, otherwise -10.",
+        "directCash": 0,
+        "directPoints": -10,
+        "balanceCalls": [
+          {
+            "va": "0x4ab3e3",
+            "rva": "0xab3e3",
+            "fileOffset": "0xaa7e3"
+          }
+        ]
+      },
+      {
+        "id": 42,
+        "key": "robbery",
+        "handler": {
+          "va": "0x4ab3f0",
+          "rva": "0xab3f0",
+          "fileOffset": "0xaa7f0"
+        },
+        "resourceId": 948,
+        "localizedText": "강도임.",
+        "directCash": 0,
+        "directPoints": -10,
+        "balanceCalls": [
+          {
+            "va": "0x4ab3fb",
+            "rva": "0xab3fb",
+            "fileOffset": "0xaa7fb"
+          }
+        ]
+      },
+      {
+        "id": 43,
+        "key": "arsonistEscaped",
+        "handler": {
+          "va": "0x4ab408",
+          "rva": "0xab408",
+          "fileOffset": "0xaa808"
+        },
+        "resourceId": 949,
+        "localizedText": "방화범이 도망침.",
+        "directCash": 0,
+        "directPoints": -10,
+        "balanceCalls": [
+          {
+            "va": "0x4ab413",
+            "rva": "0xab413",
+            "fileOffset": "0xaa813"
+          }
+        ]
+      },
+      {
+        "id": 44,
+        "key": "citizenWaiting",
+        "handler": {
+          "va": "0x4ab420",
+          "rva": "0xab420",
+          "fileOffset": "0xaa820"
+        },
+        "resourceId": 950,
+        "localizedText": "'심시민'이 기다리고 있음.",
+        "directCash": 0,
+        "directPoints": -10,
+        "balanceCalls": [
+          {
+            "va": "0x4ab42b",
+            "rva": "0xab42b",
+            "fileOffset": "0xaa82b"
+          }
+        ]
+      },
+      {
+        "id": 45,
+        "key": "vehicleWaiting",
+        "handler": {
+          "va": "0x4ab438",
+          "rva": "0xab438",
+          "fileOffset": "0xaa838"
+        },
+        "resourceId": 951,
+        "localizedText": "차량이 기다리고 있음.",
+        "directCash": 0,
+        "directPoints": -10,
+        "balanceCalls": [
+          {
+            "va": "0x4ab443",
+            "rva": "0xab443",
+            "fileOffset": "0xaa843"
+          }
+        ]
+      },
+      {
+        "id": 46,
+        "key": "helicopterCrash",
+        "handler": {
+          "va": "0x4ab450",
+          "rva": "0xab450",
+          "fileOffset": "0xaa850"
+        },
+        "resourceId": 953,
+        "localizedText": "헬기가 추락했음.",
+        "directCash": 0,
+        "directPoints": -100,
+        "balanceCalls": [
+          {
+            "va": "0x4ab45b",
+            "rva": "0xab45b",
+            "fileOffset": "0xaa85b"
+          }
+        ]
+      },
+      {
+        "id": 47,
+        "key": "playerHarmedCitizen",
+        "handler": {
+          "va": "0x4ab468",
+          "rva": "0xab468",
+          "fileOffset": "0xaa868"
+        },
+        "resourceId": 954,
+        "localizedText": "당신이 '심시민'을 해쳤다.",
+        "condition": "Explicit harm events are posted by actor code at VA 0x4C0087, 0x4C1794 and 0x4C8DFA. This is not an arbitrary proximity trigger.",
+        "directCash": -300,
+        "directPoints": -100,
+        "balanceCalls": [
+          {
+            "va": "0x4ab478",
+            "rva": "0xab478",
+            "fileOffset": "0xaa878"
+          },
+          {
+            "va": "0x4ab481",
+            "rva": "0xab481",
+            "fileOffset": "0xaa881"
+          }
+        ]
+      },
+      {
+        "id": 48,
+        "key": "planeShotDown",
+        "handler": {
+          "va": "0x4ab48e",
+          "rva": "0xab48e",
+          "fileOffset": "0xaa88e"
+        },
+        "resourceId": 955,
+        "localizedText": "비행기가 격추됨.",
+        "directCash": -200,
+        "directPoints": -100,
+        "balanceCalls": [
+          {
+            "va": "0x4ab49e",
+            "rva": "0xab49e",
+            "fileOffset": "0xaa89e"
+          },
+          {
+            "va": "0x4ab4a7",
+            "rva": "0xab4a7",
+            "fileOffset": "0xaa8a7"
+          }
+        ]
+      },
+      {
+        "id": 49,
+        "key": "boatGrounded",
+        "handler": {
+          "va": "0x4ab4b4",
+          "rva": "0xab4b4",
+          "fileOffset": "0xaa8b4"
+        },
+        "resourceId": 956,
+        "localizedText": "배가 좌초됨.",
+        "directCash": -100,
+        "directPoints": -100,
+        "balanceCalls": [
+          {
+            "va": "0x4ab4c1",
+            "rva": "0xab4c1",
+            "fileOffset": "0xaa8c1"
+          },
+          {
+            "va": "0x4ab4ca",
+            "rva": "0xab4ca",
+            "fileOffset": "0xaa8ca"
+          }
+        ]
+      },
+      {
+        "id": 50,
+        "key": "playerObstructedTraffic",
+        "handler": {
+          "va": "0x4ab4d7",
+          "rva": "0xab4d7",
+          "fileOffset": "0xaa8d7"
+        },
+        "resourceId": 957,
+        "localizedText": "당신이 교통을 방해했음.",
+        "directCash": -50,
+        "directPoints": -50,
+        "balanceCalls": [
+          {
+            "va": "0x4ab4e4",
+            "rva": "0xab4e4",
+            "fileOffset": "0xaa8e4"
+          },
+          {
+            "va": "0x4ab4ed",
+            "rva": "0xab4ed",
+            "fileOffset": "0xaa8ed"
+          }
+        ]
+      },
+      {
+        "id": 51,
+        "key": "trainDestroyed",
+        "handler": {
+          "va": "0x4ab4f7",
+          "rva": "0xab4f7",
+          "fileOffset": "0xaa8f7"
+        },
+        "resourceId": 958,
+        "localizedText": "기차가 파괴됨.",
+        "directCash": -150,
+        "directPoints": -100,
+        "balanceCalls": [
+          {
+            "va": "0x4ab507",
+            "rva": "0xab507",
+            "fileOffset": "0xaa907"
+          },
+          {
+            "va": "0x4ab510",
+            "rva": "0xab510",
+            "fileOffset": "0xaa910"
+          }
+        ]
+      },
+      {
+        "id": 52,
+        "key": "playerAtFault",
+        "handler": {
+          "va": "0x4ab51a",
+          "rva": "0xab51a",
+          "fileOffset": "0xaa91a"
+        },
+        "resourceId": 959,
+        "localizedText": "당신의 과실임.",
+        "directCash": -75,
+        "directPoints": -100,
+        "balanceCalls": [
+          {
+            "va": "0x4ab52a",
+            "rva": "0xab52a",
+            "fileOffset": "0xaa92a"
+          },
+          {
+            "va": "0x4ab533",
+            "rva": "0xab533",
+            "fileOffset": "0xaa933"
+          }
+        ]
+      },
+      {
+        "id": 53,
+        "key": "missileDamage",
+        "handler": {
+          "va": "0x4ab53d",
+          "rva": "0xab53d",
+          "fileOffset": "0xaa93d"
+        },
+        "resourceId": 960,
+        "localizedText": "미사일이 피해를 줬음.",
+        "directCash": -200,
+        "directPoints": -200,
+        "balanceCalls": [
+          {
+            "va": "0x4ab54a",
+            "rva": "0xab54a",
+            "fileOffset": "0xaa94a"
+          },
+          {
+            "va": "0x4ab553",
+            "rva": "0xab553",
+            "fileOffset": "0xaa953"
+          }
+        ]
+      }
+    ],
+    "fireLabelMismatch": "At runtime Fire Ctrl12 penalizes new/spreading fire by 20 points and Ctrl13 pays 50 cash per extinguished flame; their UI labels suggest the opposite.",
+    "speederLabelMismatch": "Speeder Ctrl2 labeled Incmtl Points is routed into cash for event 33, not score.",
+    "note": "All 53 central switch cases enumerated. This list does not by itself prove what player action generated a case."
+  },
+  "service": {
+    "aircraft": [
+      {
+        "nativeIndex": 0,
+        "id": "JETRANG",
+        "name": "Jet Ranger",
+        "twkSection": "Jet Ranger",
+        "repairPrice16_16": 83230,
+        "fuelPrice16_16": 262144,
+        "repairPerUnit": 1.269989013671875,
+        "fuelPerGallon": 4.0,
+        "repairSlot": {
+          "va": "0x505408",
+          "rva": "0x105408",
+          "fileOffset": "0x103e08"
+        },
+        "fuelSlot": {
+          "va": "0x50540c",
+          "rva": "0x10540c",
+          "fileOffset": "0x103e0c"
+        },
+        "newPrice": 7800,
+        "maxDamage": 604,
+        "maxLoadLabelValue": 1548,
+        "ignoredRepairControl": {
+          "label": "Repair Rate ($/damage)",
+          "value": 1
+        },
+        "ignoredFuelControl": {
+          "label": "Fuel Cost ($/gal)",
+          "value": 3
+        }
+      },
+      {
+        "nativeIndex": 1,
+        "id": "HUGH500",
+        "name": "MD 500",
+        "twkSection": "Hughes 500",
+        "repairPrice16_16": 87162,
+        "fuelPrice16_16": 262144,
+        "repairPerUnit": 1.329986572265625,
+        "fuelPerGallon": 4.0,
+        "repairSlot": {
+          "va": "0x505464",
+          "rva": "0x105464",
+          "fileOffset": "0x103e64"
+        },
+        "fuelSlot": {
+          "va": "0x505468",
+          "rva": "0x105468",
+          "fileOffset": "0x103e68"
+        },
+        "newPrice": 8800,
+        "maxDamage": 659,
+        "maxLoadLabelValue": 1987,
+        "ignoredRepairControl": {
+          "label": "Repair Rate ($/damage)",
+          "value": 1
+        },
+        "ignoredFuelControl": {
+          "label": "Fuel Cost ($/gal)",
+          "value": 3
+        }
+      },
+      {
+        "nativeIndex": 2,
+        "id": "APACHE",
+        "name": "Apache",
+        "twkSection": "Apache",
+        "repairPrice16_16": 327680,
+        "fuelPrice16_16": 262144,
+        "repairPerUnit": 5.0,
+        "fuelPerGallon": 4.0,
+        "repairSlot": {
+          "va": "0x5054c0",
+          "rva": "0x1054c0",
+          "fileOffset": "0x103ec0"
+        },
+        "fuelSlot": {
+          "va": "0x5054c4",
+          "rva": "0x1054c4",
+          "fileOffset": "0x103ec4"
+        },
+        "newPrice": 50000,
+        "maxDamage": 1000,
+        "maxLoadLabelValue": 1904,
+        "ignoredRepairControl": {
+          "label": "Repair Rate ($/damage)",
+          "value": 1
+        },
+        "ignoredFuelControl": {
+          "label": "Fuel Cost ($/gal)",
+          "value": 3
+        }
+      },
+      {
+        "nativeIndex": 3,
+        "id": "BELL212",
+        "name": "Bell 212",
+        "twkSection": "Bell 212",
+        "repairPrice16_16": 85196,
+        "fuelPrice16_16": 262144,
+        "repairPerUnit": 1.29998779296875,
+        "fuelPerGallon": 4.0,
+        "repairSlot": {
+          "va": "0x50551c",
+          "rva": "0x10551c",
+          "fileOffset": "0x103f1c"
+        },
+        "fuelSlot": {
+          "va": "0x505520",
+          "rva": "0x105520",
+          "fileOffset": "0x103f20"
+        },
+        "newPrice": 13500,
+        "maxDamage": 1000,
+        "maxLoadLabelValue": 5062,
+        "ignoredRepairControl": {
+          "label": "Repair Rate ($/damage)",
+          "value": 1
+        },
+        "ignoredFuelControl": {
+          "label": "Fuel Cost ($/gal)",
+          "value": 3
+        }
+      },
+      {
+        "nativeIndex": 4,
+        "id": "SCWZR300",
+        "name": "Schweizer 300",
+        "twkSection": "Schwiezer 300",
+        "repairPrice16_16": 39321,
+        "fuelPrice16_16": 262144,
+        "repairPerUnit": 0.5999908447265625,
+        "fuelPerGallon": 4.0,
+        "repairSlot": {
+          "va": "0x505578",
+          "rva": "0x105578",
+          "fileOffset": "0x103f78"
+        },
+        "fuelSlot": {
+          "va": "0x50557c",
+          "rva": "0x10557c",
+          "fileOffset": "0x103f7c"
+        },
+        "newPrice": 3400,
+        "maxDamage": 495,
+        "maxLoadLabelValue": 1062,
+        "ignoredRepairControl": {
+          "label": "Repair Rate ($/damage)",
+          "value": 1
+        },
+        "ignoredFuelControl": {
+          "label": "Fuel Cost ($/gal)",
+          "value": 3
+        }
+      },
+      {
+        "nativeIndex": 5,
+        "id": "AGUSTA",
+        "name": "Agusta",
+        "twkSection": "Agusta",
+        "repairPrice16_16": 144179,
+        "fuelPrice16_16": 262144,
+        "repairPerUnit": 2.1999969482421875,
+        "fuelPerGallon": 4.0,
+        "repairSlot": {
+          "va": "0x5055d4",
+          "rva": "0x1055d4",
+          "fileOffset": "0x103fd4"
+        },
+        "fuelSlot": {
+          "va": "0x5055d8",
+          "rva": "0x1055d8",
+          "fileOffset": "0x103fd8"
+        },
+        "newPrice": 16500,
+        "maxDamage": 714,
+        "maxLoadLabelValue": 2207,
+        "ignoredRepairControl": {
+          "label": "Repair Rate ($/damage)",
+          "value": 1
+        },
+        "ignoredFuelControl": {
+          "label": "Fuel Cost ($/gal)",
+          "value": 3
+        }
+      },
+      {
+        "nativeIndex": 6,
+        "id": "DAUPHIN",
+        "name": "Dauphin",
+        "twkSection": "Dauphin",
+        "repairPrice16_16": 144179,
+        "fuelPrice16_16": 262144,
+        "repairPerUnit": 2.1999969482421875,
+        "fuelPerGallon": 4.0,
+        "repairSlot": {
+          "va": "0x505630",
+          "rva": "0x105630",
+          "fileOffset": "0x104030"
+        },
+        "fuelSlot": {
+          "va": "0x505634",
+          "rva": "0x105634",
+          "fileOffset": "0x104034"
+        },
+        "newPrice": 18500,
+        "maxDamage": 769,
+        "maxLoadLabelValue": 3525,
+        "ignoredRepairControl": {
+          "label": "Repair Rate ($/damage)",
+          "value": 1
+        },
+        "ignoredFuelControl": {
+          "label": "Fuel Cost ($/gal)",
+          "value": 3
+        }
+      },
+      {
+        "nativeIndex": 7,
+        "id": "MDEXPLRR",
+        "name": "MD Explorer",
+        "twkSection": "MDEXPLORER",
+        "repairPrice16_16": 150732,
+        "fuelPrice16_16": 262144,
+        "repairPerUnit": 2.29998779296875,
+        "fuelPerGallon": 4.0,
+        "repairSlot": {
+          "va": "0x50568c",
+          "rva": "0x10568c",
+          "fileOffset": "0x10408c"
+        },
+        "fuelSlot": {
+          "va": "0x505690",
+          "rva": "0x105690",
+          "fileOffset": "0x104090"
+        },
+        "newPrice": 20500,
+        "maxDamage": 769,
+        "maxLoadLabelValue": 3085,
+        "ignoredRepairControl": {
+          "label": "Repair Rate ($/damage)",
+          "value": 1
+        },
+        "ignoredFuelControl": {
+          "label": "Fuel Cost ($/gal)",
+          "value": 3
+        }
+      },
+      {
+        "nativeIndex": 8,
+        "id": "MD520",
+        "name": "MD 520",
+        "twkSection": "MD520",
+        "repairPrice16_16": 85196,
+        "fuelPrice16_16": 262144,
+        "repairPerUnit": 1.29998779296875,
+        "fuelPerGallon": 4.0,
+        "repairSlot": {
+          "va": "0x5056e8",
+          "rva": "0x1056e8",
+          "fileOffset": "0x1040e8"
+        },
+        "fuelSlot": {
+          "va": "0x5056ec",
+          "rva": "0x1056ec",
+          "fileOffset": "0x1040ec"
+        },
+        "newPrice": 11000,
+        "maxDamage": 659,
+        "maxLoadLabelValue": 2426,
+        "ignoredRepairControl": {
+          "label": "Repair Rate ($/damage)",
+          "value": 1
+        },
+        "ignoredFuelControl": {
+          "label": "Fuel Cost ($/gal)",
+          "value": 3
+        }
+      }
+    ],
+    "aircraftTweakRegistration": "Nine 14-entry registrations starting at 0x490A60. Ctrl0..13 are loaded; any later rate lines in HELI.TWK cannot override the direct rate table used by these quote functions.",
+    "repairQuote": {
+      "va": "0x490fc0",
+      "rva": "0x90fc0",
+      "fileOffset": "0x903c0",
+      "instructions": [
+        "00490FC0 mov edx, dword ptr [esp + 4]",
+        "00490FC4 push esi",
+        "00490FC5 mov eax, dword ptr [edx]",
+        "00490FC7 mov ecx, eax",
+        "00490FC9 lea eax, [eax + eax*2]",
+        "00490FCC shl eax, 3",
+        "00490FCF sub eax, ecx",
+        "00490FD1 shl eax, 2",
+        "00490FD4 mov ecx, dword ptr [eax + 0x505408]",
+        "00490FDA mov eax, dword ptr [eax + 0x505404]",
+        "00490FE0 push ecx",
+        "00490FE1 sub eax, dword ptr [edx + 0xd0]",
+        "00490FE7 shl eax, 0x10",
+        "00490FEA push eax",
+        "00490FEB call 0x46dbfd",
+        "00490FF0 sar eax, 0x10",
+        "00490FF3 add esp, 8",
+        "00490FF6 mov esi, eax",
+        "00490FF8 mov ecx, dword ptr [0x5053a8]",
+        "00490FFE push 2",
+        "00491000 push 0xf6",
+        "00491005 mov eax, dword ptr [ecx + 0x1c]",
+        "00491008 mov edx, dword ptr [ecx + 0x18]",
+        "0049100B push eax",
+        "0049100C push edx",
+        "0049100D call 0x488ff0",
+        "00491012 add esp, 0x10",
+        "00491015 test eax, eax",
+        "00491017 jne 0x49101c",
+        "00491019 lea esi, [esi + esi*2]",
+        "0049101C mov eax, esi",
+        "0049101E pop esi"
+      ]
+    },
+    "fuelQuote": {
+      "va": "0x4910c0",
+      "rva": "0x910c0",
+      "fileOffset": "0x904c0",
+      "instructions": [
+        "004910C0 mov edx, dword ptr [esp + 4]",
+        "004910C4 push esi",
+        "004910C5 mov eax, dword ptr [edx]",
+        "004910C7 mov ecx, eax",
+        "004910C9 lea eax, [eax + eax*2]",
+        "004910CC shl eax, 3",
+        "004910CF sub eax, ecx",
+        "004910D1 shl eax, 2",
+        "004910D4 mov ecx, dword ptr [eax + 0x50540c]",
+        "004910DA mov eax, dword ptr [eax + 0x5053f8]",
+        "004910E0 push ecx",
+        "004910E1 sub eax, dword ptr [edx + 0x330]",
+        "004910E7 push eax",
+        "004910E8 call 0x46dbfd",
+        "004910ED sar eax, 0x10",
+        "004910F0 add esp, 8",
+        "004910F3 mov esi, eax",
+        "004910F5 mov ecx, dword ptr [0x5053a8]",
+        "004910FB push 2",
+        "004910FD push 0xf6",
+        "00491102 mov eax, dword ptr [ecx + 0x1c]",
+        "00491105 mov edx, dword ptr [ecx + 0x18]",
+        "00491108 push eax",
+        "00491109 push edx",
+        "0049110A call 0x488ff0",
+        "0049110F add esp, 0x10",
+        "00491112 test eax, eax",
+        "00491114 jne 0x491119",
+        "00491116 lea esi, [esi + esi*2]",
+        "00491119 mov eax, esi",
+        "0049111B pop esi",
+        "0049111C ret"
+      ]
+    },
+    "math": "Repair=floor(damagePoints*repairPrice16_16/65536), fuel=floor(missingGallons*fuelPrice16_16/65536). Field multiplier 3 is applied AFTER truncation when AP246 tile is not within square radius 2.",
+    "fieldEntry": {
+      "va": "0x454a28",
+      "rva": "0x54a28",
+      "fileOffset": "0x53e28",
+      "instructions": [
+        "00454A28 cmp edi, 0x40",
+        "00454A2B jne 0x454aa4",
+        "00454A2D cmp dword ptr [0x504c68], 3",
+        "00454A34 jne 0x454c1b",
+        "00454A3A call 0x47a510",
+        "00454A3F cmp dword ptr [eax + 0x44], 0",
+        "00454A43 je 0x454c1b",
+        "00454A49 mov eax, dword ptr [0x5053a8]",
+        "00454A4E push eax",
+        "00454A4F call 0x490fc0",
+        "00454A54 add esp, 4",
+        "00454A57 test eax, eax",
+        "00454A59 jne 0x454a71",
+        "00454A5B mov eax, dword ptr [0x5053a8]",
+        "00454A60 push eax",
+        "00454A61 call 0x4910c0",
+        "00454A66 add esp, 4",
+        "00454A69 test eax, eax",
+        "00454A6B je 0x454c1b",
+        "00454A71 push 1",
+        "00454A73 mov eax, dword ptr [0x5053a8]",
+        "00454A78 push 0xf6",
+        "00454A7D mov ecx, dword ptr [eax + 0x1c]",
+        "00454A80 push ecx",
+        "00454A81 mov edx, dword ptr [eax + 0x18]",
+        "00454A84 push edx",
+        "00454A85 call 0x488ff0",
+        "00454A8A add esp, 0x10",
+        "00454A8D test eax, eax",
+        "00454A8F jne 0x454c1b",
+        "00454A95 mov ecx, esi",
+        "00454A97 call 0x444f30"
+      ]
+    },
+    "fieldEligibility": "The manual service input requires on-foot state 3, an owned craft, a nonzero repair or fuel quote, and being outside radius 1 of AP246. The service dialog then initializes repair and fuel sliders plus a gas slider for owners. Accepting calls the actual repair, fuel, and gas updates. HELP/99REF claims repairs are hangar-only; this code path implements field repair and lists all three sliders. No player input was sent to test field reachability.",
+    "repairApply": {
+      "va": "0x491020",
+      "rva": "0x91020",
+      "fileOffset": "0x90420"
+    },
+    "fieldRepairDivideByThree": {
+      "va": "0x491069",
+      "rva": "0x91069",
+      "fileOffset": "0x90469"
+    },
+    "fuelApply": {
+      "va": "0x491120",
+      "rva": "0x91120",
+      "fileOffset": "0x90520"
+    },
+    "gas": {
+      "price": 50,
+      "capacity": 10,
+      "quantityAtPurchase": 10,
+      "quantityOnSale": 0,
+      "quote": {
+        "va": "0x4911b0",
+        "rva": "0x911b0",
+        "fileOffset": "0x905b0",
+        "instructions": [
+          "004911B0 mov eax, dword ptr [esp + 4]",
+          "004911B4 lea ecx, [eax + eax*4]",
+          "004911B7 lea eax, [ecx + ecx*4]",
+          "004911BA add eax, eax",
+          "004911BC ret"
+        ]
+      },
+      "apply": {
+        "va": "0x491d80",
+        "rva": "0x91d80",
+        "fileOffset": "0x91180",
+        "instructions": [
+          "00491D80 push esi",
+          "00491D81 call 0x47a510",
+          "00491D86 mov ecx, eax",
+          "00491D88 mov esi, 0x32",
+          "00491D8D mov eax, dword ptr [esp + 8]",
+          "00491D91 cdq",
+          "00491D92 idiv esi",
+          "00491D94 pop esi",
+          "00491D95 add dword ptr [ecx + 0x54], eax",
+          "00491D98 ret"
+        ]
+      },
+      "capacityFunction": {
+        "va": "0x4911a0",
+        "rva": "0x911a0",
+        "fileOffset": "0x905a0"
+      },
+      "purchaseFills": {
+        "va": "0x42ee45",
+        "rva": "0x2ee45",
+        "fileOffset": "0x2e245"
+      },
+      "saleClears": {
+        "va": "0x42f002",
+        "rva": "0x2f002",
+        "fileOffset": "0x2e402"
+      },
+      "expenditure": {
+        "va": "0x445047",
+        "rva": "0x45047",
+        "fileOffset": "0x44447"
+      },
+      "consumption": {
+        "va": "0x493963",
+        "rva": "0x93963",
+        "fileOffset": "0x92d63"
+      }
+    }
+  },
+  "shop": {
+    "equipmentPrices": {
+      "bucket": 500,
+      "megaphone": 500,
+      "harness": 800,
+      "gas": 2500,
+      "cannon": 1500
+    },
+    "equipmentPurchase": {
+      "va": "0x491d40",
+      "rva": "0x91d40",
+      "fileOffset": "0x91140"
+    },
+    "equipmentSale": {
+      "va": "0x491dcc",
+      "rva": "0x91dcc",
+      "fileOffset": "0x911cc",
+      "instructions": [
+        "00491DCC mov edx, dword ptr [esp + ecx*4]",
+        "00491DD0 lea eax, [edx + edx*4]",
+        "00491DD3 lea ecx, [eax + eax*2]",
+        "00491DD6 lea eax, [ecx + ecx*4]",
+        "00491DD9 mov ecx, 0x64",
+        "00491DDE cdq",
+        "00491DDF idiv ecx",
+        "00491DE1 add esp, 0x14",
+        "00491DE4 ret"
+      ]
+    },
+    "equipmentSaleFormula": "floor(75 * originalPurchasePrice / 100)",
+    "aircraftSale": {
+      "formula": "max(floor(newPrice/2), newPrice-floor(heli[0x334]*0.5)) for an existing matching aircraft. 0 when not found.",
+      "depreciation16_16": 32768,
+      "fieldUnit": "not verified",
+      "logic": {
+        "va": "0x491cc0",
+        "rva": "0x91cc0",
+        "fileOffset": "0x910c0",
+        "instructions": [
+          "00491CC0 push esi",
+          "00491CC1 xor ecx, ecx",
+          "00491CC3 mov eax, 0x5c7e50",
+          "00491CC8 mov edx, dword ptr [esp + 8]",
+          "00491CCC cmp dword ptr [eax], edx",
+          "00491CCE je 0x491d1e",
+          "00491CD0 add eax, 0x33c",
+          "00491CD5 inc ecx",
+          "00491CD6 cmp eax, 0x5c9ea8",
+          "00491CDB jb 0x491ccc",
+          "00491CDD xor ecx, ecx",
+          "00491CDF lea eax, [edx + edx*2]",
+          "00491CE2 shl eax, 3",
+          "00491CE5 sub eax, edx",
+          "00491CE7 test ecx, ecx",
+          "00491CE9 lea esi, [eax*4 + 0x5053b8]",
+          "00491CF0 je 0x491d32",
+          "00491CF2 mov eax, dword ptr [0x505334]",
+          "00491CF7 mov ecx, dword ptr [ecx + 0x334]",
+          "00491CFD push eax",
+          "00491CFE push ecx",
+          "00491CFF call 0x46dbfd",
+          "00491D04 sar eax, 0x10",
+          "00491D07 add esp, 8",
+          "00491D0A mov ecx, dword ptr [esi + 0x48]",
+          "00491D0D mov edx, ecx",
+          "00491D0F sub edx, eax",
+          "00491D11 mov eax, ecx",
+          "00491D13 sar eax, 1",
+          "00491D16 cmp eax, edx",
+          "00491D18 jg 0x491d34",
+          "00491D1A pop esi",
+          "00491D1B mov eax, edx",
+          "00491D1D ret",
+          "00491D1E lea eax, [ecx + ecx*2]",
+          "00491D21 shl eax, 3",
+          "00491D24 sub eax, ecx",
+          "00491D26 shl eax, 2",
+          "00491D29 lea ecx, [eax + eax*8 + 0x5c7e50]",
+          "00491D30 jmp 0x491cdf",
+          "00491D32 xor eax, eax",
+          "00491D34 pop esi",
+          "00491D35 ret"
+        ]
+      }
+    }
+  },
+  "promotion": {
+    "cityRequirements": [
+      {
+        "city": 0,
+        "points": 400,
+        "cash": 500
+      },
+      {
+        "city": 1,
+        "points": 400,
+        "cash": 500
+      },
+      {
+        "city": 2,
+        "points": 400,
+        "cash": 500
+      },
+      {
+        "city": 3,
+        "points": 700,
+        "cash": 500
+      },
+      {
+        "city": 4,
+        "points": 700,
+        "cash": 500
+      },
+      {
+        "city": 5,
+        "points": 700,
+        "cash": 500
+      },
+      {
+        "city": 6,
+        "points": 1000,
+        "cash": 450
+      },
+      {
+        "city": 7,
+        "points": 1000,
+        "cash": 450
+      },
+      {
+        "city": 8,
+        "points": 1000,
+        "cash": 450
+      },
+      {
+        "city": 9,
+        "points": 1200,
+        "cash": 400
+      },
+      {
+        "city": 10,
+        "points": 1200,
+        "cash": 400
+      },
+      {
+        "city": 11,
+        "points": 1200,
+        "cash": 400
+      },
+      {
+        "city": 12,
+        "points": 1500,
+        "cash": 350
+      },
+      {
+        "city": 13,
+        "points": 1500,
+        "cash": 350
+      },
+      {
+        "city": 14,
+        "points": 1500,
+        "cash": 350
+      },
+      {
+        "city": 15,
+        "points": 1800,
+        "cash": 300
+      },
+      {
+        "city": 16,
+        "points": 1800,
+        "cash": 300
+      },
+      {
+        "city": 17,
+        "points": 1800,
+        "cash": 300
+      },
+      {
+        "city": 18,
+        "points": 2000,
+        "cash": 250
+      },
+      {
+        "city": 19,
+        "points": 2000,
+        "cash": 250
+      },
+      {
+        "city": 20,
+        "points": 2000,
+        "cash": 250
+      },
+      {
+        "city": 21,
+        "points": 2200,
+        "cash": 200
+      },
+      {
+        "city": 22,
+        "points": 2200,
+        "cash": 200
+      },
+      {
+        "city": 23,
+        "points": 2400,
+        "cash": 150
+      },
+      {
+        "city": 24,
+        "points": 2400,
+        "cash": 150
+      },
+      {
+        "city": 25,
+        "points": 2500,
+        "cash": 100
+      },
+      {
+        "city": 26,
+        "points": 2500,
+        "cash": 100
+      },
+      {
+        "city": 27,
+        "points": 2700,
+        "cash": 100
+      },
+      {
+        "city": 28,
+        "points": 2700,
+        "cash": 100
+      },
+      {
+        "city": 29,
+        "points": 3000,
+        "cash": 100
+      }
+    ],
+    "eligible": {
+      "va": "0x47b7c0",
+      "rva": "0x7b7c0",
+      "fileOffset": "0x7abc0"
+    },
+    "cashField": {
+      "va": "0x47a690",
+      "rva": "0x7a690",
+      "fileOffset": "0x79a90"
+    },
+    "cashAward": {
+      "va": "0x4554fe",
+      "rva": "0x554fe",
+      "fileOffset": "0x548fe"
+    },
+    "loggedAmount": {
+      "va": "0x455518",
+      "rva": "0x55518",
+      "fileOffset": "0x54918"
+    },
+    "customMode": "Separate non-career branch at 0x45543A resets score and awards 2000 cash when score exceeds its computed goal; not the career city payout."
+  },
+  "unresolved": {
+    "flightSalary": {
+      "status": "manual-only",
+      "source": "HELP/ENGLISH/18REF.HTM says pilots earn salary for flying time. No periodic player wage amount/cadence identified. The sole literal +1 direct cash call at 0x4A2C88 belongs to a conditional object event handler also emitting per-car events; it does not prove player hourly pay. No evidence for 5/60s."
+    },
+    "doctorOfficerService": {
+      "status": "manual-only",
+      "source": "18REF describes costs for doctors, police and emergency dispatch. No matching fixed debit found among all 30 direct cash calls nor literal pointers to the cash-adjustment function in this PE. Hypothetical other mutation paths are not excluded. 25 per hire and 10 per emergency call are unverified."
+    }
+  },
+  "handlingCapacity": {
+    "maxLoad": "HELI Ctrl8 Max Load enters slot +8 of the 92-byte aircraft profile (0x490AA3). The HUD computes 11 * currentLoad[0x1D0] / maxLoad at 0x45C40D..41E. It is a load quantity, not a seat count. Exact unit not established.",
+    "aircraftReferenceResourceIds": "RT_STRING 480..487 explicitly gives separate kg/lb empty weights, capacities and seat counts for the eight regular helicopters. These cannot be substituted for the simulation value.",
+    "apacheMass": "No verified empty mass in catalog RT480..487; excluded.",
+    "bucketCapacity": "See Heli Ropestuff TWK; do not infer litres/kg without a verified conversion."
+  }
+}

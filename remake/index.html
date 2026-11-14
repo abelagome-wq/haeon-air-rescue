@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#142a3a"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="해온 구조대"><title>해온 항공구조대 · Haeon Air Rescue</title>
+<link rel="icon" href="./art/icons/icon-192.png"><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./mobile.css"><link rel="stylesheet" href="./original.css"><link rel="stylesheet" href="./src/operations.css"><link rel="manifest" href="./manifest.webmanifest" crossorigin="use-credentials"><link rel="apple-touch-icon" href="./art/icons/apple-touch-icon.png">
+<script type="importmap">{"imports":{"three":"./vendor/three/three.module.min.js","three/addons/":"./vendor/three/addons/"}}</script>
+</head><body>
+<main id="hangar">
+ <div class="home-inner">
+  <header class="brand"><span class="mark" aria-hidden="true"></span><b>HAEON</b><i></i><span>AIR RESCUE</span><span class="radio"><em></em> 무전 대기</span></header>
+  <div class="intro"><div class="kicker">FLIGHT OPERATIONS</div><h1>해온 항공구조대</h1><p>도시 규모와 출동 기체를 선택하세요.</p></div>
+  <section class="hangar-grid">
+   <div class="aircard"><div class="strap"><span>기체 식별</span><b id="airIndex">01 / 20</b></div><img id="airPhoto" src="art/SCWZR300.webp" alt="해온 솔새 기체 렌더"><button id="previewAircraft" type="button" aria-haspopup="dialog">기체 3D 보기</button><div class="airfoot"><div><small>AIRFRAME</small><h2 id="airTitle">해온 솔새</h2></div><span id="airCode">HAEON 301</span></div></div>
+   <form id="dispatch"><h2>출동 계획</h2><div class="plan-fields">
+    <div class="plan-field"><label for="careerMode"><strong>근무 방식</strong></label><select id="careerMode"><option value="career">구조대 경력 · 지역 승급</option><option value="free">자유 비행 · 모든 도시</option></select></div>
+    <div class="plan-field"><label for="citySelect"><strong>도시 규모</strong></label><select id="citySelect" disabled><option>도시 생성 중…</option></select></div>
+    <div class="district-preview"><canvas id="districtMap" width="176" height="176" aria-label="생성된 도시의 도로와 출동 시설 배치"></canvas><div><strong id="districtName"></strong><small id="districtSpan"></small></div><button id="regenerateCity" type="button" disabled>새 배치 생성</button></div>
+    <div class="plan-field"><label for="heliSelect"><strong>헬리콥터</strong></label><select id="heliSelect" disabled><option>기체 목록 읽는 중…</option></select></div>
+    <div class="plan-field"><label for="missionSelect"><strong>임무</strong></label><select id="missionSelect"><option value="auto">도시 무전 · 자동 출동</option></select></div>
+    <div class="plan-field"><label for="quality"><strong>화면 품질</strong></label><select id="quality"><option value="mobile">모바일 · 가벼운 자동 해상도</option><option value="balanced">Surface · 자동 해상도</option><option value="native">기본 해상도 · 고정</option></select></div>
+    <div class="plan-field"><label for="controlsSelect"><strong>터치 조작</strong></label><select id="controlsSelect"><option value="auto">기기 자동 감지</option><option value="touch">화면 조이스틱 켜기</option><option value="off">키보드 · 게임패드 사용</option></select></div>
+    <div class="plan-field"><label for="scheme"><strong>키보드 조종</strong></label><select id="scheme"><option value="classic">방향키 이동, Q/W 상승·하강</option><option value="modern">WASD 이동, Space/Shift 상승·하강</option></select></div>
+    <div class="plan-field"><label for="shift"><strong>근무 시간</strong></label><select id="shift"><option value="city">도시 근무표</option><option value="night">야간</option><option value="day">주간</option></select></div>
+    <div class="plan-field"><label for="weatherSelect"><strong>기상 조건</strong></label><select id="weatherSelect" aria-describedby="departureWeather"><option value="auto">자동 · 변화하는 날씨</option><option value="calm">맑음 · 무풍</option><option value="breeze">산들바람</option><option value="drywind">건조한 강풍</option><option value="fog">안개</option><option value="rain">비</option><option value="squall">돌풍·폭우</option></select></div>
+    <div class="plan-field departure-weather" id="departureWeather"><b>이륙장 예보</b><span id="departureConditions"></span><small id="departureVisibility"></small></div>
+    </div><button type="submit" id="start" disabled>근무 시작 <span>↗</span></button>
+    <div id="menuInfo" role="status">도시 자료를 읽는 중입니다.</div>
+   </form>
+  </section>
+  <section class="career-strip"><div><small>PILOT ACCOUNT</small><strong id="cashBalance">—</strong><span id="ownedKit">해온 솔새 · 물양동이 · 확성기로 시작합니다.</span></div><div class="career-actions"><button type="button" id="openShop" disabled>헬기 · 장비 상점 <span>H / Xbox X</span></button><button type="button" id="resetCareer" aria-haspopup="dialog" aria-controls="resetDialog" disabled>경력 초기화 <span>Xbox Y</span></button></div></section>
+  <section class="mobile-install"><div><p id="mobileNotice" hidden>휴대폰을 가로로 돌리면 기체 양옆이 더 넓게 보입니다. 왼쪽 스틱으로 이동·선회하고 오른쪽 버튼으로 상승·하강합니다.</p>
+   <div class="tilt-options"><button type="button" id="tiltMenu" aria-pressed="false">기울기 조종 켜기</button><button type="button" id="tiltCenterMenu" hidden>중립 맞추기</button><small id="tiltMenuStatus" role="status"></small></div>
+   <p id="installHint" role="status" hidden></p></div><button type="button" id="installApp">홈 화면에 추가 안내</button></section>
+  <footer><span>HAEON AIR RESCUE</span><button type="button" id="inspect">객체 점검실 ↗</button><button type="button" id="openSoundEditor" aria-haspopup="dialog">소리 설정</button><button type="button" id="padHelpMenu" aria-haspopup="dialog">Xbox 조작표</button><span id="career">지역 항공 구조대 · 비행 당직</span></footer>
+ </div>
+</main>
+<dialog id="soundEditor" aria-labelledby="soundEditorTitle" aria-describedby="soundStorageNote">
+ <section class="sound-sheet">
+  <header class="inspecthead"><h2 id="soundEditorTitle">소리 설정</h2><button type="button" id="closeSoundEditor">닫기 ×</button></header>
+  <p id="soundStorageNote">무전은 게임 내장 한국어 음성으로 재생합니다.</p>
+  <button type="button" id="radioDemo">관제 무전 들어보기</button>
+  <label class="voice-mode">현장·방송 음성<select id="voiceMode"><option value="builtin">게임 내장 한국어 TTS</option><option value="device">기기 한국어 TTS 우선</option></select></label>
+  <p class="sound-hint">확성기는 비행 장비에서 선택하세요. F6–F10 키로 교통 우회, 정차, 대피, 해산, 인사를 방송할 수 있습니다.</p>
+  <div class="sound-filters">
+   <label>분류<select id="soundGroup"><option value="">전체</option></select></label>
+   <label>검색<input id="soundSearch" type="search" placeholder="소리 이름, 대사 또는 파일명" autocomplete="off"></label>
+  </div>
+  <label class="sound-picker">소리 선택 <span id="soundCount"></span><select id="soundList"></select></label>
+  <div id="soundDetail">
+   <h3 id="soundLabel"></h3><p id="soundSource"></p>
+   <div class="sound-actions"><button type="button" id="previewOriginal">기본 소리 듣기</button><button type="button" id="previewCustom" hidden>교체본 듣기</button></div>
+   <label class="sound-picker">교체할 내장 소리<select id="soundPreset"></select></label>
+   <div class="sound-actions"><button type="button" id="applySoundPreset">선택한 소리 적용</button></div>
+   <div class="sound-actions sound-edit-actions"><button type="button" id="replaceSound">파일로 교체</button><button type="button" id="resetSound" hidden>기본 소리로 복원</button></div>
+   <input type="file" id="soundFile" accept="audio/*,.wav,.mp3,.ogg,.m4a,.aac,.flac,.opus,.aiff,.webm" hidden>
+  </div>
+  <p id="soundNotice" role="status" aria-live="polite"></p>
+ </section>
+</dialog>
+<dialog id="shop" aria-labelledby="shopTitle"><section class="shop-inner"><header class="inspecthead"><div><div class="kicker">HANGAR SUPPLY</div><h2 id="shopTitle">헬기 · 장비 상점</h2></div><button id="closeShop">닫기 ×</button></header>
+ <div class="shop-toolbar"><div class="shop-tabs"><button id="shopAircraft" aria-pressed="true">헬리콥터</button><button id="shopEquipment" aria-pressed="false">장착 부품</button><button id="shopUpgrades" aria-pressed="false">성능 개량</button><button id="shopInventory" aria-pressed="false">보유 목록</button></div><span>보유 현금 <strong id="shopBalance"></strong></span></div>
+ <div id="shopTarget" hidden><label for="shopTargetSelect">정비 기체</label><select id="shopTargetSelect"></select></div>
+ <p id="shopDescription"></p><p id="shopNotice" role="status" aria-live="polite"></p><div id="shopItems"></div><p class="shop-help">임무 보상과 구매 내역은 이 브라우저에 자동 저장됩니다. Xbox 방향 패드 · A 선택 · B 닫기 · LB/RB 분류</p>
+</section></dialog>
+<dialog id="inspection" aria-labelledby="inspectionHeading"><section class="inspectinner"><div class="inspecthead"><div><div class="kicker">ASSET MAINTENANCE</div><h2 id="inspectionHeading">객체 점검실</h2></div><button id="closeInspect" aria-label="점검실 닫기">닫기 ×</button></div><p>한 손가락으로 회전하고, 두 손가락을 벌리거나 모아 확대·축소하세요. 마우스 드래그·휠도 지원합니다.</p>
+ <div class="inspect-controls"><label>분류<select id="groups"></select></label><label>모델 검색<input id="findModel" placeholder="예: 솔새, HAEON 301, 조종사"></label><label>객체<select id="objectSelect"></select></label></div>
+ <div id="inspectorView"></div><div class="inspect-controls"><div id="modelInfo" role="status"></div><label id="animationLabel" hidden>동작<select id="animation"></select></label></div></section></dialog>
+<div id="flightFrame">
+<div id="viewport"><div id="beacon" hidden><i></i><span></span></div><div id="dropSight" aria-label="물의 예상 낙하지점" hidden></div></div>
+<section id="hud" hidden aria-label="비행 계기">
+ <div class="topbar"><span class="unit"><em></em><b>관제 연결</b></span><span id="location"></span><span id="course"></span><span class="bar-right" id="wallet"></span><span id="performance">— FPS</span><button id="cockpitView" type="button" hidden>조종석</button><button id="touchPanelToggle" type="button" aria-controls="flightDetails" aria-expanded="false" aria-label="임무·장비·계기 패널 열기">패널</button><button id="openPadActions" type="button" aria-haspopup="dialog" title="Xbox View 길게">조작 메뉴</button><button id="mapBtn" title="도시 지도 (M / Xbox View 짧게)">지도</button><button id="pauseBtn" title="일시 정지 (Esc)" aria-label="비행 일시 정지">Ⅱ</button></div>
+ <div id="touchBrief" aria-label="현재 출동"><b id="touchMission"></b><span id="touchCourse"></span></div>
+ <div id="touchTelemetry" aria-label="비행 계기 요약"><span id="touchReadings"></span><span id="touchWind" title="바람이 불어오는 방향과 풍속"></span></div>
+ <div class="walk-actions"><button id="boardBtn">기체 탑승</button><button id="hangarBtn">격납고</button><button id="serviceBtn">기체 검사</button></div>
+ <section id="flightDetails" aria-label="임무·장비·계기">
+ <div class="dispatch-msg"><div id="radioMessage" role="status" aria-live="polite"></div><div id="eventLog"></div><div class="incident-heading"><span id="incidentPriority" hidden></span><h2 id="objective">기지</h2></div><p id="instruction"></p><div class="dispatch-meta"><span id="distance"></span><span id="count"></span></div><div id="prog"><div></div></div><div id="flightWeather" aria-label="기체 위치의 기상" hidden><b id="flightConditions"></b><span id="flightVisibility"></span></div></div>
+ <div id="fieldKit"><div id="fieldKitPanel"><div class="field-row"><label for="fieldTool">장비</label><select id="fieldTool"></select><button id="useTool" title="선택 장비 사용 (E / Xbox A)">사용</button></div>
+ <div class="touch-aim-controls" aria-label="탐조등 조준"><span>조준</span><button type="button" data-aim="left" aria-label="탐조등 왼쪽 조준">←</button><button type="button" data-aim="up" aria-label="탐조등 위로 조준">↑</button><button type="button" data-aim="down" aria-label="탐조등 아래로 조준">↓</button><button type="button" data-aim="right" aria-label="탐조등 오른쪽 조준">→</button><button type="button" id="recallUnit" title="선택한 긴급 차량 복귀">복귀</button></div>
+ <div id="toolRack" aria-label="장착한 장비"></div>
+ <div id="bucketControls" hidden><button type="button" id="bucketCable" title="V 내리기 · C 감기(클래식) · Z 전환">줄 내리기</button><button type="button" id="bucketView" title="X 또는 Xbox 오른쪽 스틱 클릭">투하 시점</button><button type="button" id="bucketValve" title="B 또는 이 버튼을 누르는 동안 방수">물 투하</button><label title="장착 장비에 남은 물"><meter id="waterGauge" min="0" max="100" value="0" aria-label="남은 물 비율"></meter><span id="waterReadout">0 L</span></label></div>
+ <div id="cabinStatus"></div><div id="airframeSystems" aria-label="기체 성능 계기"></div><div id="unitStatus"></div>
+ <div id="radioPanel"><button id="radioToggle" type="button" aria-expanded="false">라디오</button><label id="radioTuner" hidden>방송국 <select id="station"><option value="mix">KMIX · 종합</option><option value="jazz">재즈</option><option value="rock">록</option><option value="techno">테크노</option><option value="classic">클래식</option><option value="off">음악 끄기</option></select></label><small id="radioTrack"></small></div>
+ <div class="status-bank"><strong id="cashReading">1,000</strong><label id="rankLabel" hidden>도시 점수 <meter id="rankMeter" min="0" max="400" value="0"></meter><span id="rankPoints"></span></label><small id="engineState">정지</small><label>피해 <meter id="damage" min="0" max="100" value="0"></meter> <span id="damageValue">0%</span></label></div></div>
+ <div class="field-row"><span id="dispatchTimer"></span><button id="nextCall" title="다른 호출로 전환 (Tab / Xbox 왼쪽 스틱 클릭)">다음 호출</button></div>
+ </div>
+ <div class="lowerleft"><div class="radar-buttons"><button id="radarOut" aria-label="지도 축소">−</button><button id="radarIn" aria-label="지도 확대">+</button><button id="radarPrev" aria-label="이전 항법 목적지">M−</button><button id="radarNext" aria-label="다음 항법 목적지">M+</button></div><div class="radarbox"><canvas id="radar" width="224" height="158" aria-label="도시 지도, 헬기와 임무 목표"></canvas><b>N</b><span id="radarRange"></span></div><div id="navlabel">기지</div><div id="seatRoster" aria-label="탑승자"></div></div>
+ <div class="instruments"><div><span>연료</span><b id="fuel">100</b><small>%</small></div><div><span>지상 고도</span><b id="alt">0</b><small>m</small></div><div><span>대지 속도</span><b id="spd">0</b><small>km/h</small></div><div><span>방위</span><b id="hdg">000</b><small>°</small></div></div>
+ </section>
+ <div id="quick"></div><div id="feedback" role="status"></div>
+ <div id="touchControls" hidden aria-label="터치 비행 조작">
+  <div class="touch-stick-zone"><div id="touchStick" data-touch-stick role="group" aria-label="전후 이동과 좌우 선회 조이스틱"><span class="touch-stick-axis touch-stick-axis-x"></span><span class="touch-stick-axis touch-stick-axis-y"></span><span class="touch-knob" id="touchKnob" data-touch-knob></span></div><span class="touch-hint">이동 · 선회</span></div>
+  <div class="touch-flight-buttons"><button type="button" id="touchStrafeLeft" data-touch-control="left" aria-label="왼쪽으로 기체 이동">좌이동</button><button type="button" id="touchLiftUp" data-touch-control="up" aria-label="누르고 있는 동안 상승">상승 ↑</button><button type="button" id="touchStrafeRight" data-touch-control="right" aria-label="오른쪽으로 기체 이동">우이동</button><button type="button" id="touchCamera" data-touch-control="camera">시점</button><button type="button" id="touchLiftDown" data-touch-control="down" aria-label="누르고 있는 동안 하강">하강 ↓</button><button type="button" id="touchUse" data-touch-action="use">작업</button></div>
+ </div>
+</section>
+</div>
+<dialog id="network"><div class="inspectinner"><div class="inspecthead"><div><div class="kicker">NAVIGATION</div><h2 id="mapTitle">도시 지도</h2></div><button id="closeMap">비행 계속 ×</button></div>
+ <div class="map-tools"><button id="surfaceTab">지상</button><button id="networkTab">지하 시설</button><button id="mapZoomOut" aria-label="전체 지도 축소">−</button><button id="mapZoomIn" aria-label="전체 지도 확대">+</button><small>흰색 기체 · 황색 선택 임무 · 청록색 다른 호출</small></div><button type="button" id="assignPriority">우선 출동</button><div id="callList" aria-label="접수된 호출"></div><canvas id="largeMap" width="640" height="640"></canvas><div class="map-read"><span id="tileInfo"></span><button hidden id="tileInspect">이 모델 열기 ↗</button></div><div id="callLog"></div></div></dialog>
+<div id="overlay" hidden><div class="dialog"><div class="kicker">OPERATIONS CONTROL</div><h2 id="dialogTitle"></h2><p id="dialogBody" role="status"></p><div id="loadline" hidden></div><div id="pauseContents" hidden>
+ <dl><dt>게임패드</dt><dd>왼쪽 스틱 이동 · RT/LT 상승·하강 · B 하차</dd><dt>시점</dt><dd id="cameraHelp">T 또는 Xbox Y로 추적·조종석·상공 시점 전환</dd><dt>항법 지도</dt><dd>M 관제 지도 · 신고 우선순위와 경로 선택</dd><dt>현장 작업</dt><dd>Enter 또는 Xbox A · G 장비 전환 · Tab 호출</dd><dt>소방 양동이</dt><dd>V 내리기 · C 감기(방향키 모드) · Z 줄 전환 · B 길게 투하 · X 하방 시점. Xbox는 양동이 선택 뒤 ↓ 줄 전환 · A 길게 투하 · 오른쪽 스틱 클릭 하방 시점</dd></dl>
+ <div class="opts"><button id="soundBtn">게임 소리 켜짐</button><button type="button" id="pauseSoundEditor" aria-haspopup="dialog">소리 설정</button><button id="fullBtn">전체 화면</button><button type="button" id="hapticToggle" aria-pressed="true">진동 켜짐</button><button type="button" id="hapticTest">진동 테스트</button><button type="button" id="invertCameraX" aria-pressed="false">시점 좌우 반전 꺼짐</button></div><small id="hapticStatus" role="status"></small><p id="schemeHelp"></p>
+ <small id="fullscreenStatus" role="status" hidden></small>
+ <div class="mobile-pause-help"><p>스틱을 놓으면 감속하고, 상승·하강 버튼을 놓으면 고도를 유지합니다.</p><button id="touchModeBtn" type="button">터치 조작 켜기</button>
+  <div class="tilt-options"><button type="button" id="tiltToggle" aria-pressed="false">기울기 조종 켜기</button><button type="button" id="tiltCenter" hidden>중립 맞추기</button><small id="tiltStatus" role="status"></small></div><p id="orientationHint" role="status"></p></div>
+ <button id="padHelpPause" type="button" aria-haspopup="dialog">Xbox 조작표</button>
+ <button id="resume" class="primary">비행 계속 <span>Esc / Menu</span></button>
+ <button type="button" id="restartFlight" aria-haspopup="dialog" aria-controls="resetDialog">현재 비행 재시작</button></div>
+ <button id="homeBtn" hidden>근무 종료</button>
+</div></div>
+<dialog id="resetDialog" aria-labelledby="resetTitle" aria-describedby="resetDescription resetResult">
+ <h2 id="resetTitle">경력을 초기화할까요?</h2>
+ <p id="resetDescription">이 브라우저에 저장된 자금과 구매·정비·개량 기록, 임무·진급·근무 기록을 모두 지웁니다. 이 작업은 되돌릴 수 없습니다.</p>
+ <p id="resetResult">새로 생성한 도시에서 §1,000과 해온 솔새, 물양동이, 확성기로 경력을 시작합니다. 소리·그래픽·입력 설정은 유지합니다.</p>
+ <p id="resetNotice" role="status"></p>
+ <div class="reset-actions"><button type="button" id="resetCancel" autofocus>취소</button><button type="button" id="resetConfirm">경력 초기화</button></div>
+</dialog>
+<dialog id="padActions" class="pad-sheet" aria-labelledby="padActionsTitle"><div class="pad-sheet-inner">
+  <header><h2 id="padActionsTitle">비행 조작 메뉴</h2><button class="pad-close" type="button">비행 계속 · B</button></header>
+  <nav class="pad-tabs" aria-label="조작 분류"></nav><div class="pad-pages"></div>
+</div></dialog>
+<dialog id="padHelp" class="pad-sheet" data-pad-scroll aria-labelledby="padHelpTitle"><div class="pad-sheet-inner">
+  <header><h2 id="padHelpTitle">Xbox 조작표</h2><button type="button" id="closePadHelp" autofocus>닫기 · B</button></header>
+  <dl class="pad-bindings">
+    <dt>왼쪽 스틱</dt><dd>앞뒤 비행·선회 / 지상 보행</dd>
+    <dt>RT / LT</dt><dd>상승 / 하강</dd><dt>LB / RB</dt><dd>왼쪽 / 오른쪽 횡이동</dd>
+    <dt>오른쪽 스틱</dt><dd>시선 이동</dd><dt>Y</dt><dd>추적·조종석·상공 시점 순환</dd>
+    <dt>오른쪽 스틱 클릭</dt><dd>짧게 투하 시점 전환 · 길게 시점 초기화</dd>
+    <dt>A</dt><dd>현장 작업 · 물양동이 선택 시 누르는 동안 투하</dd>
+    <dt>B</dt><dd>기체 탑승·하차</dd><dt>X</dt><dd>짧게 다음 장비 · 길게 구조 밧줄 사용</dd>
+    <dt>왼쪽 스틱 클릭</dt><dd>다음 호출</dd>
+    <dt>방향패드</dt><dd>탐조등 조준 · 양동이 또는 투하 시점에서 ↓ 짧게 줄 전환</dd>
+    <dt>View ▢▢</dt><dd>짧게 관제 지도 · 길게 비행 조작 메뉴</dd>
+    <dt>Menu ☰</dt><dd>일시 정지·계속</dd>
+  </dl>
+  <h3>격납고·지도</h3><dl class="pad-bindings">
+    <dt>메뉴·목록</dt><dd>방향패드나 왼쪽 스틱으로 이동 · A 선택 · B 뒤로</dd>
+    <dt>출동 계획</dt><dd>Menu 근무 시작 · X 상점 · Y 경력 초기화 확인</dd>
+    <dt>관제 지도</dt><dd>오른쪽 스틱으로 타일 이동 · LT/RT 축소/확대 · LB/RB 지상/지하 · X 시설 점검 · Y 기체 위치</dd>
+    <dt>모델 점검실</dt><dd>오른쪽 스틱으로 회전 · LT/RT 축소/확대</dd>
+  </dl><p>지원차 호출·복귀, 확성기, 방송국 선택과 카메라 미세 조정은 View를 길게 누르면 나옵니다.</p>
+</div></dialog>
+<noscript>비행하려면 JavaScript와 WebGL 2를 지원하는 브라우저가 필요합니다.</noscript>
+<dialog id="hangarDesk" aria-labelledby="deskTitle"><section class="hangar-window"><h2 id="deskTitle">정비 격납고</h2><div id="hangarPano" tabindex="0" aria-label="격납고 둘러보기"><img id="panoImage" src="./art/hangar-night.webp" alt="기지 정비 격납고 내부"></div><div id="deskLogbook" hidden></div><div class="hangar-dock"><button id="deskCatalog">카탈로그</button><button id="deskLog">비행 일지</button><button id="deskInventory">보유 목록</button><button id="nextCity" hidden>다음 도시 선택</button><button id="deskExit">기지로</button></div></section></dialog>
+<dialog id="serviceDialog" aria-labelledby="serviceTitle"><section class="shop-inner"><header class="inspecthead"><h2 id="serviceTitle">기체 검사</h2><button id="cancelService">닫기</button></header><p>현재 자금 <b id="serviceBalance"></b></p><div class="service-items"><label><input type="checkbox" id="repairChoice" checked> 피해 수리 <b id="repairPrice"></b></label><label><input type="checkbox" id="fuelChoice" checked> 연료 보충 <b id="fuelPrice"></b></label><label><input type="checkbox" id="gasChoice"> 최루가스 보충 <b id="gasPrice"></b></label></div><p id="serviceNote" role="status"></p><button id="payService">정비 확인</button></section></dialog>
+<script type="module" src="src/main.js"></script>
+</body></html>

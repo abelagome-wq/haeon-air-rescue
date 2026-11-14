@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+<title>FUEL</title>
+<defs>
+  <linearGradient id="rim" x2=".7" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#a7a6a0"/><stop offset=".22" stop-color="#59595a"/><stop offset=".48" stop-color="#232426"/><stop offset=".8" stop-color="#0c0d0e"/><stop offset="1" stop-color="#6c6a66"/></linearGradient>
+  <radialGradient id="face" cx=".42" cy=".33" r=".86"><stop stop-color="#3e3c39"/><stop offset=".77" stop-color="#191a1b"/><stop offset="1" stop-color="#121315"/></radialGradient>
+</defs>
+<circle cx="90" cy="90" r="88" fill="url(#rim)" stroke="#141415" stroke-width="3"/>
+<circle cx="90" cy="90" r="79" fill="url(#face)" stroke="#111213" stroke-width="4"/>
+<g fill="none" stroke="#ebe7d6"><path d="M38.38 141.62L46.87 133.13" stroke-width="2.5"/>
+<path d="M33.75 136.53L37.61 133.34" stroke-width="1.3"/>
+<path d="M29.62 131.03L33.76 128.22" stroke-width="1.3"/>
+<path d="M26.03 125.17L30.41 122.76" stroke-width="1.3"/>
+<path d="M23 118.99L27.59 117.01" stroke-width="1.3"/>
+<path d="M20.57 112.56L25.33 111.01" stroke-width="1.3"/>
+<path d="M18.76 105.92L23.64 104.83" stroke-width="1.3"/>
+<path d="M17.58 99.15L22.54 98.52" stroke-width="1.3"/>
+<path d="M17.04 92.29L22.03 92.14" stroke-width="1.3"/>
+<path d="M17.14 85.42L22.13 85.73" stroke-width="1.3"/>
+<path d="M17.9 78.58L29.75 80.46" stroke-width="2.5"/>
+<path d="M19.29 71.85L24.14 73.09" stroke-width="1.3"/>
+<path d="M21.32 65.27L26.02 66.97" stroke-width="1.3"/>
+<path d="M23.95 58.92L28.47 61.05" stroke-width="1.3"/>
+<path d="M27.17 52.84L31.47 55.39" stroke-width="1.3"/>
+<path d="M30.94 47.09L34.99 50.03" stroke-width="1.3"/>
+<path d="M35.24 41.72L38.99 45.03" stroke-width="1.3"/>
+<path d="M40.03 36.79L43.45 40.43" stroke-width="1.3"/>
+<path d="M45.26 32.32L48.32 36.27" stroke-width="1.3"/>
+<path d="M50.88 28.36L53.56 32.59" stroke-width="1.3"/>
+<path d="M56.86 24.96L62.31 35.65" stroke-width="2.5"/>
+<path d="M63.13 22.13L64.97 26.78" stroke-width="1.3"/>
+<path d="M69.63 19.9L71.03 24.7" stroke-width="1.3"/>
+<path d="M76.32 18.29L77.26 23.2" stroke-width="1.3"/>
+<path d="M83.13 17.32L83.6 22.3" stroke-width="1.3"/>
+<path d="M90 17L90 22" stroke-width="1.3"/>
+<path d="M96.87 17.32L96.4 22.3" stroke-width="1.3"/>
+<path d="M103.68 18.29L102.74 23.2" stroke-width="1.3"/>
+<path d="M110.37 19.9L108.97 24.7" stroke-width="1.3"/>
+<path d="M116.87 22.13L115.03 26.78" stroke-width="1.3"/>
+<path d="M123.14 24.96L117.69 35.65" stroke-width="2.5"/>
+<path d="M129.12 28.36L126.44 32.59" stroke-width="1.3"/>
+<path d="M134.74 32.32L131.68 36.27" stroke-width="1.3"/>
+<path d="M139.97 36.79L136.55 40.43" stroke-width="1.3"/>
+<path d="M144.76 41.72L141.01 45.03" stroke-width="1.3"/>
+<path d="M149.06 47.09L145.01 50.03" stroke-width="1.3"/>
+<path d="M152.83 52.84L148.53 55.39" stroke-width="1.3"/>
+<path d="M156.05 58.92L151.53 61.05" stroke-width="1.3"/>
+<path d="M158.68 65.27L153.98 66.97" stroke-width="1.3"/>
+<path d="M160.71 71.85L155.86 73.09" stroke-width="1.3"/>
+<path d="M162.1 78.58L150.25 80.46" stroke-width="2.5"/>
+<path d="M162.86 85.42L157.87 85.73" stroke-width="1.3"/>
+<path d="M162.96 92.29L157.97 92.14" stroke-width="1.3"/>
+<path d="M162.42 99.15L157.46 98.52" stroke-width="1.3"/>
+<path d="M161.24 105.92L156.36 104.83" stroke-width="1.3"/>
+<path d="M159.43 112.56L154.67 111.01" stroke-width="1.3"/>
+<path d="M157 118.99L152.41 117.01" stroke-width="1.3"/>
+<path d="M153.97 125.17L149.59 122.76" stroke-width="1.3"/>
+<path d="M150.38 131.03L146.24 128.22" stroke-width="1.3"/>
+<path d="M146.25 136.53L142.39 133.34" stroke-width="1.3"/>
+<path d="M141.62 141.62L133.13 133.13" stroke-width="2.5"/></g>
+<g fill="#f5f1df" font-family="Arial,sans-serif" font-weight="bold" font-size="15" text-anchor="middle"><text x="54.64" y="129.36">0</text>
+<text x="40.62" y="86.18">20</text>
+<text x="67.3" y="49.45">40</text>
+<text x="112.7" y="49.45">60</text>
+<text x="139.38" y="86.18">80</text>
+<text x="125.36" y="129.36">100</text></g>
+<text x="90" y="73" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="bold" fill="#cbc9bd">FUEL</text>
+<text x="90" y="111" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#c6c3b7">PERCENT</text>
+<circle cx="90" cy="90" r="6" fill="#65645d" stroke="#171818" stroke-width="2"/>
+</svg>
